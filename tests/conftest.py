@@ -50,3 +50,31 @@ def loaded(session, user, receipts, ea_rows):
     ingest.import_receipts(session, user, receipts)
     ingest.import_eaccounts(session, user, ea_rows)
     return session, user
+
+
+@pytest.fixture
+def client():
+    from fastapi.testclient import TestClient
+    from sqlmodel import Session
+
+    from app import db
+    from app.main import create_app
+
+    engine = db.make_engine("sqlite://")
+    db.set_engine(engine)
+    with TestClient(create_app()) as c:
+        c.engine = engine
+        c.db = lambda: Session(engine)
+        yield c
+    db.set_engine(None)
+
+
+@pytest.fixture
+def loaded_client(client, fixtures):
+    r = client.post(
+        "/upload",
+        files=[("receipt_files", ("r.txt", (fixtures / "receipts.txt").read_bytes(), "text/plain"))],
+        data={"eaccounts_text": (fixtures / "eaccounts.csv").read_text()},
+    )
+    assert r.status_code == 200
+    return client
