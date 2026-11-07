@@ -42,6 +42,7 @@ final class APIClient: @unchecked Sendable {
     func nextMeal(userId: Int, bias: Bias) async throws -> NextMeal {
         try await get("next-meal", ["user_id": "\(userId)", "bias": bias.rawValue], mock: "next_meal")
     }
+    func wrapped(userId: Int) async throws -> Wrapped { try await get("wrapped", ["user_id": "\(userId)"], mock: "wrapped") }
     func vendors() async throws -> [Vendor] { try await get("vendors", mock: "vendors") }
     func menu(vendorId: Int) async throws -> VendorMenu { try await get("vendors/\(vendorId)/menu", mock: "menu") }
     func settings(userId: Int) async throws -> UserSettings { try await get("settings", ["user_id": "\(userId)"], mock: "settings") }

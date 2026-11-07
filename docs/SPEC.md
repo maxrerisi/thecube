@@ -354,7 +354,7 @@ except `/ingest/postmark` (basic auth).
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| GET | `/users` | List users (William, Blue Devil) for the app's user switcher |
+| GET | `/users` | List users (the app picks the demo user, Blue Devil) |
 | GET | `/today?user_id=` | Macros eaten vs targets, points status, coach card, today's meals |
 | GET | `/next-meal?user_id=&bias=` | 3 picks + coach choice + reason |
 | GET | `/vendors` | Vendors with unit, open now, has_nutrition |
@@ -367,6 +367,7 @@ except `/ingest/postmark` (basic auth).
 | POST | `/balance` | `{user_id, points, swipes}` snapshot |
 | POST | `/admin/scrape` | Run scraper |
 | POST | `/admin/reset-demo` | Rebuild Blue Devil; re-import William from `emails/` |
+| GET | `/wrapped?user_id=` | Semester-so-far story (added 2026-11-07): 8 slides `{id, title, big, unit, caption}`; numbers by code (`app/core/wrapped.py`), one coach caption per slide, each number-checked against that slide's facts; 404 if no meals |
 
 ## 13. iOS app
 
@@ -378,6 +379,17 @@ folded into Today so the answer to "what do I eat?" sits under "how am I doing?"
 | Today | Coach card; protein + calorie rings (calories hidden if off); **Eat next**: what this meal should bring, the #1 pick with the coach's reason, 2 other options behind a disclosure; points left, swipes left, daily budget, run-out date, Plan pace; today's meals | Segmented Balanced / More protein / Cheaper; pull to refresh; swipe a meal to delete |
 | Log | Vendor list → menu by course → item rows with macros and trait icons → tap for full label | Add items, enter points paid, save (receipts arrive by email forward) |
 | Settings | Goal, targets, diet + allergen chips, show calories, meal plan, semester end, balance entry | Save |
+
+Also (added 2026-11-07): the pixel devil mascot in the top-right of every tab (mood by code:
+sleepy = nothing eaten, happy = protein hit, sweating = behind pace), tap for a line +
+shortcuts; **Feeling hungry** (full screen: hold to cook, haptics ramp, lid pops, card flips,
+macros count up, swipe left = reroll / right = let's go; picks from `/next-meal`, all goals
+interleaved); **Wrapped** (story view of `/wrapped`, share card); **onboarding** (4 pages:
+welcome, meal plan + balance, goal/protein/diet/allergens, forwarding address with copy);
+**widgets** (WidgetKit extension `ios/PitchforkWidget`, shares `ios/Shared`): lock screen
+circular protein ring, rectangular points-pace bar, inline; home small devil-in-ring, medium
+top pick + "Another" (App Intent), large mini-Today. Deep links: `pitchfork://today|hungry|wrapped`.
+App display name: Pitchfork.
 
 While Today is visible, poll `/today` every 5 s (so a live-forwarded receipt appears on stage).
 

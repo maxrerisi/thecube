@@ -6,8 +6,21 @@
 	<string>$(API_BASE_URL)</string>
 	<key>APP_TOKEN</key>
 	<string>$(APP_TOKEN)</string>
+	<key>INBOUND_EMAIL</key>
+	<string>$(INBOUND_EMAIL)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>edu.duke.thecube</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>pitchfork</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Connects to the thecube server on your Mac during development.</string>
+	<string>Connects to the Pitchfork server on your Mac during development.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>

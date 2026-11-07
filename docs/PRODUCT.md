@@ -41,6 +41,21 @@ Top to bottom:
 
 Today refreshes every 5 seconds, so a forwarded receipt shows up while you watch.
 
+### The devil, Feeling hungry, Wrapped, widgets
+- **Pixel devil** (top-right of every tab): its mood is computed from Today: sleepy before the
+  first meal, happy once protein is hit, sweating when behind on points. Tap it for a one-line
+  status and shortcuts.
+- **Feeling hungry?** Our "I'm feeling lucky": hold the button, the devil stirs a pot (haptics
+  speed up), the lid pops and a meal card flips over with its macros counting up. Swipe left for
+  another, right for "Let's go". The cards are the optimizer's picks for all three goals.
+- **Wrapped:** a Spotify-style story of the semester so far: dining days, meals, your spot, your
+  signature order, protein total (in eggs), hungriest hour, points personality, a share card.
+  Code computes every stat; Gemini writes one caption per slide, checked like the coach.
+- **Widgets:** lock screen protein ring, points-pace bar and one-line summary; home screen devil
+  in its protein ring (small), next pick with an "Another" button (medium), mini Today (large).
+- **Onboarding:** 4 screens on first launch: welcome, meal plan + balance, goal/protein/diet,
+  and the address to forward receipts to (with a copy button).
+
 ### Log: "I ate somewhere without a receipt email"
 Pick a vendor, browse its menu by course (macros and diet/allergen tags on each item), add
 items, type the points you paid, save. It shows up on Today.
@@ -118,8 +133,9 @@ A made-up student so the demo has a story. Real menus and prices, invented histo
 | Registrar Fall 2026 dates, plan starting balances from Duke's chart | Balance is typed in, not read from DukeCard |
 | Optimizer, pace, run-out math | Runs on a laptop + tunnel, not a hosted server |
 
-## Coming next (in this order)
+## Brand
 
-Logo + widget mockups → "Feeling hungry" (hold to cook a surprise pick) + pixel devil
-mascot → widgets (lock screen protein ring, points pace) → Wrapped (semester recap story)
-→ onboarding.
+Name **Pitchfork** (a devil's pitchfork is also a fork). Logo: "W/U" (WU, Duke's main dining
+hall) in Garamond Bold with a code-drawn pitchfork as the slash, on Duke blue
+(`design/logo_fork.svg` + `design/make_logo.sh`). Mascot: a 14×13 pixel Blue Devil drawn from
+strings in code (`ios/Shared/PixelDevil.swift`), no image assets.

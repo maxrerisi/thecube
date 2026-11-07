@@ -281,6 +281,23 @@ struct UserSettings: Codable, Hashable {
 
 struct Deleted: Codable { let deleted: Int }
 
+// MARK: - /wrapped
+
+struct WrappedSlide: Codable, Identifiable, Hashable {
+    let id: String
+    let title: String
+    let big: String
+    let unit: String
+    let caption: String
+}
+
+struct Wrapped: Codable {
+    let term: String
+    let asOf: String
+    let slides: [WrappedSlide]
+    let captionSource: String?
+}
+
 // MARK: - formatting
 
 enum Fmt {

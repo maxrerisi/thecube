@@ -38,8 +38,9 @@ def _call_gemini(kind: str, data: dict) -> dict | None:
     if client is None:
         return None
     from google.genai import types
-    instr = prompts.RECAP_INSTRUCTIONS if kind == "recap" else prompts.PICK_INSTRUCTIONS
-    schema = prompts.RECAP_SCHEMA if kind == "recap" else prompts.PICK_SCHEMA
+    instr, schema = {"recap": (prompts.RECAP_INSTRUCTIONS, prompts.RECAP_SCHEMA),
+                     "pick": (prompts.PICK_INSTRUCTIONS, prompts.PICK_SCHEMA),
+                     "wrapped": (prompts.WRAPPED_INSTRUCTIONS, prompts.WRAPPED_SCHEMA)}[kind]
     resp = client.models.generate_content(
         model=os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite"),
         contents=f"{instr}\n\nInput JSON:\n{json.dumps(data, sort_keys=True)}",
@@ -75,10 +76,40 @@ def input_numbers(data) -> set[str]:
     return out
 
 
+def _text_errors(text: str, allowed: set[str], show_calories=None) -> list[str]:
+    errs = []
+    if re.search(r"\b[a-z]+_[a-z_]+\b", text) or re.search(r"\bof none\b", text):
+        errs.append("quotes input keys")
+    for n in NUM.findall(text):
+        n = n.replace(",", "").rstrip(".")
+        if n not in allowed and f"{float(n):g}" not in allowed:
+            errs.append(f"number {n} not in input")
+    if show_calories is False and CAL_WORDS.search(text):
+        errs.append("calorie talk with show_calories off")
+    return errs
+
+
+def _check_wrapped(out: dict, data: dict) -> list[str]:
+    caps = out.get("captions")
+    if not isinstance(caps, list) or len(caps) != len(data["slides"]):
+        return ["need one caption per slide"]
+    errs = []
+    for cap, slide in zip(caps, data["slides"]):
+        if not isinstance(cap, str) or not cap.strip():
+            errs.append(f"{slide['id']}: empty")
+        elif len(cap) > 120:
+            errs.append(f"{slide['id']}: > 120 chars")
+        else:  # numbers must come from this slide's own facts
+            errs += [f"{slide['id']}: {e}" for e in _text_errors(cap, input_numbers(slide["facts"]))]
+    return errs
+
+
 def check(kind: str, out: dict, data: dict) -> list[str]:
     errs = []
     if not isinstance(out, dict):
         return ["not an object"]
+    if kind == "wrapped":
+        return _check_wrapped(out, data)
     text_keys = ("headline", "message") if kind == "recap" else ("headline", "reason")
     for k in text_keys:
         if not isinstance(out.get(k), str) or not out[k].strip():
@@ -137,6 +168,28 @@ def _pick_template(d: dict) -> dict:
     return {"chosen_index": 0, "headline": headline, "reason": reason + "."}
 
 
+def _wrapped_template(d: dict) -> dict:
+    lines = {
+        "intro": lambda f: f"{f['dining_days_so_far']} dining days into {f['term']}. Here's how you ate.",
+        "totals": lambda f: f"{f['meals']} meals across {f['places_tried']} places.",
+        "top_spot": lambda f: f"{f['vendor']} got {f['share_of_meals_pct']}% of your meals.",
+        "signature": lambda f: f"{f['item']}, {f['times']} times. A classic.",
+        "protein": lambda f: f"That's about {f['eggs_equivalent']} eggs' worth of protein.",
+        "peak_hour": lambda f: f"Most meals at {f['peak_hour']}. Latest order: {f['latest_order']}.",
+        "personality": lambda f: f"You're {f['personality']}.",
+        "share": lambda f: f"{f['meals']} meals, {f['protein_total_g']} g protein, and {f['top_vendor']} on repeat.",
+    }
+    return {"captions": [lines[s["id"]](s["facts"])[:120] for s in d["slides"]]}
+
+
+def wrapped_input(story: dict) -> dict:
+    return {"term": story["term"], "slides": [{"id": s["id"], "facts": s["facts"]} for s in story["slides"]]}
+
+
+def wrapped(story: dict, conn=None, call=None) -> dict:
+    return _run("wrapped", wrapped_input(story), conn, call)
+
+
 # ---------- entry points ----------
 
 def _run(kind: str, data: dict, conn=None, call=None) -> dict:
@@ -161,7 +214,7 @@ def _run(kind: str, data: dict, conn=None, call=None) -> dict:
                                 ON CONFLICT DO NOTHING""", (kind, h, json.dumps(out)))
             return {**out, "source": "gemini"}
         log.info("coach %s attempt %d rejected: %s", kind, attempt, errs)
-    out = _recap_template(data) if kind == "recap" else _pick_template(data)
+    out = {"recap": _recap_template, "pick": _pick_template, "wrapped": _wrapped_template}[kind](data)
     return {**out, "source": "template"}
 
 

@@ -2,9 +2,9 @@
 
   ../.venv/bin/python scripts/rehearse.py --base http://localhost:8000   (or the Railway URL)
 
-Steps mirror the pitch: reset -> William forwards a receipt (Postmark) -> it lands ->
-Today coach card -> switch to Blue Devil -> Eat next -> More protein -> Halal + Peanut -> picks
-change, none violate -> log an in-person meal -> it shows on Today. Exit 1 on any failure.
+Steps mirror the pitch (one user, Blue Devil): reset -> a receipt is forwarded (Postmark) and
+lands on Blue Devil -> Today coach card -> Eat next -> More protein -> Halal + Peanut -> picks
+change, none violate -> log an in-person meal -> it shows on Today -> Wrapped. Exit 1 on any failure.
 Needs APP_TOKEN, POSTMARK_WEBHOOK_USER/PASS (backend/.env).
 """
 import argparse
@@ -43,7 +43,7 @@ class Run:
 
 
 def outlook_forward(path) -> dict:
-    """A Postmark inbound payload for an Outlook 'Forward' of this receipt, from William."""
+    """A Postmark inbound payload for an Outlook 'Forward' of this receipt (lands on Blue Devil)."""
     m = email.message_from_bytes(path.read_bytes(), policy=policy.default)
     html = m.get_body(("html",)).get_content()
     inner = html.split("<body>", 1)[-1].rsplit("</body>", 1)[0]
@@ -73,12 +73,14 @@ def rehearse(base, token) -> Run:
         r.raise_for_status()
         j = r.json()
         assert j.get("status") == "ok" and j.get("imported") == 1, j
-        return f"imported 1 for user {j['user_id']}"
+        assert j["user_id"] == state["devil"], f"forward landed on user {j['user_id']}, not Blue Devil"
+        return f"imported 1 for Blue Devil (user {j['user_id']})"
 
-    def william_today():
-        t = run.get("/today", user_id=state["william"])
-        assert t["coach"]["headline"], t["coach"]
-        return f"coach ({t['coach']['source']}): {t['coach']['headline']!r}"
+    def wrapped():
+        w = run.get("/wrapped", user_id=state["devil"])
+        assert len(w["slides"]) == 8 and all(s["caption"] for s in w["slides"]), w
+        by = {s["id"]: s["big"] for s in w["slides"]}
+        return f"{by['totals']} meals, top spot {by['top_spot']}, {by['personality']} (captions: {w['caption_source']})"
 
     def devil_today():
         t = run.get("/today", user_id=state["devil"])
@@ -130,13 +132,13 @@ def rehearse(base, token) -> Run:
         return f"logged {item['name']} ({r.json()['macros']['protein_g']:.0f} g); Today shows {len(t['meals'])} meals"
 
     run.step("reset demo (hold back newest receipt)", do_reset)
-    run.step("William forwards a receipt (Postmark)", forward)
-    run.step("William: Today coach card", william_today)
-    run.step("switch to Blue Devil: Today", devil_today)
+    run.step("forward a receipt (Postmark) -> Blue Devil", forward)
+    run.step("Blue Devil: Today coach card", devil_today)
     run.step("Eat next (Balanced)", eat_next("balanced"))
     run.step("Eat next (More protein)", eat_next("protein"))
     run.step("toggle Halal + Peanut -> picks change, none violate", restrictions)
     run.step("log an in-person meal -> shows on Today", log_meal)
+    run.step("Wrapped: 8 slides with captions", wrapped)
     return run
 
 

@@ -16,6 +16,15 @@ struct EatNextSection: View {
             }
             .pickerStyle(.segmented)
             .listRowSeparator(.hidden)
+            Button { app.showHungry = true } label: {
+                HStack(spacing: 10) {
+                    PixelDevil(mood: app.mood, size: 26)
+                    Text("Feeling hungry?").font(.headline)
+                    Spacer()
+                    Text("Hold to cook a surprise").font(.caption).foregroundStyle(.secondary)
+                }
+            }
+            .buttonStyle(.plain)
             if let e = vm.error { ErrorBanner(message: e) }
             if let r = vm.result {
                 TargetLine(result: r)

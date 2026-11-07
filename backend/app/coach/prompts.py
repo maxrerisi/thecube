@@ -50,3 +50,14 @@ PICK_SCHEMA = {
     },
     "required": ["chosen_index", "headline", "reason"],
 }
+
+WRAPPED_INSTRUCTIONS = """This is the student's semester recap story (like a year-in-review), one slide
+at a time. For EACH slide in the input, in the same order, write one short caption (at most 120
+characters) that is playful and warm, second person, and uses only that slide's own facts.
+Make the protein slide fun using eggs_equivalent. No emoji. captions must have exactly one entry per slide."""
+
+WRAPPED_SCHEMA = {
+    "type": "object",
+    "properties": {"captions": {"type": "array", "items": {"type": "string"}}},
+    "required": ["captions"],
+}

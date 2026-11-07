@@ -4,6 +4,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(AppState.self) private var app
     @State private var vm = SettingsViewModel()
+    @AppStorage("onboarded") private var onboarded = false
 
     var body: some View {
         NavigationStack {
@@ -23,11 +24,15 @@ struct SettingsView: View {
                 } footer: {
                     Text("From DukeCard / eAccounts. Spending after this is subtracted automatically.")
                 }
+                Section {
+                    Button("Show welcome again") { onboarded = false }
+                }
                 if APIClient.shared.isMock {
                     Section { Text("Demo mode: showing bundled sample data. Set API_BASE_URL in Secrets.xcconfig.").font(.caption) }
                 }
             }
             .navigationTitle("Settings")
+            .toolbar { DevilToolbar() }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") { Task { if await vm.save(userId: app.userId) { app.dataChanged() } } }

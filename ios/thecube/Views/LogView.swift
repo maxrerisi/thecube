@@ -27,6 +27,7 @@ struct LogView: View {
                 }
             }
             .navigationTitle("Log")
+            .toolbar { DevilToolbar() }
             .navigationDestination(for: Vendor.self) { MenuView(vendor: $0) }
             .task(id: app.dataVersion) { await vm.load() }
             .refreshable { await vm.load() }

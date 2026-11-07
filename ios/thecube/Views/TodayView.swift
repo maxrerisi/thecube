@@ -30,16 +30,19 @@ struct TodayView: View {
                                 }
                         }
                     }
+                    Section { WrappedEntry() }
                 } else if vm.loading {
                     Section { ProgressView().frame(maxWidth: .infinity) }
                 }
             }
             .navigationTitle("Today")
+            .toolbar { DevilToolbar() }
             .refreshable { await vm.load(userId: app.userId) }
             // Poll every 5 s while visible so a live-forwarded receipt shows up on stage.
             .task(id: "\(app.userId)-\(app.dataVersion)") {
                 while !Task.isCancelled {
                     await vm.load(userId: app.userId)
+                    if let t = vm.today, app.today != t { app.today = t }
                     try? await Task.sleep(for: .seconds(5))
                 }
             }
@@ -216,5 +219,27 @@ struct MealRow: View {
             .font(.caption.monospacedDigit())
         }
         .padding(.vertical, 2)
+    }
+}
+
+/// Entry card for the semester recap story.
+struct WrappedEntry: View {
+    @Environment(AppState.self) private var app
+
+    var body: some View {
+        Button { app.showWrapped = true } label: {
+            HStack(spacing: 12) {
+                PixelDevil(mood: .happy, size: 36)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Your Fall 2026 Wrapped").font(.headline)
+                    Text("How you've eaten so far, in 8 slides").font(.caption).foregroundStyle(.secondary)
+                }
+                Spacer()
+                Image(systemName: "chevron.right").foregroundStyle(.tertiary)
+            }
+        }
+        .buttonStyle(.plain)
+        .listRowBackground(
+            LinearGradient(colors: [Color.blue.opacity(0.18), Color.purple.opacity(0.14)], startPoint: .leading, endPoint: .trailing))
     }
 }

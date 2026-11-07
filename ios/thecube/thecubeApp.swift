@@ -9,6 +9,7 @@ struct thecubeApp: App {
             RootView()
                 .environment(app)
                 .task { await app.loadUsers() }
+                .onOpenURL { app.open($0) }
         }
     }
 }
@@ -22,6 +23,22 @@ final class AppState {
     var loadError: String?
     /// Bumped after anything that changes data (log, import, delete, settings) so tabs reload.
     var dataVersion = 0
+    /// Latest /today (set by TodayView) so the devil in every tab shows the right mood.
+    var today: Today?
+    var showHungry = false
+    var showWrapped = false
+    var tab = "today"
+
+    var mood: DevilMood { today.map(DevilMood.from) ?? .neutral }
+
+    /// pitchfork://hungry, pitchfork://wrapped, pitchfork://today (widgets link here).
+    func open(_ url: URL) {
+        switch url.host() {
+        case "hungry": tab = "today"; showHungry = true
+        case "wrapped": tab = "today"; showWrapped = true
+        default: tab = "today"
+        }
+    }
     let api = APIClient.shared
 
     var user: User? { users.first { $0.id == userId } }
@@ -42,13 +59,53 @@ final class AppState {
 
 struct RootView: View {
     @Environment(AppState.self) private var app
+    @AppStorage("onboarded") private var onboarded = false
 
     var body: some View {
-        TabView {
-            Tab("Today", systemImage: "sun.max") { TodayView() }
-            Tab("Log", systemImage: "plus.circle") { LogView() }
-            Tab("Settings", systemImage: "gearshape") { SettingsView() }
+        @Bindable var app = app
+        TabView(selection: $app.tab) {
+            Tab("Today", systemImage: "sun.max", value: "today") { TodayView() }
+            Tab("Log", systemImage: "plus.circle", value: "log") { LogView() }
+            Tab("Settings", systemImage: "gearshape", value: "settings") { SettingsView() }
         }
+        .fullScreenCover(isPresented: $app.showHungry) { HungryView() }
+        .fullScreenCover(isPresented: $app.showWrapped) { WrappedView() }
+        .fullScreenCover(isPresented: Binding(get: { !onboarded }, set: { onboarded = !$0 })) {
+            OnboardingView { onboarded = true }
+        }
+    }
+}
+
+/// The devil in the top-right of every tab (trailing = actions, per Apple's HIG; leading is for
+/// Back). Tap: it says how things are going and offers Feeling hungry / Wrapped.
+struct DevilToolbar: ToolbarContent {
+    @Environment(AppState.self) private var app
+    @State private var talking = false
+
+    var body: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button { talking = true } label: { PixelDevil(mood: app.mood, size: 30) }
+                .sensoryFeedback(.impact(weight: .light), trigger: talking)
+                .popover(isPresented: $talking) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack(alignment: .top, spacing: 10) {
+                            PixelDevil(mood: app.mood, size: 40)
+                            Text(app.mood.line).font(.subheadline).fixedSize(horizontal: false, vertical: true)
+                        }
+                        Button { talking = false; app.showHungry = true } label: {
+                            Label("Feeling hungry?", systemImage: "frying.pan")
+                        }
+                        Button { talking = false; app.showWrapped = true } label: {
+                            Label("My Fall 2026 Wrapped", systemImage: "sparkles")
+                        }
+                    }
+                    .padding()
+                    .frame(width: 280)
+                    .presentationCompactAdaptation(.popover)
+                }
+                .accessibilityLabel("Pitchfork devil")
+        }
+        .sharedBackgroundVisibility(.hidden)
     }
 }
 

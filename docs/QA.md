@@ -76,9 +76,24 @@ server parses and saves it → the app polls every 5 seconds.
 **Does it scale?** The scrape is shared by every user (menus are the same for everyone). Per
 user it's a few rows per meal. The coach is cached per input, so repeated views are free.
 
-**Tested?** 59 backend tests: receipt parsing on all 31 receipts, duplicate forwarding, pace
+**Tested?** 62 backend tests: receipt parsing on all 31 receipts, duplicate forwarding, pace
 and breaks, optimizer goals produce different picks, coach validation. Plus a scripted
-rehearsal of the demo.
+rehearsal of the demo (forward → Today → picks → restrictions → log → Wrapped, ~7 s).
+
+## Delight features
+
+**What's Feeling hungry?** Our "I'm feeling lucky": hold to cook, a pick flips over, swipe for
+another. Same optimizer picks, just a faster way to decide when you don't care which goal.
+
+**Is Wrapped made up by the AI?** No. Every stat (meals, top spot, signature order, protein,
+peak hour, personality) is a SQL/Python computation; the AI only writes the caption, and a
+caption with any number not in that slide's facts is rejected.
+
+**Why a pixel devil?** Duke Blue Devils, and it shows status at a glance: sleepy before you eat,
+happy when protein is hit, sweating when you're behind on points.
+
+**Widgets?** Lock screen protein ring and points-pace bar; home screen pick with an "Another"
+button that rerolls without opening the app.
 
 ## Limits (say them before they ask)
 
@@ -90,6 +105,6 @@ rehearsal of the demo.
 
 ## Future
 
-Per-student forwarding addresses; auto-forward rules so there's no manual step; widgets;
-semester Wrapped; spring term calendar; other schools on NetNutrition (it's a common vendor
+Per-student forwarding addresses; auto-forward rules so there's no manual step; spring term
+calendar; push nudges ("you're 135 behind, Cheaper tab tonight?"); other schools on NetNutrition (it's a common vendor
 product).
