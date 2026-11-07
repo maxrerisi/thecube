@@ -2,7 +2,7 @@
  "date": "2026-11-07",
  "user": {
   "id": 2,
-  "name": "Jordan",
+  "name": "Blue Devil",
   "is_demo": true
  },
  "targets": {
@@ -10,7 +10,7 @@
   "protein_g": 150
  },
  "show_calories": true,
- "semester_end": "2026-12-18",
+ "semester_end": "2026-12-14",
  "eaten": {
   "calories": 1170.0,
   "protein_g": 74.0,
@@ -19,25 +19,28 @@
  },
  "protein_hit_days_7": 2,
  "points": {
-  "points": 1093.25,
+  "points": 879.62,
   "swipes": 14,
-  "days_left": 41,
-  "daily_budget": 26.66,
+  "days_left": 37,
+  "daily_budget": 23.77,
   "spent_today": 20.08,
   "trailing_daily": 30.8,
-  "runout": "2026-12-12",
+  "runout": "2026-12-05",
   "on_pace": false,
-  "balance_as_of": "2026-10-10T06:00:00-04:00"
+  "balance_as_of": "2026-10-10T06:00:00-04:00",
+  "meal_plan": "A",
+  "pace_target": 1014.62,
+  "vs_pace": -135.0
  },
  "coach": {
-  "headline": "Points run out December 12",
-  "message": "At 30.8 a day you'll run out before the semester ends; 26.66 a day lasts. 74 g of 150 g protein so far today.",
+  "headline": "Points pace check",
+  "message": "You have 879.62 points left, but your current pace puts you behind Duke's chart by 135 points, meaning points could run out on December 5 before the semester ends on December 14. Your daily budget is 23.77.",
   "tone": "warning",
-  "source": "template"
+  "source": "gemini"
  },
  "meals": [
   {
-   "id": 179,
+   "id": 979,
    "ts": "2026-11-07T08:30:00-05:00",
    "vendor": "The Skillet",
    "items": [
@@ -53,7 +56,7 @@
    "fat_g": 34.5
   },
   {
-   "id": 180,
+   "id": 980,
    "ts": "2026-11-07T12:05:00-05:00",
    "vendor": "Ginger + Soy",
    "items": [

@@ -35,19 +35,23 @@ def test_two_resets_identical_and_story(menus):
     r3 = menus.post("/admin/reset-demo", headers=AUTH).json()
     assert r3["fingerprint"] == r1["fingerprint"]
 
-    # SPEC 14 story for Jordan
+    # SPEC 14 story for Blue Devil: Plan A, behind Duke's pace, short on protein
     t = menus.get("/today?user_id=2", headers=AUTH).json()
+    assert t["user"]["name"] == "Blue Devil"
     assert t["targets"] == {"calories": 2800, "protein_g": 150}
-    assert len(t["meals"]) == 2 and 60 <= t["eaten"]["protein_g"] <= 80          # ~70 g so far today
-    runout = date.fromisoformat(t["points"]["runout"])
-    assert (date(2026, 12, 18) - runout).days == 6                                 # ~6 days early
-    assert t["points"]["on_pace"] is False
+    assert len(t["meals"]) == 2 and 60 <= t["eaten"]["protein_g"] <= 80          # ~74 g so far today
+    p = t["points"]
+    assert p["meal_plan"] == "A" and p["pace_target"] == 1014.62                   # Duke chart, Nov 7
+    assert p["vs_pace"] == -135.0                                                  # 135 behind Duke's pace
+    runout = date.fromisoformat(p["runout"])
+    assert 7 <= (date(2026, 12, 14) - runout).days <= 11                           # ~9 days early
+    assert p["on_pace"] is False
     assert t["protein_hit_days_7"] <= 2                                             # short most weekdays
     assert menus.get("/settings?user_id=2", headers=AUTH).json()["require_diets"] == []
-    with connect() as conn:  # every Jordan component is a real NetNutrition item; prices from receipts
+    with connect() as conn:  # every Blue Devil component is a real NetNutrition item; prices from receipts
         n = conn.execute("""SELECT count(*) AS n FROM order_components c JOIN order_items oi ON oi.id = c.order_item_id
                             JOIN orders o ON o.id = oi.order_id JOIN users u ON u.id = o.user_id
-                            WHERE u.name = 'Jordan' AND c.item_oid IS NULL""").fetchone()["n"]
+                            WHERE u.name = 'Blue Devil' AND c.item_oid IS NULL""").fetchone()["n"]
         assert n == 0
 
 

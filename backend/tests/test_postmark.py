@@ -1,4 +1,5 @@
-"""T12: Postmark inbound -> receipt lands for the forwarding user (no network; simulated payloads)."""
+"""T12: Postmark inbound -> receipt lands for the user who owns the sender address (no network;
+simulated payloads). William's Duke address belongs to Blue Devil (user 2) for the pitch."""
 import base64
 import email
 from email import policy
@@ -19,7 +20,7 @@ def pm(menus, monkeypatch):
     monkeypatch.setenv("POSTMARK_WEBHOOK_PASS", BASIC[1])
     with connect() as conn:
         conn.execute("DELETE FROM orders")
-        william = conn.execute("SELECT email FROM users WHERE name = 'William'").fetchone()["email"]
+        william = conn.execute("SELECT email FROM users WHERE name = 'Blue Devil'").fetchone()["email"]
     return menus, william
 
 
@@ -33,14 +34,14 @@ def inline_payload(p, sender):
 
 def test_inline_forward_lands_then_duplicate(pm):
     client, william = pm
-    assert william, "William's email comes from the receipts' To: header"
+    assert william, "the address comes from the receipts' To: header"
     body = inline_payload(SAMPLES[1], william)
     assert client.post("/ingest/postmark", json=body).status_code == 401              # no basic auth
     assert client.post("/ingest/postmark", json=body, auth=("x", "y")).status_code == 401
     r = client.post("/ingest/postmark", json=body, auth=BASIC).json()
-    assert r["status"] == "ok" and r["imported"] == 1 and r["user_id"] == 1
+    assert r["status"] == "ok" and r["imported"] == 1 and r["user_id"] == 2
     assert client.post("/ingest/postmark", json=body, auth=BASIC).json()["duplicates"] == 1
-    t = client.get("/today?user_id=1", headers=AUTH)  # shows up via the normal pipeline
+    t = client.get("/today?user_id=2", headers=AUTH)  # shows up via the normal pipeline
     assert t.status_code == 200
 
 

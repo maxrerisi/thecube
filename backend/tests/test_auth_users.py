@@ -14,5 +14,5 @@ def test_users_returns_two(client):
     r = client.get("/users", headers=AUTH)
     assert r.status_code == 200
     users = r.json()
-    assert [u["name"] for u in users] == ["William", "Jordan"]
+    assert [u["name"] for u in users] == ["William", "Blue Devil"]
     assert [u["is_demo"] for u in users] == [False, True]

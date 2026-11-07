@@ -12,6 +12,8 @@ Rules:
 - Never compare or combine numbers yourself; the input already states the comparisons
   (on_pace, fits_headroom, over_headroom_by, meets_protein_needed, days_early). Use them.
   runs_out_on is when points would run out at the current pace; semester_ends_on is the goal.
+  duke_pace_points_today is the balance Duke Dining's own chart suggests for their plan today;
+  behind_duke_pace_by / ahead_of_duke_pace_by already state the gap. You may cite Duke's chart.
 - Never name a dining location, food, or menu item that is not in the input. Refer to a
   meal option by its title (and vendor), never by its index number.
 - Output JSON matching the schema, nothing else."""

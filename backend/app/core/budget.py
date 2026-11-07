@@ -3,6 +3,7 @@ import math
 from dataclasses import asdict, dataclass
 from datetime import date, datetime, timedelta
 
+from app.core import pace
 from app.core.clock import NY, day_bounds
 
 
@@ -17,12 +18,15 @@ class PointsStatus:
     runout: date | None           # None = lasts to semester end (or no data)
     on_pace: bool | None
     balance_as_of: datetime | None
+    meal_plan: str | None = None      # Duke plan letter, for the pace chart
+    pace_target: float | None = None  # Duke's suggested balance today for that plan
+    vs_pace: float | None = None      # points - pace_target (negative = behind Duke's pace)
 
     def to_json(self) -> dict:
         d = asdict(self)
         for k in ("runout", "balance_as_of"):
             d[k] = d[k].isoformat() if d[k] else None
-        for k in ("points", "daily_budget", "spent_today", "trailing_daily"):
+        for k in ("points", "daily_budget", "spent_today", "trailing_daily", "pace_target", "vs_pace"):
             d[k] = round(d[k], 2) if d[k] is not None else None
         return d
 
@@ -49,7 +53,7 @@ def compute(snap: dict | None, orders: list[dict], semester_end: date, today: da
                         trailing <= daily_budget, snap["ts"])
 
 
-def status(conn, user_id: int, semester_end: date, today: date) -> PointsStatus:
+def status(conn, user_id: int, semester_end: date, today: date, meal_plan: str | None = None) -> PointsStatus:
     _, end_of_today = day_bounds(today)
     snap = conn.execute("""SELECT ts, points, swipes FROM balance_snapshots WHERE user_id = %s AND ts < %s
                            ORDER BY ts DESC LIMIT 1""", (user_id, end_of_today)).fetchone()
@@ -58,4 +62,8 @@ def status(conn, user_id: int, semester_end: date, today: date) -> PointsStatus:
     orders = conn.execute("""SELECT ts, points_spent, swipes_used FROM orders
                              WHERE user_id = %s AND ts >= %s AND ts < %s""",
                           (user_id, since, end_of_today)).fetchall()
-    return compute(snap, orders, semester_end, today)
+    s = compute(snap, orders, semester_end, today)
+    s.meal_plan, s.pace_target = meal_plan, pace.target(meal_plan, today)
+    if s.points is not None and s.pace_target is not None:
+        s.vs_pace = s.points - s.pace_target
+    return s

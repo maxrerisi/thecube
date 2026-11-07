@@ -29,7 +29,7 @@ reason for each pick. **Code computes every number; the LLM only writes words.**
 | Next-meal optimizer + Eat Next screen | Gemini goal parsing (use toggles) |
 | Coach card + pick reason (Gemini) | History screen, carb mode (stretch only) |
 | Diet/allergen filters from NetNutrition traits | Scraping Transact web order (needs login) |
-| Two users: William (real data), Jordan (fake) | Auth system (bearer token + user picker) |
+| Two users: William (real data), Blue Devil (fake) | Auth system (bearer token + user picker) |
 
 ## 3. Stack and repo
 
@@ -54,7 +54,7 @@ thecube/
     app/core/     budget.py  optimizer.py  macros.py
     app/coach/    gemini.py  prompts.py
     db/schema.sql
-    seed/         aliases.json  jordan.py
+    seed/         aliases.json  blue_devil.py  duke_points_fall2026.json
     tests/
   ios/thecube/    Views/ ViewModels/ API/
 ```
@@ -272,6 +272,12 @@ def status(user, today):
 
 "Today" = local date in America/New_York, overridable by `DEMO_TODAY`.
 
+**Duke pace (added 2026-11-07):** if `settings.meal_plan` is set, `status` also returns
+`meal_plan`, `pace_target` = Duke Dining's Fall 2026 points chart value for that plan today
+(`seed/duke_points_fall2026.json`, linear between the chart's weekly rows; 0 from Dec 14) and
+`vs_pace = points - pace_target` (negative = behind). The coach gets the gap pre-computed.
+Semester end defaults to 2026-12-14 (the chart's end date).
+
 ## 9. Settings (per user, toggles only)
 
 ```python
@@ -282,6 +288,7 @@ class Settings(BaseModel):
     require_diets: list[Literal["halal", "vegan", "vegetarian"]] = []
     avoid_allergens: list[Literal["egg","fish","gluten","milk","peanut","sesame","shellfish","soy","tree_nut","wheat"]] = []
     show_calories: bool = True
+    meal_plan: Literal["A","B","C","D","E","F","I","J"] | None = None   # Duke plan, for the pace chart
 ```
 
 ## 10. Next-meal optimizer (`app/core/optimizer.py`)
@@ -336,7 +343,7 @@ except `/ingest/postmark` (basic auth).
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| GET | `/users` | List users (William, Jordan) for the app's user switcher |
+| GET | `/users` | List users (William, Blue Devil) for the app's user switcher |
 | GET | `/today?user_id=` | Macros eaten vs targets, points status, coach card, today's meals |
 | GET | `/next-meal?user_id=&bias=` | 3 picks + coach choice + reason |
 | GET | `/vendors` | Vendors with unit, open now, has_nutrition |
@@ -348,11 +355,11 @@ except `/ingest/postmark` (basic auth).
 | GET/PUT | `/settings?user_id=` | Toggles, targets, semester end |
 | POST | `/balance` | `{user_id, points, swipes}` snapshot |
 | POST | `/admin/scrape` | Run scraper |
-| POST | `/admin/reset-demo` | Rebuild Jordan; re-import William from `emails/` |
+| POST | `/admin/reset-demo` | Rebuild Blue Devil; re-import William from `emails/` |
 
 ## 13. iOS app
 
-Four tabs plus a user switcher (William / Jordan) in the toolbar.
+Four tabs plus a user switcher (William / Blue Devil) in the toolbar.
 
 | Tab | Shows | Actions |
 | --- | --- | --- |
@@ -367,11 +374,15 @@ While Today is visible, poll `/today` every 5 s (so a live-forwarded receipt app
 
 - **William (real):** all receipts in `emails/` imported. Balance snapshot entered by hand.
   The live demo is William forwarding a real new receipt from Outlook.
-- **Jordan (fake):** `seed/jordan.py`, deterministic (`random.seed(42)`), 28 days of
-  orders **built from real scraped NetNutrition items and real receipt prices**. Story:
-  goal build_muscle (2,800 cal / 150 g protein), short on protein most weekdays, on pace
-  to run out of points ~6 days early. Today: breakfast + lunch logged, ~70 g protein.
-  No restrictions at start; the demo toggles Halal + Peanut live.
+- **Blue Devil (fake, renamed from Jordan):** `seed/blue_devil.py`, deterministic
+  (`random.seed(42)`), 28 days of orders **built from real scraped NetNutrition items and
+  real receipt prices**. Story: upperclass Plan A, goal build_muscle (2,800 cal / 150 g
+  protein), short on protein most weekdays (2 of 7 days), 135 points behind Duke's Plan A
+  chart, so at the current pace points run out Dec 5 (9 days before Dec 14). Today:
+  breakfast + lunch logged, 74 g protein. No restrictions at start; the demo toggles
+  Halal + Peanut live.
+- **Live forward lands on Blue Devil:** Blue Devil's `users.email` is William's Duke
+  address, so the receipt William forwards on stage shows up on Blue Devil's Today.
 - `POST /admin/reset-demo` restores both exactly.
 
 ## 15. Build order
@@ -395,7 +406,7 @@ While Today is visible, poll `/today` every 5 s (so a live-forwarded receipt app
 | T5 | A | Budget + `/today` (coach null) | Unit tests on sample numbers |
 | T6 | A | `/vendors`, `/vendors/{id}/menu`, `/orders/manual` | Manual order for Sazon burrito computes macros |
 | T7 | B | Log tab (vendor → menu → add → price → save) | Logged meal shows on Today |
-| T8 | A | Jordan seed + reset-demo | Two resets identical |
+| T8 | A | Blue Devil seed + reset-demo | Two resets identical |
 | T9 | A | Optimizer + `/next-meal` | Halal + peanut set → no violating picks |
 | T10 | B | Eat next tab | Bias switch changes picks live |
 | T11 | B | Coach (3 functions, number check, fallback, cache) wired in | 10 runs, no blank cards |
@@ -409,9 +420,9 @@ Stretch after T14: history screen, carb-per-meal mode, dining-hall daily menus.
 
 1. Problem (0:40): points run out, meals suffer, dietary needs ignored.
 2. Live (2:30): William forwards a real receipt → it appears with macros → Today coach
-   card → switch to Jordan → Eat next → "More protein" → toggle Halal + Peanut → picks
+   card → switch to Blue Devil → Eat next → "More protein" → toggle Halal + Peanut → picks
    change → log an in-person meal from the menu.
 3. How it works (0:40): NetNutrition + receipts → Postgres → code computes → Gemini words.
 4. Impact (0:40): Transact + CBORD run dining at many campuses.
 
-Be explicit about what's real (menus, William's receipts, live email) vs fake (Jordan).
+Be explicit about what's real (menus, William's receipts, live email) vs fake (Blue Devil).

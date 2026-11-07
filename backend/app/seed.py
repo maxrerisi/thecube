@@ -16,10 +16,10 @@ ROOT = Path(__file__).resolve().parents[2]
 EMAILS = ROOT / "emails"
 
 # Placeholders until each user sets them in the app (Settings tab / T13).
-SEMESTER_END = "2026-12-18"   # TODO confirm Duke fall 2026 last exam day
+SEMESTER_END = "2026-12-14"   # Duke Dining's Fall 2026 points chart counts down to Dec 14
 WILLIAM = Settings(semester_end=SEMESTER_END, targets={"calories": 2400, "protein_g": 120})
-JORDAN = Settings(semester_end=SEMESTER_END, targets={"calories": 2800, "protein_g": 150},
-                  goal="build_muscle")  # SPEC 14 story
+BLUE_DEVIL = Settings(semester_end=SEMESTER_END, targets={"calories": 2800, "protein_g": 150},
+                      goal="build_muscle", meal_plan="A")  # SPEC 14 story
 
 
 def william_email() -> str | None:
@@ -33,12 +33,19 @@ def william_email() -> str | None:
 
 
 def seed_users(conn) -> None:
-    rows = [("William", william_email(), False, WILLIAM), ("Jordan", None, True, JORDAN)]
-    for name, addr, demo, settings in rows:
+    """William (real receipts) and Blue Devil (demo student). William's Duke address belongs to
+    Blue Devil, so a receipt William forwards live during the pitch lands on Blue Devil's Today."""
+    conn.execute("UPDATE users SET name = 'Blue Devil' WHERE name = 'Jordan'")  # renamed 2026-11-07
+    rows = [("William", False, WILLIAM), ("Blue Devil", True, BLUE_DEVIL)]
+    for name, demo, settings in rows:
         conn.execute(
-            """INSERT INTO users (name, email, is_demo, settings)
-               SELECT %s, %s, %s, %s WHERE NOT EXISTS (SELECT 1 FROM users WHERE name = %s)""",
-            (name, addr, demo, json.dumps(settings.model_dump(mode="json")), name))
+            """INSERT INTO users (name, is_demo, settings)
+               SELECT %s, %s, %s WHERE NOT EXISTS (SELECT 1 FROM users WHERE name = %s)""",
+            (name, demo, json.dumps(settings.model_dump(mode="json")), name))
+    addr = william_email()
+    if addr:
+        conn.execute("UPDATE users SET email = NULL WHERE name <> 'Blue Devil' AND lower(email) = %s", (addr,))
+        conn.execute("UPDATE users SET email = %s WHERE name = 'Blue Devil'", (addr,))
 
 
 ALIASES = ROOT / "backend" / "seed" / "aliases.json"
@@ -93,7 +100,7 @@ def main() -> None:
     for w in warnings:
         print("warning:", w)
     print("seeded:", dict(c))
-    if "--demo" in sys.argv:  # also import William's receipts and build Jordan (= /admin/reset-demo)
+    if "--demo" in sys.argv:  # also import William's receipts and build Blue Devil (= /admin/reset-demo)
         from app import demo
         with connect() as conn:
             print("demo:", demo.reset(conn))

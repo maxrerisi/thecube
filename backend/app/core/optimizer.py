@@ -188,7 +188,7 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
     meals_left = 1 if at.hour >= 17 else 2
     p_t = max(s.targets.protein_g - eaten["protein_g"], 0) / meals_left
     c_t = max(s.targets.calories - eaten["calories"], 0) / meals_left
-    pts = budget.status(conn, user_id, s.semester_end, today)
+    pts = budget.status(conn, user_id, s.semester_end, today, s.meal_plan)
     headroom = None if pts.daily_budget is None else pts.daily_budget - pts.spent_today
     hist = {r["vendor_id"]: r["n"] for r in conn.execute(
         "SELECT vendor_id, count(*) AS n FROM orders WHERE user_id = %s GROUP BY vendor_id", (user_id,)).fetchall()}

@@ -41,7 +41,7 @@ def today_payload(conn, user_id: int) -> dict:
     eaten = macros.total(per)
     if not s.show_calories:
         eaten["calories"] = None
-    pts = budget.status(conn, user_id, s.semester_end, today)
+    pts = budget.status(conn, user_id, s.semester_end, today, s.meal_plan)
     return {
         "date": today.isoformat(),
         "user": {"id": user["id"], "name": user["name"], "is_demo": user["is_demo"]},

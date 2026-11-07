@@ -176,6 +176,15 @@ def _days_between(a: str | None, b: str | None) -> int | None:
     return (date.fromisoformat(b) - date.fromisoformat(a)).days if a and b else None
 
 
+def _pace_facts(pts: dict) -> dict:
+    """Duke's own pace chart for the user's plan, compared by code (SPEC 8)."""
+    if pts.get("vs_pace") is None:
+        return {}
+    gap = round(abs(pts["vs_pace"]))
+    return {"duke_meal_plan": f"Plan {pts['meal_plan']}", "duke_pace_points_today": round(pts["pace_target"]),
+            **({"behind_duke_pace_by": gap} if pts["vs_pace"] < 0 else {"ahead_of_duke_pace_by": gap})}
+
+
 def recap_input(today: dict) -> dict:
     """Only what the card needs, numbers already computed by code (SPEC 11)."""
     pts = today["points"]
@@ -189,7 +198,8 @@ def recap_input(today: dict) -> dict:
             "daily_budget": pts["daily_budget"], "spent_today": pts["spent_today"],
             "trailing_daily": pts["trailing_daily"], "on_pace": pts["on_pace"],
             "runs_out_on": _words(pts["runout"]), "semester_ends_on": _words(today.get("semester_end")),
-            "days_early": _days_between(pts["runout"], today.get("semester_end"))},
+            "days_early": _days_between(pts["runout"], today.get("semester_end")),
+            **_pace_facts(pts)},
     }
     if today["show_calories"]:
         d["calories"], d["calorie_target"] = today["eaten"]["calories"], today["targets"]["calories"]

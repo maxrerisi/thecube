@@ -148,7 +148,33 @@ struct PointsCard: View {
                     }
                 }
             }
+            if let plan = points.mealPlan, let target = points.paceTarget, let gap = points.vsPace {
+                PaceRow(plan: plan, target: target, gap: gap)
+            }
         }
+    }
+}
+
+/// Where you are vs Duke Dining's own Fall 2026 points chart for your plan.
+struct PaceRow: View {
+    let plan: String
+    let target: Double
+    let gap: Double
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .firstTextBaseline) {
+                Label("Duke Plan \(plan) pace", systemImage: "chart.line.downtrend.xyaxis")
+                    .font(.subheadline.weight(.medium))
+                Spacer()
+                Text(gap < 0 ? "\(Fmt.pts(-gap)) behind" : "\(Fmt.pts(gap)) ahead")
+                    .font(.subheadline.monospacedDigit().weight(.semibold))
+                    .foregroundStyle(gap < 0 ? .orange : .green)
+            }
+            Text("Duke's chart says \(Fmt.pts(target)) points today.")
+                .font(.caption).foregroundStyle(.secondary)
+        }
+        .padding(.top, 8)
     }
 }
 

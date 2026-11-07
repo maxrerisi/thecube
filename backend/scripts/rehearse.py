@@ -3,7 +3,7 @@
   ../.venv/bin/python scripts/rehearse.py --base http://localhost:8000   (or the Railway URL)
 
 Steps mirror the pitch: reset -> William forwards a receipt (Postmark) -> it lands ->
-Today coach card -> switch to Jordan -> Eat next -> More protein -> Halal + Peanut -> picks
+Today coach card -> switch to Blue Devil -> Eat next -> More protein -> Halal + Peanut -> picks
 change, none violate -> log an in-person meal -> it shows on Today. Exit 1 on any failure.
 Needs APP_TOKEN, POSTMARK_WEBHOOK_USER/PASS (backend/.env).
 """
@@ -64,8 +64,8 @@ def rehearse(base, token) -> Run:
         state["held"] = out["held_back"][0]
         users = run.get("/users")
         state["william"] = next(u["id"] for u in users if u["name"] == "William")
-        state["jordan"] = next(u["id"] for u in users if u["name"] == "Jordan")
-        return f"jordan {out['reset']['jordan']['orders']} orders, william {out['import']['imported']} imported, holding {state['held']}"
+        state["devil"] = next(u["id"] for u in users if u["name"] == "Blue Devil")
+        return f"blue devil {out['reset']['blue_devil']['orders']} orders, william {out['import']['imported']} imported, holding {state['held']}"
 
     def forward():
         from demo_reset import EMAILS
@@ -80,16 +80,16 @@ def rehearse(base, token) -> Run:
         assert t["coach"]["headline"], t["coach"]
         return f"coach ({t['coach']['source']}): {t['coach']['headline']!r}"
 
-    def jordan_today():
-        t = run.get("/today", user_id=state["jordan"])
-        state["jordan_meals"] = len(t["meals"])
+    def devil_today():
+        t = run.get("/today", user_id=state["devil"])
+        state["devil_meals"] = len(t["meals"])
         assert t["coach"]["headline"] and t["points"]["runout"], t
         return (f"{t['eaten']['protein_g']:.0f} g protein, runs out {t['points']['runout']}, "
                 f"coach: {t['coach']['headline']!r}")
 
     def eat_next(bias):
         def f():
-            n = run.get("/next-meal", user_id=state["jordan"], bias=bias)
+            n = run.get("/next-meal", user_id=state["devil"], bias=bias)
             assert n["picks"], "no picks"
             state[bias] = [p["title"] for p in n["picks"]]
             c = n["coach"]
@@ -97,11 +97,11 @@ def rehearse(base, token) -> Run:
         return f
 
     def restrictions():
-        s = run.get("/settings", user_id=state["jordan"])
+        s = run.get("/settings", user_id=state["devil"])
         s.update(require_diets=["halal"], avoid_allergens=["peanut"])
-        r = requests.put(f"{base}/settings", params={"user_id": state["jordan"]}, json=s, headers=run.h, timeout=30)
+        r = requests.put(f"{base}/settings", params={"user_id": state["devil"]}, json=s, headers=run.h, timeout=30)
         r.raise_for_status()
-        n = run.get("/next-meal", user_id=state["jordan"], bias="protein")
+        n = run.get("/next-meal", user_id=state["devil"], bias="protein")
         titles = [p["title"] for p in n["picks"]]
         assert titles and titles != state["protein"], "picks did not change"
         menus = {}
@@ -122,17 +122,17 @@ def rehearse(base, token) -> Run:
                     if i["name"] == "Chipotle Chicken")
         p = next(p for p in item["portions"] if p["is_default"])
         r = requests.post(f"{base}/orders/manual", headers=run.h, timeout=30, json={
-            "user_id": state["jordan"], "vendor_id": v["id"],
+            "user_id": state["devil"], "vendor_id": v["id"],
             "items": [{"item_oid": item["item_oid"], "uofm_oid": p["uofm_oid"], "price": 12.85}]})
         r.raise_for_status()
-        t = run.get("/today", user_id=state["jordan"])
-        assert len(t["meals"]) == state["jordan_meals"] + 1, "logged meal not on Today"
+        t = run.get("/today", user_id=state["devil"])
+        assert len(t["meals"]) == state["devil_meals"] + 1, "logged meal not on Today"
         return f"logged {item['name']} ({r.json()['macros']['protein_g']:.0f} g); Today shows {len(t['meals'])} meals"
 
     run.step("reset demo (hold back newest receipt)", do_reset)
     run.step("William forwards a receipt (Postmark)", forward)
     run.step("William: Today coach card", william_today)
-    run.step("switch to Jordan: Today", jordan_today)
+    run.step("switch to Blue Devil: Today", devil_today)
     run.step("Eat next (Balanced)", eat_next("balanced"))
     run.step("Eat next (More protein)", eat_next("protein"))
     run.step("toggle Halal + Peanut -> picks change, none violate", restrictions)

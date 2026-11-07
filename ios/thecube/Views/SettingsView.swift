@@ -60,8 +60,16 @@ struct SettingsView: View {
                 Toggle(Fmt.label(a), isOn: member(a, in: \.avoidAllergens))
             }
         }
-        Section("Semester") {
+        Section {
+            Picker("Meal plan", selection: binding(\.mealPlan)) {
+                Text("Not set").tag(String?.none)
+                ForEach(UserSettings.mealPlans, id: \.self) { Text("Plan \($0)").tag(Optional($0)) }
+            }
             DatePicker("Semester ends", selection: semesterEnd, displayedComponents: .date)
+        } header: {
+            Text("Semester")
+        } footer: {
+            Text("Your plan lets us compare your balance with Duke Dining's Fall 2026 points chart.")
         }
     }
 

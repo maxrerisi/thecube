@@ -32,6 +32,9 @@ struct PointsStatus: Codable, Hashable {
     var runout: String?
     var onPace: Bool?
     var balanceAsOf: String?
+    var mealPlan: String?
+    var paceTarget: Double?   // Duke Dining chart: suggested balance today for mealPlan
+    var vsPace: Double?       // points - paceTarget (negative = behind)
 }
 
 struct CoachCard: Codable, Hashable {
@@ -259,7 +262,10 @@ struct UserSettings: Codable, Hashable {
     var requireDiets: [String]
     var avoidAllergens: [String]
     var showCalories: Bool
+    var mealPlan: String?
 
+    /// Duke Fall 2026 plans on the points chart (seed/duke_points_fall2026.json).
+    static let mealPlans = ["A", "B", "C", "D", "E", "F", "I", "J"]
     static let diets = ["halal", "vegan", "vegetarian"]
     static let allergens = ["egg", "fish", "gluten", "milk", "peanut", "sesame", "shellfish", "soy", "tree_nut", "wheat"]
     static let goals = ["balanced", "build_muscle", "budget"]

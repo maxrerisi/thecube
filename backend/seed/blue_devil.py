@@ -1,18 +1,22 @@
-"""Jordan: the fake demo user (SPEC 14). Deterministic (random.seed(42)) given "today".
+"""Blue Devil: the fake demo student (SPEC 14). Deterministic (random.seed(42)) given "today".
 
 28 days of orders built from REAL NetNutrition items and REAL receipt prices (from
-William's receipts). Story: goal build_muscle (2,800 cal / 150 g protein), short on protein
-most weekdays, on pace to run out of points ~6 days early. Today: breakfast + lunch logged,
-~70 g protein. No restrictions at start (the demo toggles Halal + Peanut live).
+William's receipts). Story: upperclass Plan A, goal build_muscle (2,800 cal / 150 g protein),
+short on protein most weekdays, and BEHIND_PACE points behind Duke Dining's own Plan A pace
+chart (seed/duke_points_fall2026.json), so at the current pace points run out ~9 days early.
+Today: breakfast + lunch logged, ~74 g protein. No restrictions at start (the demo toggles
+Halal + Peanut live). Live forwards from William's Duke address land here (seed.py).
 """
 import random
 from datetime import date, datetime, time, timedelta
 
+from app.core import pace
 from app.core.clock import NY
 from app.ingest.matcher import item_format
 
 DAYS = 28
-RUNOUT_EARLY_DAYS = 6
+MEAL_PLAN = "A"
+BEHIND_PACE = 135.0     # points below Duke's chart today
 START_SWIPES = 14
 SWIPE_VALUE = 11.80  # Board Plan Equivalency seen on William's receipts
 TAX = 0.075
@@ -72,7 +76,7 @@ def _component(conn, unit_oid, name, course, word):
         """SELECT item_oid FROM nn_items WHERE unit_oid = %s AND name = %s AND course LIKE %s
            ORDER BY menu_date DESC NULLS LAST, item_oid LIMIT 1""", (unit_oid, name, f"%{course}%")).fetchone()
     if not item:
-        raise LookupError(f"Jordan seed: {name!r} ({course!r}) not on unit {unit_oid}'s menu")
+        raise LookupError(f"Blue Devil seed: {name!r} ({course!r}) not on unit {unit_oid}'s menu")
     ps = conn.execute("SELECT uofm_oid, portion_name, is_default FROM nn_portions WHERE item_oid = %s ORDER BY uofm_oid",
                       (item["item_oid"],)).fetchall()
     hit = next((p for p in ps if word and word in p["portion_name"].lower().split()), None) if word else None
@@ -88,7 +92,7 @@ def resolve_meals(conn) -> dict:
         price = conn.execute("""SELECT price FROM prices WHERE vendor_id = %s AND item_name = %s AND variant = %s""",
                              (v["id"], item, variant)).fetchone()
         if not price:
-            raise LookupError(f"Jordan seed: no receipt price for {vname} / {item} / {variant!r}; import William first")
+            raise LookupError(f"Blue Devil seed: no receipt price for {vname} / {item} / {variant!r}; import William first")
         out[key] = {"vendor_id": v["id"], "vendor": vname, "item": item, "variant": variant,
                     "price": float(price["price"]),
                     "components": [(n, *_component(conn, v["unit_oid"], n, c, w)) for n, c, w in comps]}
@@ -117,7 +121,7 @@ def plan(today: date) -> list[tuple[datetime, str]]:
 
 
 def build(conn, user_id: int, today: date, semester_end: date) -> dict:
-    """Delete and rebuild Jordan's orders + balance snapshot. Returns a summary."""
+    """Delete and rebuild Blue Devil's orders + balance snapshot. Returns a summary."""
     conn.execute("DELETE FROM orders WHERE user_id = %s", (user_id,))
     conn.execute("DELETE FROM balance_snapshots WHERE user_id = %s", (user_id,))
     meals = resolve_meals(conn)
@@ -134,18 +138,18 @@ def build(conn, user_id: int, today: date, semester_end: date) -> dict:
                                    swipes_used, swipe_value, source, external_ref, macros_partial)
                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'seed', %s, false) RETURNING id""",
             (user_id, ts, m["vendor_id"], m["vendor"], m["price"], tax, round(m["price"] + tax, 2), points,
-             1 if swipe else 0, SWIPE_VALUE if swipe else 0, f"jordan-{ts:%Y%m%d-%H%M}-{i}")).fetchone()["id"]
+             1 if swipe else 0, SWIPE_VALUE if swipe else 0, f"bluedevil-{ts:%Y%m%d-%H%M}-{i}")).fetchone()["id"]
         oi = conn.execute("INSERT INTO order_items (order_id, name, price, format) VALUES (%s, %s, %s, %s) RETURNING id",
                           (oid, m["item"], m["price"], item_format(m["item"]))).fetchone()["id"]
         for name, item_oid, uofm in m["components"]:
             conn.execute("""INSERT INTO order_components (order_item_id, raw_name, item_oid, uofm_oid, servings)
                             VALUES (%s, %s, %s, %s, 1)""", (oi, name, item_oid, uofm))
         spends.append((ts, points, 1 if swipe else 0))
-    # Balance snapshot at the start, sized so the trailing-7-day pace runs out RUNOUT_EARLY_DAYS early.
+    # Balance snapshot at the start, sized so that today (after today's meals) the balance is
+    # BEHIND_PACE below Duke's Plan A chart. Runout then follows from the trailing pace.
     week = [p for ts, p, _ in spends if today - timedelta(days=7) <= ts.date() < today]
     trailing = sum(week) / 7
-    days_left = max((semester_end - today).days, 1)
-    target_now = round(trailing * (days_left - RUNOUT_EARLY_DAYS) + trailing / 2, 2)  # mid-day: floor() lands on -6
+    target_now = round(pace.target(MEAL_PLAN, today) - BEHIND_PACE, 2)
     snap_ts = datetime.combine(today - timedelta(days=DAYS), time(6, 0), NY)
     spent_since = sum(p for _, p, _ in spends)
     swipes_since = sum(s for _, _, s in spends)

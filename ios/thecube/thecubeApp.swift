@@ -13,7 +13,7 @@ struct thecubeApp: App {
     }
 }
 
-/// Selected user (William / Jordan) shared by every tab. SPEC 13: user switcher in the toolbar.
+/// Selected user (William / Blue Devil) shared by every tab. SPEC 13: user switcher in the toolbar.
 @Observable
 @MainActor
 final class AppState {
@@ -52,7 +52,7 @@ struct RootView: View {
     }
 }
 
-/// Toolbar menu to switch between William and Jordan.
+/// Toolbar menu to switch between William and Blue Devil.
 struct UserSwitcher: View {
     @Environment(AppState.self) private var app
 

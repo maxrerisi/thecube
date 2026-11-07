@@ -18,6 +18,7 @@ class Settings(BaseModel):
     avoid_allergens: list[Literal["egg", "fish", "gluten", "milk", "peanut", "sesame",
                                   "shellfish", "soy", "tree_nut", "wheat"]] = []
     show_calories: bool = True
+    meal_plan: Literal["A", "B", "C", "D", "E", "F", "I", "J"] | None = None  # Duke plan (pace chart)
 
 
 class User(BaseModel):
