@@ -242,21 +242,20 @@ struct CartView: View {
                     Section(line.item.name) {
                         LabeledContent("Portion", value: line.portion.name)
                         Stepper("Servings: \(line.servings, specifier: "%g")", value: $line.servings, in: 0.5...5, step: 0.5)
-                        if let known = line.knownPrice {
-                            LabeledContent("Price", value: Fmt.money(known))
-                        } else {
-                            TextField("Price (e.g. 12.85)", text: $line.typedPrice)
-                                .keyboardType(.decimalPad)
-                        }
+                        LabeledContent("Protein", value: Fmt.g((line.portion.proteinG ?? 0) * line.servings))
                     }
                 }
                 .onDelete { vm.cart.remove(atOffsets: $0) }
-                Section("Total") {
+                Section {
                     LabeledContent("Protein", value: Fmt.g(vm.totals.proteinG))
                     LabeledContent("Calories", value: Fmt.cal(vm.totals.calories))
-                    LabeledContent("Subtotal", value: Fmt.money(vm.subtotal))
-                    TextField("Points spent (default \(Fmt.pts(vm.defaultPoints)))", text: $vm.pointsOverride)
+                    TextField(vm.subtotal > 0 ? "Points paid (est. \(Fmt.pts(vm.defaultPoints)))" : "Points paid (e.g. 12.85)",
+                              text: $vm.pointsPaid)
                         .keyboardType(.decimalPad)
+                } header: {
+                    Text("Total")
+                } footer: {
+                    Text(vm.subtotal > 0 ? "Leave blank to use the receipt prices we know." : "Enter what this meal cost so your points budget stays right.")
                 }
                 if let e = vm.error { Section { ErrorBanner(message: e) } }
             }
@@ -267,7 +266,7 @@ struct CartView: View {
                     Button("Save") {
                         Task { if await vm.save(userId: app.userId) { onSaved() } }
                     }
-                    .disabled(vm.cart.isEmpty || vm.saving || (vm.missingPrices && vm.pointsOverride.isEmpty))
+                    .disabled(vm.cart.isEmpty || vm.saving)
                 }
             }
         }

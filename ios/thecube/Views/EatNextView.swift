@@ -75,7 +75,7 @@ struct PickCard: View {
         VStack(alignment: .leading, spacing: 8) {
             if let coach {
                 VStack(alignment: .leading, spacing: 4) {
-                    Label("Coach pick", systemImage: "star.fill").font(.caption.bold()).foregroundStyle(.yellow)
+                    Label("Coach pick", systemImage: "star.fill").font(.caption.bold()).foregroundStyle(.orange)
                     Text(coach.headline).font(.subheadline.bold())
                     Text(coach.reason).font(.subheadline).foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -113,9 +113,6 @@ struct PickCard: View {
             }
         }
         .padding(.vertical, 4)
-        .overlay(alignment: .topTrailing) {
-            if coach == nil { Text("#\(rank)").font(.caption2).foregroundStyle(.tertiary) }
-        }
         .listRowBackground(coach != nil ? Color.yellow.opacity(0.08) : nil)
     }
 }

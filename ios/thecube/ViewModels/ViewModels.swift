@@ -87,11 +87,8 @@ struct CartLine: Identifiable, Hashable {
     let item: MenuItem
     var portion: Portion
     var servings: Double = 1
-    var typedPrice: String = ""
 
     var knownPrice: Double? { item.knownPrice?.price }
-    /// Price per serving: the known receipt price, else what the user typed.
-    var unitPrice: Double? { knownPrice ?? Double(typedPrice.replacingOccurrences(of: "$", with: "")) }
 }
 
 @Observable
@@ -101,7 +98,8 @@ final class MenuViewModel {
     var menu: VendorMenu?
     var error: String?
     var cart: [CartLine] = []
-    var pointsOverride: String = ""
+    /// What the user paid for the whole meal (points); optional when receipt prices are known.
+    var pointsPaid: String = ""
     var saving = false
     private let api = APIClient.shared
 
@@ -124,24 +122,25 @@ final class MenuViewModel {
                carbsG: cart.reduce(0) { $0 + ($1.portion.carbsG ?? 0) * $1.servings },
                fatG: cart.reduce(0) { $0 + ($1.portion.fatG ?? 0) * $1.servings })
     }
-    var subtotal: Double { cart.reduce(0) { $0 + ($1.unitPrice ?? 0) * $1.servings } }
+    /// Sum of receipt prices we know for items in the cart (unknown items count 0).
+    var subtotal: Double { cart.reduce(0) { $0 + ($1.knownPrice ?? 0) * $1.servings } }
     /// SPEC 7: points default = prices x 1.075 tax, editable.
     var defaultPoints: Double { (subtotal * 1.075 * 100).rounded() / 100 }
-    var missingPrices: Bool { cart.contains { $0.unitPrice == nil } }
+    var typedPoints: Double? { Double(pointsPaid.replacingOccurrences(of: "$", with: "")) }
 
     func save(userId: Int) async -> Bool {
         saving = true
         defer { saving = false }
         let items = cart.map { line in
             ManualItem(itemOid: line.item.itemOid, uofmOid: line.portion.uofmOid, servings: line.servings,
-                       price: line.knownPrice == nil ? line.unitPrice : nil)
+                       price: nil)
         }
-        let points = Double(pointsOverride.replacingOccurrences(of: "$", with: ""))
+        let points = typedPoints
         do {
             _ = try await api.logManual(ManualOrder(userId: userId, vendorId: vendor.id, items: items,
                                                     pointsSpent: points, swipesUsed: 0))
             cart = []
-            pointsOverride = ""
+            pointsPaid = ""
             error = nil
             return true
         } catch {

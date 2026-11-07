@@ -56,19 +56,19 @@ struct RootView: View {
 struct UserSwitcher: View {
     @Environment(AppState.self) private var app
 
+    /// Two users in the demo, so one tap flips between them; the current name is always visible.
     var body: some View {
-        @Bindable var app = app
-        Menu {
-            Picker("User", selection: $app.userId) {
-                ForEach(app.users) { u in
-                    Text(u.isDemo ? "\(u.name) (demo)" : u.name).tag(u.id)
-                }
-            }
+        Button {
+            guard let i = app.users.firstIndex(where: { $0.id == app.userId }), !app.users.isEmpty else { return }
+            app.userId = app.users[(i + 1) % app.users.count].id
         } label: {
-            Label(app.user?.name ?? "User", systemImage: "person.crop.circle")
-                .labelStyle(.titleAndIcon)
+            HStack(spacing: 6) {
+                Image(systemName: "arrow.left.arrow.right")
+                Text(app.user?.name ?? "User").fontWeight(.semibold)
+            }
+            .fixedSize()
         }
-        .accessibilityLabel("Switch user")
+        .accessibilityLabel("Switch user, now \(app.user?.name ?? "none")")
     }
 }
 

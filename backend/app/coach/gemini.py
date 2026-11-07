@@ -212,13 +212,13 @@ def pick_input(result: dict, show_calories: bool) -> dict:
         words.append("avoids " + ", ".join(a.replace("_", " ") for a in r["avoid_allergens"]))
     return {
         "show_calories": show_calories, "bias": result["bias"], "headroom": result["headroom"],
-        "protein_needed_this_meal_g": result["per_meal_target"]["protein_g"],
+        "protein_needed_this_meal_g": round(result["per_meal_target"]["protein_g"]),
         "restrictions": "; ".join(words) or "none",
-        "picks": [{"index": i, "vendor": p["vendor"], "title": p["title"], "protein_g": p["protein_g"],
+        "picks": [{"index": i, "vendor": p["vendor"], "title": p["title"], "protein_g": round(p["protein_g"]),
                    "points_cost": p["points_cost"],
                    "meets_protein_needed": p["protein_g"] >= result["per_meal_target"]["protein_g"],
                    **_headroom_facts(p["points_cost"], result["headroom"]),
-                   **({"calories": p["calories"]} if show_calories else {})}
+                   **({"calories": round(p["calories"])} if show_calories else {})}
                   for i, p in enumerate(result["picks"])],
     }
 
