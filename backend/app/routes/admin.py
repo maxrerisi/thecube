@@ -25,7 +25,8 @@ def scrape(background: BackgroundTasks, units: str | None = None):
 
 
 @router.post("/reset-demo")
-def reset_demo():
+def reset_demo(emails: bool = True):
+    """emails=false: skip importing emails/ (scripts/demo_reset.py uploads them itself)."""
     from app import demo
     with connect() as conn:
-        return demo.reset(conn)
+        return demo.reset(conn, import_emails=emails)

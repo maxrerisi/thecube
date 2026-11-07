@@ -1,5 +1,8 @@
 """POST /admin/reset-demo (SPEC 14): rebuild Jordan; re-import William from emails/.
 
+On a deployed server there is no emails/ (gitignored, public repo): run
+scripts/demo_reset.py from a laptop, which calls this and then uploads emails/.
+
 Removes everything a live demo adds (manual logs, forwarded receipts, typed prices, auto-
 written aliases, toggled settings, entered balances) so the next run starts identical.
 William's real balance is "entered by hand" once in the env var WILLIAM_BALANCE
@@ -29,7 +32,7 @@ def _user(conn, name):
     return conn.execute("SELECT id FROM users WHERE name = %s", (name,)).fetchone()["id"]
 
 
-def reset(conn, emails_dir: Path = EMAILS) -> dict:
+def reset(conn, emails_dir: Path = EMAILS, import_emails: bool = True) -> dict:
     from seed import jordan  # backend/seed/jordan.py
     seed_users(conn)
     william, jordan_id = _user(conn, "William"), _user(conn, "Jordan")
@@ -38,9 +41,12 @@ def reset(conn, emails_dir: Path = EMAILS) -> dict:
     if base := william_balance():
         conn.execute("INSERT INTO balance_snapshots (user_id, ts, points, swipes) VALUES (%s, %s, %s, %s)",
                      (william, base[2], base[0], base[1]))
-    conn.execute("TRUNCATE prices, item_aliases, vendor_aliases")
+    # Receipt prices stay (Jordan's meals are priced from them, and a deployed server has no
+    # emails/ to re-derive them); prices typed during a demo go.
+    conn.execute("DELETE FROM prices WHERE source = 'manual'")
+    conn.execute("TRUNCATE item_aliases, vendor_aliases")
     warnings = seed_vendors(conn)
-    files = [p.read_bytes() for p in sorted(emails_dir.glob("*.eml"))]
+    files = [p.read_bytes() for p in sorted(emails_dir.glob("*.eml"))] if import_emails else []
     imported = import_emls(conn, william, files) if files else {"imported": 0}
     settings_store.save(conn, jordan_id, JORDAN)
     built = jordan.build(conn, jordan_id, clock.today(), JORDAN.semester_end)

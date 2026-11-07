@@ -1,0 +1,11 @@
+# never ship private data or secrets in the image
+emails/
+**/.env
+*.env
+spikes/nn_cache/
+spikes/receipts.json
+spikes/matching.json
+.venv/
+ios/
+.git/
+**/__pycache__/
