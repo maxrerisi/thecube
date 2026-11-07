@@ -64,6 +64,11 @@ def test_picks_change_with_restrictions_and_bias(demo):
     plain = [p["title"] for p in run(demo, "protein", 12, 30)["picks"]]
     by_bias = {b: [p["title"] for p in run(demo, b, 12, 30)["picks"]] for b in ("balanced", "protein", "cheap")}
     assert len({tuple(v) for v in by_bias.values()}) == 3  # each bias gives a different list
+    for h, m in ((12, 30), (18, 30)):  # each tab optimizes something different
+        top = {b: run(demo, b, h, m)["picks"][0] for b in ("balanced", "protein", "cheap")}
+        assert top["protein"]["title"] != top["cheap"]["title"]
+        assert top["protein"]["protein_g"] >= max(t["protein_g"] for t in top.values())
+        assert top["cheap"]["points_cost"] <= min(t["points_cost"] for t in top.values())
     s = demo.get("/settings?user_id=2", headers=AUTH).json()
     s.update(require_diets=["halal"], avoid_allergens=["peanut"])
     demo.put("/settings?user_id=2", json=s, headers=AUTH)

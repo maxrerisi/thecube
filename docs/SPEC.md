@@ -322,6 +322,15 @@ Implementation notes (T9, 2026-11-07; `app/core/optimizer.py`, templates in `see
 - Vendor hours are real (NetNutrition `Unit/GetHoursOfOperationMarkup`), seeded in
   `seed/aliases.json`.
 
+**Scoring (revised 2026-11-07):** each bias optimizes a different objective; prices are
+scaled by `ref_price = max(daily_budget / 2, 8)` (a typical meal), not by today's headroom
+(a nearly spent day made every option equally bad, so all tabs agreed):
+balanced = -1.2 short - 0.6 extra - 0.8 cal_dev - 0.35 over - 0.25 cost;
+protein = 2.0 min(protein / target, 1.5) - 0.3 cal_dev - 0.15 over - 0.1 cost;
+cheap = -2.0 cost - 0.5 over - 0.8 short - 0.2 cal_dev; all + 0.1 history_share
+(short/extra = protein below/above target, relative; over = cost above headroom / ref_price).
+The app labels the target "Still to eat today" when one meal is left.
+
 ## 11. Coach (`app/coach/`)
 
 Same as before; unchanged in spirit:

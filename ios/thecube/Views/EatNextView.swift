@@ -14,6 +14,8 @@ struct EatNextView: View {
                         ForEach(Bias.allCases) { Text($0.label).tag($0) }
                     }
                     .pickerStyle(.segmented)
+                } footer: {
+                    Text(vm.bias.blurb)
                 }
                 if let e = vm.error { Section { ErrorBanner(message: e) } }
                 if let r = vm.result {
@@ -45,10 +47,18 @@ struct TargetHeader: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Stat(label: "Protein this meal", value: Fmt.g(result.perMealTarget.proteinG))
-                if let c = result.perMealTarget.calories { Stat(label: "Calories this meal", value: Fmt.cal(c)) }
-                Stat(label: "Points headroom", value: Fmt.pts(result.headroom))
+            Text(result.mealsLeft == 1 ? "Still to eat today" : "Aim for this meal (2 left today)")
+                .font(.caption.weight(.semibold)).foregroundStyle(.secondary).textCase(.uppercase)
+            HStack(alignment: .top) {
+                Stat(label: "protein", value: Fmt.g(result.perMealTarget.proteinG))
+                if let c = result.perMealTarget.calories { Stat(label: "calories", value: Fmt.cal(c)) }
+                if let h = result.headroom {
+                    if h >= 0 {
+                        Stat(label: "points left in today's budget", value: Fmt.pts(h))
+                    } else {
+                        Stat(label: "over today's budget", value: Fmt.pts(-h), tint: .orange)
+                    }
+                }
             }
             let r = result.restrictions
             if !r.requireDiets.isEmpty || !r.avoidAllergens.isEmpty {

@@ -150,14 +150,28 @@ def simple_candidates(items, rows, alias, template_items, ok) -> list[dict]:
 
 # ---------- scoring ----------
 
-def score(m: dict, p_t: float, c_t: float, headroom: float | None, history_share: float, bias: str) -> float:
-    w_p = 1.6 if bias == "protein" else 1.0
-    w_price = 3.0 if bias == "cheap" else 1.5
-    price_term = 0.0 if headroom is None else w_price * max(0.0, m["points_cost"] - headroom) / max(headroom, 1)
-    # "More protein": going over the protein target isn't penalized (one-sided), only falling short
-    p_gap = max(0.0, p_t - m["protein_g"]) if bias == "protein" else abs(m["protein_g"] - p_t)
-    return (-w_p * p_gap / max(p_t, 1) - 0.6 * abs(m["calories"] - c_t) / max(c_t, 1)
-            - price_term + 0.2 * history_share)
+def score(m: dict, p_t: float, c_t: float, headroom: float | None, history_share: float, bias: str,
+          ref_price: float = 12.0) -> float:
+    """Higher is better. Each bias optimizes a different thing (they used to share one formula,
+    and with little points headroom the price term swamped everything, so all tabs agreed):
+      balanced: closest to this meal's protein + calorie targets, price a mild tiebreak;
+      protein:  most protein (up to 1.5x the target), price barely matters;
+      cheap:    fewest points, as long as it is a real meal (protein shortfall still costs).
+    Prices are scaled by ref_price (half the daily budget, a typical meal), not by today's
+    headroom, so a nearly-spent day doesn't make every option look equally terrible."""
+    p_t, c_t = max(p_t, 1.0), max(c_t, 1.0)
+    cost = m["points_cost"] / ref_price
+    over = 0.0 if headroom is None else max(0.0, m["points_cost"] - max(headroom, 0.0)) / ref_price
+    short = max(0.0, p_t - m["protein_g"]) / p_t
+    extra = max(0.0, m["protein_g"] - p_t) / p_t
+    cal_dev = abs(m["calories"] - c_t) / c_t
+    if bias == "protein":
+        s = 2.0 * min(m["protein_g"] / p_t, 1.5) - 0.3 * cal_dev - 0.15 * over - 0.1 * cost
+    elif bias == "cheap":
+        s = -2.0 * cost - 0.5 * over - 0.8 * short - 0.2 * cal_dev
+    else:
+        s = -1.2 * short - 0.6 * extra - 0.8 * cal_dev - 0.35 * over - 0.25 * cost
+    return s + 0.1 * history_share
 
 
 def pick_top(cands: list[dict], n=3) -> list[dict]:
@@ -190,6 +204,7 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
     c_t = max(s.targets.calories - eaten["calories"], 0) / meals_left
     pts = budget.status(conn, user_id, s.semester_end, today, s.meal_plan)
     headroom = None if pts.daily_budget is None else pts.daily_budget - pts.spent_today
+    ref_price = max((pts.daily_budget or 24.0) / 2, 8.0)  # a typical meal for this budget
     hist = {r["vendor_id"]: r["n"] for r in conn.execute(
         "SELECT vendor_id, count(*) AS n FROM orders WHERE user_id = %s GROUP BY vendor_id", (user_id,)).fetchall()}
     n_orders = sum(hist.values()) or 1
@@ -214,7 +229,7 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
             c["points_cost"] = round(c["price"] * (1 + TAX), 2)
             c.update(vendor_id=v["id"], vendor=v["name"],
                      opens_at=None if not fallback else hours.opens_within(v["hours"], at, __import__("datetime").timedelta(hours=2)).isoformat())
-            c["score"] = round(score(c, p_t, c_t, headroom, hist.get(v["id"], 0) / n_orders, bias), 4)
+            c["score"] = round(score(c, p_t, c_t, headroom, hist.get(v["id"], 0) / n_orders, bias, ref_price), 4)
         vc = [c for c in vc if c["calories"] >= MIN_MEAL_SHARE * c_t]
         cands += sorted(vc, key=lambda c: -c["score"])[:CAP_PER_VENDOR]
     picks = pick_top(cands)

@@ -91,8 +91,11 @@ def check(kind: str, out: dict, data: dict) -> list[str]:
         errs.append(f"{text_keys[1]} > 280 chars")
     if kind == "recap" and out.get("tone") not in ("praise", "nudge", "warning"):
         errs.append("bad tone")
-    if kind == "pick" and out.get("chosen_index") not in range(len(data.get("picks", []))):
-        errs.append("bad chosen_index")
+    if kind == "pick" and out.get("chosen_index") != 0:
+        errs.append("chosen_index must be 0 (the app's top pick)")
+    for k in text_keys:  # leaked JSON keys ("49 protein_g", "restrictions of none")
+        if re.search(r"\b[a-z]+_[a-z_]+\b", out[k]) or re.search(r"\bof none\b", out[k]):
+            errs.append(f"{k} quotes input keys")
     allowed = input_numbers(data)
     for k in text_keys:
         for n in NUM.findall(out[k]):
@@ -126,8 +129,8 @@ def _recap_template(d: dict) -> dict:
 def _pick_template(d: dict) -> dict:
     best = d["picks"][0]
     reason = f"{best['protein_g']} g protein for {best['points_cost']} points"
-    if d.get("headroom") is not None:
-        reason += f", with {d['headroom']} points of headroom today"
+    if d.get("points_left_today") is not None:
+        reason += f", with {d['points_left_today']} points left in today's budget"
     headline = f"{best['title']} at {best['vendor']}"
     if len(headline) > 60:  # never cut mid-word: fall back to the title, then a word-boundary trim
         headline = best["title"] if len(best["title"]) <= 60 else best["title"][:59].rsplit(" ", 1)[0] + "…"
@@ -210,7 +213,7 @@ def _headroom_facts(cost: float, headroom: float | None) -> dict:
     if headroom is None:
         return {}
     over = round(cost - headroom, 2)
-    return {"fits_headroom": over <= 0, **({"over_headroom_by": over} if over > 0 else {})}
+    return {"fits_today_budget": over <= 0, **({"over_today_budget_by": over} if over > 0 else {})}
 
 
 def pick_input(result: dict, show_calories: bool) -> dict:
@@ -221,7 +224,7 @@ def pick_input(result: dict, show_calories: bool) -> dict:
     if r["avoid_allergens"]:
         words.append("avoids " + ", ".join(a.replace("_", " ") for a in r["avoid_allergens"]))
     return {
-        "show_calories": show_calories, "bias": result["bias"], "headroom": result["headroom"],
+        "show_calories": show_calories, "bias": result["bias"], "points_left_today": result["headroom"],
         "protein_needed_this_meal_g": round(result["per_meal_target"]["protein_g"]),
         "restrictions": "; ".join(words) or "none",
         "picks": [{"index": i, "vendor": p["vendor"], "title": p["title"], "protein_g": round(p["protein_g"]),

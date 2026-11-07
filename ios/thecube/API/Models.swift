@@ -141,6 +141,14 @@ enum Bias: String, CaseIterable, Identifiable {
         case .cheap: "Cheaper"
         }
     }
+    /// One line under the segmented control saying what this tab optimizes.
+    var blurb: String {
+        switch self {
+        case .balanced: "Closest to what you still need, easy on points."
+        case .protein: "The most protein, even if it costs more."
+        case .cheap: "The fewest points that still make a real meal."
+        }
+    }
 }
 
 // MARK: - vendors / menu
