@@ -1,0 +1,5 @@
+// Committed defaults. Put real values in Secrets.xcconfig (gitignored), next to this file.
+// Empty API_BASE_URL = the app runs on the bundled mock JSON (Mock/*.json).
+API_BASE_URL =
+APP_TOKEN =
+#include? "Secrets.xcconfig"

@@ -1,0 +1,72 @@
+{
+ "date": "2026-11-07",
+ "user": {
+  "id": 2,
+  "name": "Jordan",
+  "is_demo": true
+ },
+ "targets": {
+  "calories": 2800,
+  "protein_g": 150
+ },
+ "show_calories": true,
+ "semester_end": "2026-12-18",
+ "eaten": {
+  "calories": 1170.0,
+  "protein_g": 74.0,
+  "carbs_g": 88.0,
+  "fat_g": 50.5
+ },
+ "protein_hit_days_7": 2,
+ "points": {
+  "points": 1093.25,
+  "swipes": 14,
+  "days_left": 41,
+  "daily_budget": 26.66,
+  "spent_today": 20.08,
+  "trailing_daily": 30.8,
+  "runout": "2026-12-12",
+  "on_pace": false,
+  "balance_as_of": "2026-10-10T06:00:00-04:00"
+ },
+ "coach": {
+  "headline": "Points run out December 12",
+  "message": "At 30.8 a day you'll run out before the semester ends; 26.66 a day lasts. 74 g of 150 g protein so far today.",
+  "tone": "warning",
+  "source": "template"
+ },
+ "meals": [
+  {
+   "id": 179,
+   "ts": "2026-11-07T08:30:00-05:00",
+   "vendor": "The Skillet",
+   "items": [
+    "Biscuit Egg Cheese with Protein"
+   ],
+   "points_spent": 6.98,
+   "swipes_used": 0,
+   "source": "seed",
+   "macros_partial": false,
+   "calories": 585.0,
+   "protein_g": 28.0,
+   "carbs_g": 32.0,
+   "fat_g": 34.5
+  },
+  {
+   "id": 180,
+   "ts": "2026-11-07T12:05:00-05:00",
+   "vendor": "Ginger + Soy",
+   "items": [
+    "Tokyo (Teriyaki Chicken)"
+   ],
+   "points_spent": 13.1,
+   "swipes_used": 0,
+   "source": "seed",
+   "macros_partial": false,
+   "calories": 585.0,
+   "protein_g": 46.0,
+   "carbs_g": 56.0,
+   "fat_g": 16.0
+  }
+ ]
+}

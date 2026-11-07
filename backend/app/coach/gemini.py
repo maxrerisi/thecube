@@ -128,7 +128,10 @@ def _pick_template(d: dict) -> dict:
     reason = f"{best['protein_g']} g protein for {best['points_cost']} points"
     if d.get("headroom") is not None:
         reason += f", with {d['headroom']} points of headroom today"
-    return {"chosen_index": 0, "headline": f"{best['title']} at {best['vendor']}"[:60], "reason": reason + "."}
+    headline = f"{best['title']} at {best['vendor']}"
+    if len(headline) > 60:  # never cut mid-word: fall back to the title, then a word-boundary trim
+        headline = best["title"] if len(best["title"]) <= 60 else best["title"][:59].rsplit(" ", 1)[0] + "…"
+    return {"chosen_index": 0, "headline": headline, "reason": reason + "."}
 
 
 # ---------- entry points ----------

@@ -18,3 +18,9 @@ spikes/matching.json
 spikes/nn_scrape.log
 spikes/nn/
 .pytest_cache/
+
+# iOS
+ios/Config/Secrets.xcconfig
+xcuserdata/
+DerivedData/
+*.xcuserstate

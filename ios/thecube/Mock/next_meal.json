@@ -1,0 +1,257 @@
+{
+ "user_id": 2,
+ "bias": "protein",
+ "at": "2026-11-07T12:30:05.143092-05:00",
+ "meals_left": 2,
+ "per_meal_target": {
+  "protein_g": 38.0,
+  "calories": 815
+ },
+ "headroom": 6.58,
+ "restrictions": {
+  "require_diets": [],
+  "avoid_allergens": []
+ },
+ "open_fallback": false,
+ "candidates": 351,
+ "picks": [
+  {
+   "title": "Biscuit, Egg & Cheese with Turkey Sausage Link",
+   "group": "Biscuit, Egg & Cheese",
+   "kind": "template",
+   "components": [
+    {
+     "name": "Biscuit",
+     "item_oid": 303718661,
+     "uofm_oid": 0,
+     "portion": "Biscuit",
+     "calories": 250.0,
+     "protein_g": 3.0,
+     "carbs_g": 31.0,
+     "fat_g": 11.0
+    },
+    {
+     "name": "Cooked Eggs",
+     "item_oid": 303718668,
+     "uofm_oid": 0,
+     "portion": "4 oz Portion",
+     "calories": 200.0,
+     "protein_g": 17.0,
+     "carbs_g": 1.0,
+     "fat_g": 13.0
+    },
+    {
+     "name": "Cheddar Cheese Slice",
+     "item_oid": 303718666,
+     "uofm_oid": 0,
+     "portion": "Slice",
+     "calories": 90.0,
+     "protein_g": 5.0,
+     "carbs_g": 0.0,
+     "fat_g": 7.0
+    },
+    {
+     "name": "Turkey Sausage Link",
+     "item_oid": 303718671,
+     "uofm_oid": 0,
+     "portion": "2 Link Portion",
+     "calories": 320.0,
+     "protein_g": 24.0,
+     "carbs_g": 0.5,
+     "fat_g": 24.0
+    }
+   ],
+   "price": 6.49,
+   "calories": 860.0,
+   "protein_g": 49.0,
+   "carbs_g": 32.5,
+   "fat_g": 55.0,
+   "points_cost": 6.98,
+   "vendor_id": 2,
+   "vendor": "The Skillet",
+   "opens_at": null,
+   "score": -0.0864
+  },
+  {
+   "title": "Burrito with Chili Lime Mahi",
+   "group": "Burrito",
+   "kind": "template",
+   "components": [
+    {
+     "name": "Flour Tortilla 12\"",
+     "item_oid": 303709881,
+     "uofm_oid": 9104530,
+     "portion": "Burrito",
+     "calories": 290.0,
+     "protein_g": 8.0,
+     "carbs_g": 48.0,
+     "fat_g": 7.0
+    },
+    {
+     "name": "Romaine Lettuce",
+     "item_oid": 303709889,
+     "uofm_oid": 8244781,
+     "portion": "Burrito Portion",
+     "calories": 15.0,
+     "protein_g": 0.5,
+     "carbs_g": 2.0,
+     "fat_g": 0.0
+    },
+    {
+     "name": "Chili Lime Mahi",
+     "item_oid": 303709912,
+     "uofm_oid": 9104541,
+     "portion": "Burrito",
+     "calories": 170.0,
+     "protein_g": 24.0,
+     "carbs_g": 2.0,
+     "fat_g": 7.0
+    },
+    {
+     "name": "Fried Egg",
+     "item_oid": 303709952,
+     "uofm_oid": 0,
+     "portion": "Egg",
+     "calories": 110.0,
+     "protein_g": 8.0,
+     "carbs_g": 0.0,
+     "fat_g": 8.0
+    },
+    {
+     "name": "Queso Dip",
+     "item_oid": 303709951,
+     "uofm_oid": 8245097,
+     "portion": "Burrito Portion",
+     "calories": 130.0,
+     "protein_g": 6.0,
+     "carbs_g": 5.0,
+     "fat_g": 9.0
+    },
+    {
+     "name": "Pinto Beans",
+     "item_oid": 303709929,
+     "uofm_oid": 9104589,
+     "portion": "Burrito",
+     "calories": 100.0,
+     "protein_g": 4.0,
+     "carbs_g": 17.0,
+     "fat_g": 1.5
+    },
+    {
+     "name": "Habanero Red Hot Sauce",
+     "item_oid": 303709987,
+     "uofm_oid": 0,
+     "portion": "Portion",
+     "calories": 0.0,
+     "protein_g": 0.0,
+     "carbs_g": 0.0,
+     "fat_g": 0.0
+    }
+   ],
+   "price": 12.85,
+   "calories": 815.0,
+   "protein_g": 50.5,
+   "carbs_g": 74.0,
+   "fat_g": 32.5,
+   "points_cost": 13.81,
+   "vendor_id": 1,
+   "vendor": "Sazon",
+   "opens_at": null,
+   "score": -1.5816
+  },
+  {
+   "title": "Arepa Bowl with Chorizo",
+   "group": "Arepa Bowl",
+   "kind": "template",
+   "components": [
+    {
+     "name": "Latin Arepa Bowl",
+     "item_oid": 303709878,
+     "uofm_oid": 0,
+     "portion": "Arepa",
+     "calories": 160.0,
+     "protein_g": 3.0,
+     "carbs_g": 23.0,
+     "fat_g": 8.0
+    },
+    {
+     "name": "Cilantro Lime White Rice",
+     "item_oid": 303709884,
+     "uofm_oid": 8244747,
+     "portion": "Arepa Bowl Portion",
+     "calories": 100.0,
+     "protein_g": 2.0,
+     "carbs_g": 22.0,
+     "fat_g": 0.0
+    },
+    {
+     "name": "Chorizo",
+     "item_oid": 303709906,
+     "uofm_oid": 8605929,
+     "portion": "Arepa Portion",
+     "calories": 260.0,
+     "protein_g": 15.0,
+     "carbs_g": 8.0,
+     "fat_g": 18.0
+    },
+    {
+     "name": "Fried Egg",
+     "item_oid": 303709952,
+     "uofm_oid": 0,
+     "portion": "Egg",
+     "calories": 110.0,
+     "protein_g": 8.0,
+     "carbs_g": 0.0,
+     "fat_g": 8.0
+    },
+    {
+     "name": "Queso Dip",
+     "item_oid": 303709951,
+     "uofm_oid": 8245096,
+     "portion": "Arepa Bowl Portion",
+     "calories": 130.0,
+     "protein_g": 6.0,
+     "carbs_g": 5.0,
+     "fat_g": 9.0
+    },
+    {
+     "name": "Black Beans",
+     "item_oid": 303709932,
+     "uofm_oid": 8244635,
+     "portion": "Arepa Bowl Portion",
+     "calories": 60.0,
+     "protein_g": 4.0,
+     "carbs_g": 11.0,
+     "fat_g": 0.0
+    },
+    {
+     "name": "Habanero Red Hot Sauce",
+     "item_oid": 303709987,
+     "uofm_oid": 0,
+     "portion": "Portion",
+     "calories": 0.0,
+     "protein_g": 0.0,
+     "carbs_g": 0.0,
+     "fat_g": 0.0
+    }
+   ],
+   "price": 12.85,
+   "calories": 820.0,
+   "protein_g": 38.0,
+   "carbs_g": 69.0,
+   "fat_g": 43.0,
+   "points_cost": 13.81,
+   "vendor_id": 1,
+   "vendor": "Sazon",
+   "opens_at": null,
+   "score": -1.5853
+  }
+ ],
+ "coach": {
+  "chosen_index": 0,
+  "headline": "Biscuit, Egg & Cheese with Turkey Sausage Link at The Skille",
+  "reason": "49.0 g protein for 6.98 points, with 6.58 points of headroom today.",
+  "source": "template"
+ },
+ "show_calories": true
+}
