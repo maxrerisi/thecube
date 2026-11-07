@@ -1,0 +1,17 @@
+# Real personal purchase history: never commit
+data/
+out/
+
+# Local databases and uploads
+*.db
+*.db-journal
+*.sqlite3
+
+# Python / tooling
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.DS_Store
