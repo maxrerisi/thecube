@@ -1,0 +1,76 @@
+{
+  "_doc": "Seed for vendors, vendor_aliases, item_aliases (SPEC 4/6). Built in E3 from William's 31 receipts vs spikes/nn.json (2026-11-07). vendors[].aliases are lowercased, whitespace-collapsed receipt vendor names. items[vendor][raw] = NetNutrition item name, or {name, course} when the same name appears in several courses with different portions (course is a substring match). Resolved to item_oid at seed time. '?' in _notes = best guess, review.",
+  "vendors": [
+    {"name": "Sazon", "building": "Brodhead Center", "unit_oid": 18, "aliases": ["sazon"]},
+    {"name": "The Skillet", "building": "Brodhead Center", "unit_oid": 8, "aliases": ["the skillet"]},
+    {"name": "It's Thyme", "building": "Bryan Center", "unit_oid": 21, "aliases": ["its thyme", "it's thyme"]},
+    {"name": "Ginger + Soy", "building": "Brodhead Center", "unit_oid": 19, "aliases": ["ginger & soy", "ginger + soy"]},
+    {"name": "Tandoor", "building": "Brodhead Center", "unit_oid": 16, "aliases": ["tandoor", "tandoor indian cuisine"]},
+    {"name": "Trinity Cafe", "building": "East Campus Union", "unit_oid": 5, "aliases": ["trinity", "trinity cafe"]},
+    {"name": "Gyotaku", "building": "Brodhead Center", "unit_oid": 20, "aliases": ["gyotaku"]},
+    {"name": "The Farmstead", "building": "Brodhead Center", "unit_oid": 11, "aliases": ["farmstead & sprout sandwiches", "the farmstead"]},
+    {"name": "Sprout", "building": "Brodhead Center", "unit_oid": 10, "aliases": ["sprout"]},
+    {"name": "The Devil's Krafthouse", "building": "Brodhead Center", "unit_oid": null, "aliases": ["the devil's krafthouse"]},
+    {"name": "Gothic Grill", "building": "Bryan Center", "unit_oid": null, "aliases": ["gothic grill"]},
+    {"name": "McDonald's", "building": "Bryan Center", "unit_oid": null, "aliases": ["mcdonald's"]}
+  ],
+  "items": {
+    "Sazon": {
+      "monterrey jack cheese": "Shredded Cheddar Monterey Jack Cheese",
+      "super food lettuce": "Super Food Salad Mix",
+      "plaintains": "Maduros (Sweet Plantains)",
+      "chimichurri": "Chimmichurri Sauce",
+      "fresco sour cream": "Fresco Sauce",
+      "habanero": "Habanero Red Hot Sauce",
+      "white cilantro rice": "Cilantro Lime White Rice",
+      "arepa": "Latin Arepa Bowl",
+      "cotija cheese": "Cheese Cotija",
+      "chicken": "Chipotle Chicken",
+      "grilled chicken": "Chipotle Chicken",
+      "chips and pico de gallo": "Chips and Salsa"
+    },
+    "The Skillet": {
+      "sausage": {"name": "Pork Sausage Patty", "course": "Build a Biscuit"},
+      "sub brioche bun": "Toasted Brioche Bun",
+      "full stack": "Pancakes",
+      "vanilla greek yogurt cup": "Greek Vanilla Yogurt"
+    },
+    "Ginger + Soy": {
+      "spicy mayo sauce": "Spicy Mayo",
+      "broccoli": "Seasoned Broccoli",
+      "tokyo (teriyaki chicken)": "Grilled Teriyaki Chicken",
+      "salmon poke bowl": "Marinated Salmon"
+    },
+    "Gyotaku": {
+      "salmon": {"name": "Salmon", "course": "Sashimi Bowl (Fish"},
+      "sushi rice - base": {"name": "Sushi Rice", "course": "Sashimi Bowl (Base"},
+      "edamame - toppings": "Shelled Edamame",
+      "pickles - toppings": "Pickled Radish",
+      "red pepper- toppings": "Red Bell Pepper",
+      "yuzu miso": "Yuzu Miso Sauce"
+    },
+    "Trinity Cafe": {
+      "iced latte": "Iced Latte Whole Milk"
+    },
+    "It's Thyme": {
+      "jerk chicken": "Caribbean Jerk Chicken",
+      "pickled red onions": "Red Pickled Onion",
+      "garlic hummus": "Lemon Garlic Hummus",
+      "roasted corn w poblano peppers": "Fire Roasted Corn with Poblano Peppers",
+      "roasted seasonal veggies": "Mixed Roasted Vegetables"
+    }
+  },
+  "_notes": {
+    "Sazon/chicken": "? $5 Meal Deal protein; Chipotle Chicken is the only plain chicken (halal).",
+    "Sazon/grilled chicken": "? not on the current menu; Chipotle Chicken is closest.",
+    "Sazon/chips and pico de gallo": "? receipt side; Chips and Salsa (370 cal) is the closest single item.",
+    "Sazon/pickled onions": "not on current Sazon menu: stays unmatched.",
+    "The Skillet/full stack": "Pancakes; 'Full Stack' is likely the 4 Pancake Portion, but item_aliases has no portion column, so the default (2) is used.",
+    "The Skillet/mac and cheese, fair life strawberry milk": "not in Skillet's NetNutrition: stay unmatched.",
+    "Ginger + Soy/salmon poke bowl": "only used if items-with-components also count the item itself (see matching.md).",
+    "Gyotaku/pickles - toppings": "? Pickled Radish is the only pickle in the Sashimi Bowl toppings course.",
+    "Trinity Cafe": "'Whole', 'Regular Espresso', 'Vanilla' are drink modifiers with no item; stay unmatched.",
+    "It's Thyme": "Acai bar items (Traditional Acai, Honey Oat Granola, Seasonal Berries, ...) and Basil Roasted Potatoes, Sweet Potato Chips, Sunbutter, Chia Pudding are not on the Saturday menu; re-scrape on a weekday.",
+    "Tandoor": "Tofu Korma and the Monday combo are not on Saturday's menu; menu rotates daily."
+  }
+}

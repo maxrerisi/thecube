@@ -1,0 +1,9 @@
+fastapi>=0.162
+uvicorn>=0.40
+psycopg[binary]>=3.3
+pydantic>=2.14
+python-multipart>=0.0.20
+requests>=2.34
+rapidfuzz>=3.14
+pytest>=9
+httpx>=0.28

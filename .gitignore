@@ -1,0 +1,20 @@
+# private data
+emails/
+spikes/receipts.json
+spikes/nn_cache/
+
+# secrets
+.env
+*.env
+Secrets.xcconfig
+
+# misc
+.DS_Store
+__pycache__/
+.venv/
+
+# receipt-derived / local-only
+spikes/matching.json
+spikes/nn_scrape.log
+spikes/nn/
+.pytest_cache/
