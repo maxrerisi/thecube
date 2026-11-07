@@ -1,8 +1,9 @@
 """Create the schema and seed base rows. Idempotent.
 
-  cd backend && ../.venv/bin/python -m app.seed
+  cd backend && ../.venv/bin/python -m app.seed [--demo]
 """
 import email
+import sys
 import json
 from email import policy
 from email.utils import getaddresses
@@ -92,6 +93,10 @@ def main() -> None:
     for w in warnings:
         print("warning:", w)
     print("seeded:", dict(c))
+    if "--demo" in sys.argv:  # also import William's receipts and build Jordan (= /admin/reset-demo)
+        from app import demo
+        with connect() as conn:
+            print("demo:", demo.reset(conn))
 
 
 if __name__ == "__main__":

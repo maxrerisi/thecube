@@ -22,3 +22,10 @@ def scrape(background: BackgroundTasks, units: str | None = None):
         raise HTTPException(422, "units must be comma-separated integers")
     background.add_task(_run_scrape, oids)
     return {"started": True, "units": oids or "all"}
+
+
+@router.post("/reset-demo")
+def reset_demo():
+    from app import demo
+    with connect() as conn:
+        return demo.reset(conn)
