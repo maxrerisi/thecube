@@ -26,3 +26,21 @@ def reset_db():
 def client():
     reset_db()
     return TestClient(app)
+
+
+def load_menus_and_vendors():
+    """Load spikes/nn.json into nn_* tables and seed vendors/aliases (needs a reset DB)."""
+    import json
+    from pathlib import Path
+    from app.ingest import netnutrition
+    from app.seed import seed_vendors
+    nn = Path(__file__).resolve().parents[2] / "spikes" / "nn.json"
+    with connect() as conn:
+        netnutrition.write_db(conn, json.loads(nn.read_text()))
+        return seed_vendors(conn)
+
+
+@pytest.fixture(scope="module")
+def menus(client):
+    assert load_menus_and_vendors() == []
+    return client

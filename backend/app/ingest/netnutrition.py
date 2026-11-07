@@ -316,3 +316,30 @@ def main(argv=None):
 
 if __name__ == "__main__":
     main()
+
+
+# ---------- hours ----------
+
+DAYS = {"Sunday": "sun", "Monday": "mon", "Tuesday": "tue", "Wednesday": "wed", "Thursday": "thu",
+        "Friday": "fri", "Saturday": "sat"}
+
+
+def parse_hours(h: str) -> dict[str, list[list[str]]]:
+    """GetHoursOfOperationMarkup -> {"mon": [["11:00", "21:00"]], ...} (24h, local). Days with
+    no row are closed (absent)."""
+    out: dict[str, list[list[str]]] = {}
+    for day, opens, closes in re.findall(r"<tr[^>]*>\s*<td>(\w+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>", h):
+        if day not in DAYS:
+            continue
+        try:
+            o = dt.datetime.strptime(opens.strip(), "%I:%M %p").strftime("%H:%M")
+            c = dt.datetime.strptime(closes.strip(), "%I:%M %p").strftime("%H:%M")
+        except ValueError:
+            continue  # "Closed" etc.
+        out.setdefault(DAYS[day], []).append([o, c])
+    return out
+
+
+def hours(sc: "Scraper", unit_oid: int, day: dt.date) -> dict:
+    return parse_hours(sc.cached(f"hours_{unit_oid}_{day.isoformat()}.html",
+                                 lambda: sc.post("Unit/GetHoursOfOperationMarkup", unitOid=unit_oid)))

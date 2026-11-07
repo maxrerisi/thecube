@@ -57,9 +57,10 @@ def seed_vendors(conn, path: Path = ALIASES) -> list[str]:
         if v["unit_oid"] is not None and unit is None:
             warnings.append(f"vendor {v['name']}: unit {v['unit_oid']} not scraped yet; unit_oid left NULL")
         ids[v["name"]] = conn.execute(
-            """INSERT INTO vendors (name, building, unit_oid) VALUES (%s, %s, %s)
-               ON CONFLICT (name) DO UPDATE SET building = EXCLUDED.building, unit_oid = EXCLUDED.unit_oid
-               RETURNING id""", (v["name"], v["building"], unit)).fetchone()["id"]
+            """INSERT INTO vendors (name, building, unit_oid, hours) VALUES (%s, %s, %s, %s)
+               ON CONFLICT (name) DO UPDATE SET building = EXCLUDED.building, unit_oid = EXCLUDED.unit_oid,
+                 hours = EXCLUDED.hours
+               RETURNING id""", (v["name"], v["building"], unit, json.dumps(v.get("hours", {})))).fetchone()["id"]
         for raw in v["aliases"]:
             conn.execute("""INSERT INTO vendor_aliases (raw, vendor_id) VALUES (%s, %s)
                             ON CONFLICT (raw) DO UPDATE SET vendor_id = EXCLUDED.vendor_id""", (key(raw), ids[v["name"]]))
