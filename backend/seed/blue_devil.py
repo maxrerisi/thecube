@@ -2,8 +2,9 @@
 
 28 days of orders built from REAL NetNutrition items and REAL receipt prices (from
 William's receipts). Story: upperclass Plan A, goal build_muscle (2,800 cal / 150 g protein),
-short on protein most weekdays, and BEHIND_PACE points behind Duke Dining's own Plan A pace
-chart (seed/duke_points_fall2026.json), so at the current pace points run out ~9 days early.
+short on protein most weekdays, and BEHIND_PACE points behind an even Plan A pace (app/core/pace.py:
+start balance over the Registrar term's dining days), so at his pace points run out Dec 9, the
+first day of finals.
 Today: breakfast + lunch logged, ~74 g protein. No restrictions at start (the demo toggles
 Halal + Peanut live). Live forwards from William's Duke address land here (seed.py).
 """
@@ -16,7 +17,7 @@ from app.ingest.matcher import item_format
 
 DAYS = 28
 MEAL_PLAN = "A"
-BEHIND_PACE = 135.0     # points below Duke's chart today
+BEHIND_PACE = 135.0     # points below an even pace for Plan A today
 START_SWIPES = 14
 SWIPE_VALUE = 11.80  # Board Plan Equivalency seen on William's receipts
 TAX = 0.075
@@ -146,7 +147,7 @@ def build(conn, user_id: int, today: date, semester_end: date) -> dict:
                             VALUES (%s, %s, %s, %s, 1)""", (oi, name, item_oid, uofm))
         spends.append((ts, points, 1 if swipe else 0))
     # Balance snapshot at the start, sized so that today (after today's meals) the balance is
-    # BEHIND_PACE below Duke's Plan A chart. Runout then follows from the trailing pace.
+    # BEHIND_PACE below the even Plan A pace. Runout then follows from the trailing pace.
     week = [p for ts, p, _ in spends if today - timedelta(days=7) <= ts.date() < today]
     trailing = sum(week) / 7
     target_now = round(pace.target(MEAL_PLAN, today) - BEHIND_PACE, 2)

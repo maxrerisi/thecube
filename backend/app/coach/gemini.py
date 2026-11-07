@@ -180,12 +180,13 @@ def _days_between(a: str | None, b: str | None) -> int | None:
 
 
 def _pace_facts(pts: dict) -> dict:
-    """Duke's own pace chart for the user's plan, compared by code (SPEC 8)."""
+    """Pace for the user's meal plan (start balance spread over the term's dining days, breaks
+    excluded), compared by code (SPEC 8)."""
     if pts.get("vs_pace") is None:
         return {}
     gap = round(abs(pts["vs_pace"]))
-    return {"duke_meal_plan": f"Plan {pts['meal_plan']}", "duke_pace_points_today": round(pts["pace_target"]),
-            **({"behind_duke_pace_by": gap} if pts["vs_pace"] < 0 else {"ahead_of_duke_pace_by": gap})}
+    return {"meal_plan": f"Plan {pts['meal_plan']}", "on_pace_balance_today": round(pts["pace_target"]),
+            **({"behind_pace_by": gap} if pts["vs_pace"] < 0 else {"ahead_of_pace_by": gap})}
 
 
 def recap_input(today: dict) -> dict:

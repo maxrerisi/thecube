@@ -1,36 +1,27 @@
-"""Duke's Fall 2026 points pace chart (seed/duke_points_fall2026.json): the balance Duke
-suggests a plan should have on a given day. Linear between the chart's weekly rows."""
-import json
+"""Points pace for a Duke meal plan (our numbers): the plan's starting balance spread evenly
+over the Fall 2026 dining days (Registrar calendar, breaks excluded; app/core/term.py).
+target(plan, day) = balance you'd have at the start of `day` if you'd spent evenly so far."""
 from datetime import date
-from functools import cache
-from pathlib import Path
 
-CHART = Path(__file__).resolve().parents[2] / "seed" / "duke_points_fall2026.json"
-
-
-@cache
-def chart() -> dict:
-    return json.loads(CHART.read_text())
+from app.core import term
 
 
 def plans() -> list[str]:
-    return list(chart()["plans"])
+    return list(term.data()["plan_start_points"])
+
+
+def daily(plan: str) -> float | None:
+    start = term.data()["plan_start_points"].get(plan)
+    if start is None:
+        return None
+    return start / term.dining_days(term.start(), term.end() + __import__("datetime").timedelta(days=1))
 
 
 def target(plan: str | None, day: date) -> float | None:
-    """Duke's suggested balance for `plan` on `day` (None if no plan / unknown plan)."""
-    c = chart()
-    if not plan or plan not in c["plans"]:
+    if not plan or plan not in term.data()["plan_start_points"]:
         return None
-    dates = [date.fromisoformat(d) for d in c["dates"]]
-    bal = c["plans"][plan]["balances"]
-    if day <= dates[0]:
-        return bal[0]
-    if day >= dates[-1]:
-        return bal[-1]
-    for i in range(1, len(dates)):
-        if day <= dates[i]:
-            d0, d1 = dates[i - 1], dates[i]
-            f = (day - d0).days / (d1 - d0).days
-            return round(bal[i - 1] + (bal[i] - bal[i - 1]) * f, 2)
-    return None
+    start_pts = term.data()["plan_start_points"][plan]
+    if day <= term.start():
+        return start_pts
+    used = term.dining_days(term.start(), min(day, term.end()))
+    return round(max(start_pts - daily(plan) * used, 0.0), 2)

@@ -154,7 +154,7 @@ struct PointsCard: View {
     }
 }
 
-/// Where you are vs Duke Dining's own Fall 2026 points chart for your plan.
+/// Where you are vs an even pace for your plan (start balance over the term's dining days).
 struct PaceRow: View {
     let plan: String
     let target: Double
@@ -163,14 +163,14 @@ struct PaceRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .firstTextBaseline) {
-                Label("Duke Plan \(plan) pace", systemImage: "chart.line.downtrend.xyaxis")
+                Label("Plan \(plan) pace", systemImage: "chart.line.downtrend.xyaxis")
                     .font(.subheadline.weight(.medium))
                 Spacer()
                 Text(gap < 0 ? "\(Fmt.pts(-gap)) behind" : "\(Fmt.pts(gap)) ahead")
                     .font(.subheadline.monospacedDigit().weight(.semibold))
                     .foregroundStyle(gap < 0 ? .orange : .green)
             }
-            Text("Duke's chart says \(Fmt.pts(target)) points today.")
+            Text("Spending evenly through Dec 14 (breaks skipped) leaves \(Fmt.pts(target)) today.")
                 .font(.caption).foregroundStyle(.secondary)
         }
         .padding(.top, 8)

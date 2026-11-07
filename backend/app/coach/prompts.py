@@ -13,8 +13,8 @@ Rules:
   (on_pace, fits_today_budget, over_today_budget_by, meets_protein_needed, days_early). Use them.
   Say "today's points budget", never "headroom".
   runs_out_on is when points would run out at the current pace; semester_ends_on is the goal.
-  duke_pace_points_today is the balance Duke Dining's own chart suggests for their plan today;
-  behind_duke_pace_by / ahead_of_duke_pace_by already state the gap. You may cite Duke's chart.
+  on_pace_balance_today is what their meal plan would have left today if spent evenly over the
+  semester's dining days (breaks skipped); behind_pace_by / ahead_of_pace_by state the gap.
 - Never name a dining location, food, or menu item that is not in the input. Refer to a
   meal option by its title (and vendor), never by its index number.
 - Write plain words: never copy input key names (like protein_g) or say "restrictions of none".

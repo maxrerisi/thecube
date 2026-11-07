@@ -59,6 +59,16 @@ def test_local_day_boundary_and_days_left_floor():
     assert s.spent_today == 0 and s.days_left == 1
 
 
+def test_breaks_skip_days_left_and_runout():
+    from app.core.term import add_dining_days, dining_days
+    brk = frozenset(date(2026, 11, 25) + timedelta(days=i) for i in range(5))  # Thanksgiving
+    week = [order(TODAY - timedelta(days=i), 30.0) for i in range(1, 8)]
+    s = compute(SNAP, week, date(2026, 12, 14), TODAY, brk)
+    assert s.days_left == 37 - 5                                              # Nov 7..Dec 13 minus 5
+    assert s.runout == add_dining_days(TODAY, 26, brk) == date(2026, 12, 8)  # floor(790/30)=26, skips 25-29
+    assert dining_days(TODAY, date(2026, 11, 30), brk) == 18
+
+
 def test_no_snapshot():
     s = compute(None, [order(TODAY, 5.0)], END, TODAY)
     assert s.points is None and s.daily_budget is None and s.spent_today == 5.0

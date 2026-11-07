@@ -54,7 +54,7 @@ thecube/
     app/core/     budget.py  optimizer.py  macros.py
     app/coach/    gemini.py  prompts.py
     db/schema.sql
-    seed/         aliases.json  blue_devil.py  duke_points_fall2026.json
+    seed/         aliases.json  blue_devil.py  fall2026_term.json
     tests/
   ios/thecube/    Views/ ViewModels/ API/
 ```
@@ -272,11 +272,13 @@ def status(user, today):
 
 "Today" = local date in America/New_York, overridable by `DEMO_TODAY`.
 
-**Duke pace (added 2026-11-07):** if `settings.meal_plan` is set, `status` also returns
-`meal_plan`, `pace_target` = Duke Dining's Fall 2026 points chart value for that plan today
-(`seed/duke_points_fall2026.json`, linear between the chart's weekly rows; 0 from Dec 14) and
-`vs_pace = points - pace_target` (negative = behind). The coach gets the gap pre-computed.
-Semester end defaults to 2026-12-14 (the chart's end date).
+**Term + pace (revised 2026-11-07):** `seed/fall2026_term.json` holds the Registrar's Fall 2026
+term (Aug 24 – Dec 14) and breaks (fall break Oct 10–13, Thanksgiving Nov 25–29),
+plus each meal plan's starting balance. Break days don't count: `days_left` = dining days in
+[today, semester_end), and the run-out date advances only over dining days. If
+`settings.meal_plan` is set, `status` also returns `meal_plan`, `pace_target` = the balance an
+even pace would leave at the start of today (start balance x (1 - dining days used / 104)),
+and `vs_pace = points - pace_target` (negative = behind). Our numbers, not Duke's weekly chart.
 
 ## 9. Settings (per user, toggles only)
 
@@ -386,8 +388,8 @@ While Today is visible, poll `/today` every 5 s (so a live-forwarded receipt app
 - **Blue Devil (fake, renamed from Jordan):** `seed/blue_devil.py`, deterministic
   (`random.seed(42)`), 28 days of orders **built from real scraped NetNutrition items and
   real receipt prices**. Story: upperclass Plan A, goal build_muscle (2,800 cal / 150 g
-  protein), short on protein most weekdays (2 of 7 days), 135 points behind Duke's Plan A
-  chart, so at the current pace points run out Dec 5 (9 days before Dec 14). Today:
+  protein), short on protein most weekdays (2 of 7 days), 135 points behind an even Plan A
+  pace, so at the current pace points run out Dec 9, the first day of finals. Today:
   breakfast + lunch logged, 74 g protein. No restrictions at start; the demo toggles
   Halal + Peanut live.
 - **Live forward lands on Blue Devil:** Blue Devil's `users.email` is William's Duke

@@ -1,0 +1,28 @@
+{
+ "_doc": "Fall 2026 term from the Duke Registrar academic calendar (registrar.duke.edu/2026-2027-academic-calendar/). Break days = no campus dining assumed. plan_start_points = each meal plan's starting balance (Duke Dining Fall 2026 points chart, 'Total Value'). Pace = start balance spread evenly over dining days (start..end minus breaks); our own numbers, not Duke's weekly chart.",
+ "term": "Fall 2026",
+ "start": "2026-08-24",
+ "end": "2026-12-14",
+ "breaks": [
+  {
+   "name": "Fall break",
+   "from": "2026-10-10",
+   "to": "2026-10-13"
+  },
+  {
+   "name": "Thanksgiving recess",
+   "from": "2026-11-25",
+   "to": "2026-11-29"
+  }
+ ],
+ "plan_start_points": {
+  "A": 3071.28,
+  "B": 3680.8,
+  "C": 4075.33,
+  "D": 4373.1,
+  "E": 4770.85,
+  "F": 1006.2,
+  "I": 1057.8,
+  "J": 2172.58
+ }
+}

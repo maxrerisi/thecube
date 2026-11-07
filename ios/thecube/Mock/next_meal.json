@@ -1,13 +1,13 @@
 {
  "user_id": 2,
  "bias": "balanced",
- "at": "2026-11-07T17:17:32.071594-05:00",
+ "at": "2026-11-07T17:56:41.896782-05:00",
  "meals_left": 1,
  "per_meal_target": {
   "protein_g": 76.0,
   "calories": 1630
  },
- "headroom": 3.69,
+ "headroom": 6.16,
  "restrictions": {
   "require_diets": [],
   "avoid_allergens": []
@@ -16,64 +16,7 @@
  "candidates": 249,
  "picks": [
   {
-   "title": "Biscuit, Egg & Cheese with Turkey Sausage Link",
-   "group": "Biscuit, Egg & Cheese",
-   "kind": "template",
-   "components": [
-    {
-     "name": "Biscuit",
-     "item_oid": 303718661,
-     "uofm_oid": 0,
-     "portion": "Biscuit",
-     "calories": 250.0,
-     "protein_g": 3.0,
-     "carbs_g": 31.0,
-     "fat_g": 11.0
-    },
-    {
-     "name": "Cooked Eggs",
-     "item_oid": 303718668,
-     "uofm_oid": 0,
-     "portion": "4 oz Portion",
-     "calories": 200.0,
-     "protein_g": 17.0,
-     "carbs_g": 1.0,
-     "fat_g": 13.0
-    },
-    {
-     "name": "Cheddar Cheese Slice",
-     "item_oid": 303718666,
-     "uofm_oid": 0,
-     "portion": "Slice",
-     "calories": 90.0,
-     "protein_g": 5.0,
-     "carbs_g": 0.0,
-     "fat_g": 7.0
-    },
-    {
-     "name": "Turkey Sausage Link",
-     "item_oid": 303718671,
-     "uofm_oid": 0,
-     "portion": "2 Link Portion",
-     "calories": 320.0,
-     "protein_g": 24.0,
-     "carbs_g": 0.5,
-     "fat_g": 24.0
-    }
-   ],
-   "price": 6.49,
-   "calories": 860.0,
-   "protein_g": 49.0,
-   "carbs_g": 32.5,
-   "fat_g": 55.0,
-   "points_cost": 6.98,
-   "vendor_id": 2,
-   "vendor": "The Skillet",
-   "opens_at": null,
-   "score": -1.9366
-  },
-  {
-   "title": "Quesadilla with Steak",
+   "title": "Quesadilla with Hot Honey Chicken",
    "group": "Quesadilla",
    "kind": "template",
    "components": [
@@ -88,14 +31,14 @@
      "fat_g": 7.0
     },
     {
-     "name": "Steak",
-     "item_oid": 303709924,
-     "uofm_oid": 8244624,
+     "name": "Hot Honey Chicken",
+     "item_oid": 303709909,
+     "uofm_oid": 8698901,
      "portion": "Quesadilla Portion",
-     "calories": 240.0,
-     "protein_g": 34.0,
-     "carbs_g": 0.0,
-     "fat_g": 10.0
+     "calories": 380.0,
+     "protein_g": 30.0,
+     "carbs_g": 13.0,
+     "fat_g": 23.0
     },
     {
      "name": "Shredded Cheddar Monterey Jack Cheese",
@@ -139,15 +82,15 @@
     }
    ],
    "price": 12.85,
-   "calories": 1230.0,
-   "protein_g": 68.0,
-   "carbs_g": 59.0,
-   "fat_g": 76.0,
+   "calories": 1370.0,
+   "protein_g": 64.0,
+   "carbs_g": 72.0,
+   "fat_g": 89.0,
    "points_cost": 13.81,
    "vendor_id": 1,
    "vendor": "Sazon",
    "opens_at": null,
-   "score": -4.2966
+   "score": -0.7523
   },
   {
    "title": "Burrito with Hot Honey Chicken",
@@ -234,13 +177,70 @@
    "vendor_id": 1,
    "vendor": "Sazon",
    "opens_at": null,
-   "score": -4.3877
+   "score": -0.8618
+  },
+  {
+   "title": "Biscuit, Egg & Cheese with Turkey Sausage Link",
+   "group": "Biscuit, Egg & Cheese",
+   "kind": "template",
+   "components": [
+    {
+     "name": "Biscuit",
+     "item_oid": 303718661,
+     "uofm_oid": 0,
+     "portion": "Biscuit",
+     "calories": 250.0,
+     "protein_g": 3.0,
+     "carbs_g": 31.0,
+     "fat_g": 11.0
+    },
+    {
+     "name": "Cooked Eggs",
+     "item_oid": 303718668,
+     "uofm_oid": 0,
+     "portion": "4 oz Portion",
+     "calories": 200.0,
+     "protein_g": 17.0,
+     "carbs_g": 1.0,
+     "fat_g": 13.0
+    },
+    {
+     "name": "Cheddar Cheese Slice",
+     "item_oid": 303718666,
+     "uofm_oid": 0,
+     "portion": "Slice",
+     "calories": 90.0,
+     "protein_g": 5.0,
+     "carbs_g": 0.0,
+     "fat_g": 7.0
+    },
+    {
+     "name": "Turkey Sausage Link",
+     "item_oid": 303718671,
+     "uofm_oid": 0,
+     "portion": "2 Link Portion",
+     "calories": 320.0,
+     "protein_g": 24.0,
+     "carbs_g": 0.5,
+     "fat_g": 24.0
+    }
+   ],
+   "price": 6.49,
+   "calories": 860.0,
+   "protein_g": 49.0,
+   "carbs_g": 32.5,
+   "fat_g": 55.0,
+   "points_cost": 6.98,
+   "vendor_id": 2,
+   "vendor": "The Skillet",
+   "opens_at": null,
+   "score": -0.9409
   }
  ],
  "coach": {
   "chosen_index": 0,
-  "headline": "Pick Biscuit, Egg & Cheese with Turkey Sausage Link",
-  "reason": "The Biscuit, Egg & Cheese with Turkey Sausage Link at The Skillet costs 6.98 points and goes over your headroom by 3.29, which is the closest option to fitting your points headroom for today.",
+  "headline": "Quesadilla with Hot Honey Chicken at Sazon",
+  "reason": "This option from Sazon costs 13.81, which is over today's points budget by 7.65. It provides 64 grams of protein toward your goal of 76 grams.",
   "source": "gemini"
  },
  "show_calories": true

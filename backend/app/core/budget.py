@@ -3,7 +3,7 @@ import math
 from dataclasses import asdict, dataclass
 from datetime import date, datetime, timedelta
 
-from app.core import pace
+from app.core import pace, term
 from app.core.clock import NY, day_bounds
 
 
@@ -31,12 +31,15 @@ class PointsStatus:
         return d
 
 
-def compute(snap: dict | None, orders: list[dict], semester_end: date, today: date) -> PointsStatus:
-    """snap: {ts, points, swipes} or None. orders: [{ts (aware), points_spent, swipes_used}]."""
+def compute(snap: dict | None, orders: list[dict], semester_end: date, today: date,
+            breaks: frozenset[date] = frozenset()) -> PointsStatus:
+    """snap: {ts, points, swipes} or None. orders: [{ts (aware), points_spent, swipes_used}].
+    breaks: days with no campus dining (Registrar breaks); they don't count as days left and
+    the run-out date skips them."""
     def local_day(o):
         return o["ts"].astimezone(NY).date()
 
-    days_left = max((semester_end - today).days, 1)
+    days_left = max(term.dining_days(today, semester_end, breaks), 1)
     spent_today = sum(float(o["points_spent"]) for o in orders if local_day(o) == today)
     window = {today - timedelta(days=i) for i in range(1, 8)}
     trailing = sum(float(o["points_spent"]) for o in orders if local_day(o) in window) / 7
@@ -46,7 +49,7 @@ def compute(snap: dict | None, orders: list[dict], semester_end: date, today: da
     points = float(snap["points"]) - sum(float(o["points_spent"]) for o in after)
     swipes = (snap["swipes"] - sum(o["swipes_used"] for o in after)) if snap["swipes"] is not None else None
     daily_budget = points / days_left
-    runout = today + timedelta(days=math.floor(points / trailing)) if trailing > 0 else None
+    runout = term.add_dining_days(today, math.floor(points / trailing), breaks) if trailing > 0 else None
     if runout is not None and runout >= semester_end:
         runout = None
     return PointsStatus(points, swipes, days_left, daily_budget, spent_today, trailing, runout,
@@ -62,7 +65,7 @@ def status(conn, user_id: int, semester_end: date, today: date, meal_plan: str |
     orders = conn.execute("""SELECT ts, points_spent, swipes_used FROM orders
                              WHERE user_id = %s AND ts >= %s AND ts < %s""",
                           (user_id, since, end_of_today)).fetchall()
-    s = compute(snap, orders, semester_end, today)
+    s = compute(snap, orders, semester_end, today, term.break_days())
     s.meal_plan, s.pace_target = meal_plan, pace.target(meal_plan, today)
     if s.points is not None and s.pace_target is not None:
         s.vs_pace = s.points - s.pace_target

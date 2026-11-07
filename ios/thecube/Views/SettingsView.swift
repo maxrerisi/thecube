@@ -68,7 +68,7 @@ struct SettingsView: View {
         } header: {
             Text("Semester")
         } footer: {
-            Text("Your plan lets us compare your balance with Duke Dining's Fall 2026 points chart.")
+            Text("Your plan's starting balance sets an even pace through finals, skipping fall break and Thanksgiving.")
         }
     }
 

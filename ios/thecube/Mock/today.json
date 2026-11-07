@@ -19,28 +19,28 @@
  },
  "protein_hit_days_7": 2,
  "points": {
-  "points": 879.62,
+  "points": 839.54,
   "swipes": 14,
-  "days_left": 37,
-  "daily_budget": 23.77,
+  "days_left": 32,
+  "daily_budget": 26.24,
   "spent_today": 20.08,
   "trailing_daily": 30.8,
-  "runout": "2026-12-05",
+  "runout": "2026-12-09",
   "on_pace": false,
   "balance_as_of": "2026-10-10T06:00:00-04:00",
   "meal_plan": "A",
-  "pace_target": 1014.62,
+  "pace_target": 974.54,
   "vs_pace": -135.0
  },
  "coach": {
   "headline": "Points pace check",
-  "message": "You have 879.62 points left, but your current pace puts you behind Duke's chart by 135 points, meaning points could run out on December 5 before the semester ends on December 14. Your daily budget is 23.77.",
+  "message": "You have 839.54 points left, but your current spending puts you behind pace by 135 points, meaning points would run out on December 9 instead of the semester ends on December 14. Your daily budget is 26.24, and you spent 20.08 today.",
   "tone": "warning",
   "source": "gemini"
  },
  "meals": [
   {
-   "id": 979,
+   "id": 1098,
    "ts": "2026-11-07T08:30:00-05:00",
    "vendor": "The Skillet",
    "items": [
@@ -56,7 +56,7 @@
    "fat_g": 34.5
   },
   {
-   "id": 980,
+   "id": 1099,
    "ts": "2026-11-07T12:05:00-05:00",
    "vendor": "Ginger + Soy",
    "items": [
