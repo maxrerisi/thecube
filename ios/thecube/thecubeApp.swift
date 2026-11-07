@@ -13,7 +13,7 @@ struct thecubeApp: App {
     }
 }
 
-/// Selected user (William / Blue Devil) shared by every tab. SPEC 13: user switcher in the toolbar.
+/// The one user (Blue Devil), shared by every tab.
 @Observable
 @MainActor
 final class AppState {
@@ -46,7 +46,6 @@ struct RootView: View {
     var body: some View {
         TabView {
             Tab("Today", systemImage: "sun.max") { TodayView() }
-            Tab("Eat next", systemImage: "fork.knife") { EatNextView() }
             Tab("Log", systemImage: "plus.circle") { LogView() }
             Tab("Settings", systemImage: "gearshape") { SettingsView() }
         }

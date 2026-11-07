@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// SPEC 13 Today: coach card; protein + calorie rings; points, swipes, daily budget, run-out
+/// SPEC 13 Today: coach card; protein + calorie rings; what to eat next; points, swipes, daily budget, run-out
 /// date; today's meals. Pull to refresh, swipe to delete, polls /today every 5 s while visible.
 struct TodayView: View {
     @Environment(AppState.self) private var app
@@ -15,6 +15,7 @@ struct TodayView: View {
                         Section { CoachCardView(card: c) }
                     }
                     Section { RingsRow(today: t) }
+                    EatNextSection(mealCount: t.meals.count)
                     Section("Points") { PointsCard(points: t.points, semesterEnd: t.semesterEnd) }
                     Section("Today's meals") {
                         if t.meals.isEmpty {

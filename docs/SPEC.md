@@ -370,14 +370,14 @@ except `/ingest/postmark` (basic auth).
 
 ## 13. iOS app
 
-Four tabs plus a user switcher (William / Blue Devil) in the toolbar.
+Three tabs, one user (Blue Devil; revised 2026-11-07: no switcher, no `.eml` import, Eat next
+folded into Today so the answer to "what do I eat?" sits under "how am I doing?").
 
 | Tab | Shows | Actions |
 | --- | --- | --- |
-| Today | Coach card; protein + calorie rings (calories hidden if off); points left, swipes left, daily budget, run-out date; today's meals | Pull to refresh; swipe a meal to delete (`swipeActionsContainer()` on iOS 27) |
-| Eat next | 3 picks: vendor, items, price, protein/cal/carbs; coach pick highlighted with reason | Segmented: Balanced / More protein / Cheaper |
-| Log | Vendor list → menu by course → item rows with macros and trait icons → tap for full label | Add items, enter price if unknown, save; "Import receipts" button (`.fileImporter` for `.eml`) |
-| Settings | Goal, targets, diet + allergen chips, show calories, semester end, balance entry | Save |
+| Today | Coach card; protein + calorie rings (calories hidden if off); **Eat next**: what this meal should bring, the #1 pick with the coach's reason, 2 other options behind a disclosure; points left, swipes left, daily budget, run-out date, Plan pace; today's meals | Segmented Balanced / More protein / Cheaper; pull to refresh; swipe a meal to delete |
+| Log | Vendor list → menu by course → item rows with macros and trait icons → tap for full label | Add items, enter points paid, save (receipts arrive by email forward) |
+| Settings | Goal, targets, diet + allergen chips, show calories, meal plan, semester end, balance entry | Save |
 
 While Today is visible, poll `/today` every 5 s (so a live-forwarded receipt appears on stage).
 

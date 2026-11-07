@@ -1,66 +1,72 @@
 import SwiftUI
 
-/// SPEC 13 Eat next: 3 picks (vendor, items, price, protein/cal/carbs), coach pick highlighted
-/// with its reason. Segmented: Balanced / More protein / Cheaper.
-struct EatNextView: View {
+/// "Eat next", shown inside Today (no separate tab): the app's #1 pick with the coach's reason,
+/// a Balanced / More protein / Cheaper switch, and the other options behind a disclosure.
+/// Reloads when the bias changes or a meal is logged/forwarded (mealCount), not on every poll.
+struct EatNextSection: View {
     @Environment(AppState.self) private var app
+    let mealCount: Int
     @State private var vm = EatNextViewModel()
+    @State private var showOthers = false
 
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    Picker("Bias", selection: $vm.bias) {
-                        ForEach(Bias.allCases) { Text($0.label).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
-                } footer: {
-                    Text(vm.bias.blurb)
-                }
-                if let e = vm.error { Section { ErrorBanner(message: e) } }
-                if let r = vm.result {
-                    Section { TargetHeader(result: r) }
-                    if r.picks.isEmpty {
-                        Section {
-                            Text("Nothing open right now matches your settings.").foregroundStyle(.secondary)
-                        }
-                    }
-                    ForEach(Array(r.picks.enumerated()), id: \.element.id) { i, p in
-                        Section {
-                            PickCard(pick: p, rank: i + 1, coach: r.coach?.chosenIndex == i ? r.coach : nil)
-                        } header: {
-                            if i == 1 { Text("Other options") }
-                        }
-                    }
-                } else if vm.loading {
-                    Section { ProgressView().frame(maxWidth: .infinity) }
-                }
+        Section {
+            Picker("Goal", selection: $vm.bias) {
+                ForEach(Bias.allCases) { Text($0.label).tag($0) }
             }
-            .navigationTitle("Eat next")
-            .refreshable { await vm.load(userId: app.userId) }
-            .task(id: "\(app.userId)-\(vm.bias.rawValue)-\(app.dataVersion)") { await vm.load(userId: app.userId) }
+            .pickerStyle(.segmented)
+            .listRowSeparator(.hidden)
+            if let e = vm.error { ErrorBanner(message: e) }
+            if let r = vm.result {
+                TargetLine(result: r)
+                if let top = r.picks.first {
+                    PickCard(pick: top, rank: 1, coach: r.coach)
+                    let others = Array(r.picks.dropFirst())
+                    if !others.isEmpty {
+                        DisclosureGroup("\(others.count) other options", isExpanded: $showOthers) {
+                            ForEach(Array(others.enumerated()), id: \.element.id) { i, p in
+                                PickCard(pick: p, rank: i + 2, coach: nil)
+                            }
+                        }
+                        .font(.subheadline)
+                    }
+                } else {
+                    Text("Nothing open right now matches your settings.").foregroundStyle(.secondary)
+                }
+            } else if vm.loading {
+                ProgressView().frame(maxWidth: .infinity)
+            }
+        } header: {
+            Text("Eat next")
+        } footer: {
+            Text(vm.bias.blurb)
+        }
+        .task(id: "\(app.userId)-\(vm.bias.rawValue)-\(app.dataVersion)-\(mealCount)") {
+            await vm.load(userId: app.userId)
         }
     }
 }
 
-struct TargetHeader: View {
+/// One line: what this meal should bring, plus today's points room and restrictions.
+struct TargetLine: View {
     let result: NextMeal
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(result.mealsLeft == 1 ? "Remaining today" : "This meal (2 meals left today)")
-                .font(.caption.weight(.semibold)).foregroundStyle(.secondary).textCase(.uppercase)
-            HStack(alignment: .top) {
-                Stat(label: "protein", value: Fmt.g(result.perMealTarget.proteinG))
-                if let c = result.perMealTarget.calories { Stat(label: "calories", value: Fmt.cal(c)) }
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 4) {
+                Text(result.mealsLeft == 1 ? "Last meal today:" : "This meal:")
+                    .foregroundStyle(.secondary)
+                Text("aim for \(Fmt.g(result.perMealTarget.proteinG)) protein").bold()
                 if let h = result.headroom {
+                    Text("·").foregroundStyle(.secondary)
                     if h >= 0 {
-                        Stat(label: "points left in today's budget", value: Fmt.pts(h))
+                        Text("\(Fmt.pts(h)) pts left today")
                     } else {
-                        Stat(label: "over today's budget", value: Fmt.pts(-h), tint: .orange)
+                        Text("\(Fmt.pts(-h)) over today").foregroundStyle(.orange)
                     }
                 }
             }
+            .font(.footnote.monospacedDigit())
             let r = result.restrictions
             if !r.requireDiets.isEmpty || !r.avoidAllergens.isEmpty {
                 HStack(spacing: 4) {
@@ -87,7 +93,6 @@ struct PickCard: View {
             if let coach {
                 VStack(alignment: .leading, spacing: 4) {
                     Label("Blue Devil pick", systemImage: "star.fill").font(.caption.bold()).foregroundStyle(.orange)
-                    Text(coach.headline).font(.subheadline.bold())
                     Text(coach.reason).font(.subheadline).foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -124,7 +129,6 @@ struct PickCard: View {
             }
         }
         .padding(.vertical, 4)
-        .listRowBackground(coach != nil ? Color.yellow.opacity(0.08) : nil)
     }
 }
 
