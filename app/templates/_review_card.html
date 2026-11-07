@@ -1,0 +1,88 @@
+{% if oob %}{% include "_nav_badge.html" %}{% include "_review_side.html" %}{% endif %}
+{% if card %}
+{% set m = card.match %}{% set g = card.group %}
+<article class="receipt review-card" id="stage-card" aria-live="polite">
+  {% if result and result.action == "confirmed" %}
+    <div class="notice ok" style="margin:0 0 16px">Saved.{% if result.also_resolved %} That also figured out
+      <strong>{{ result.also_resolved }}</strong> other charge{{ 's' if result.also_resolved != 1 }}.{% endif %}</div>
+  {% endif %}
+  <div class="receipt-head">
+    <div>
+      <h3>{% if m.status == 'user_confirmed' %}Your answer{% elif total %}Charge {{ [position, total]|min }} of {{ total }}{% endif %}</h3>
+      <div class="where">{{ m.location or g.location }}</div>
+      <div class="mono small muted">{{ g.location }} · {{ g.channel }}</div>
+    </div>
+    <div style="text-align:right">
+      <div class="amount">{{ g.spent_cents|money }}</div>
+      <div class="mono small">{{ g.when|when }}</div>
+    </div>
+  </div>
+  {% if total and m.status != 'user_confirmed' %}<div class="progress" aria-hidden="true"><span style="width: {{ (100 * (position - 1) / total)|round|int }}%"></span></div>{% endif %}
+
+  {% if m.status == 'user_confirmed' %}
+    <ul class="lines" style="margin:14px 0 18px">
+      {% for l in m.chosen %}<li><span class="name">{{ l.item }}</span><span class="dots"></span><span class="amt">{{ l.price_cents|money }}</span></li>{% endfor %}
+    </ul>
+    <form hx-post="/review/{{ g.id }}" hx-target="#stage-card" hx-swap="outerHTML" method="post" action="/review/{{ g.id }}">
+      <div class="actions">
+        <button class="btn ghost" name="action" value="undo" type="submit">Change answer</button>
+        <a class="btn ghost" href="/review">Back to queue</a>
+      </div>
+    </form>
+  {% else %}
+  <form hx-post="/review/{{ g.id }}" hx-target="#stage-card" hx-swap="outerHTML" method="post" action="/review/{{ g.id }}">
+    <input type="hidden" name="skipped_mode" value="{{ 'true' if skipped_mode else '' }}">
+    <fieldset style="border:0;padding:0;margin:16px 0 0">
+      <legend class="mono small" style="margin-bottom:10px">
+        {% if m.candidates %}Which one was it?
+          {% if m.scope == 'other locations' %}<span class="stamp" style="margin-left:6px">seen at other places</span>{% endif %}
+        {% else %}Nothing we know of adds up to {{ g.spent_cents|money }} here.{% endif %}
+      </legend>
+      {% for combo in m.candidates %}
+      <label class="option">
+        <input type="radio" name="choice" value="c{{ loop.index0 }}" {% if loop.first %}checked{% endif %}>
+        <span>
+          <span class="what">{% for l in combo %}{{ l.item }}{% if l.variants %} <span class="muted">({{ l.variants|join(' / ') }})</span>{% endif %} {{ l.price_cents|money }}{% if not loop.last %} + {% endif %}{% endfor %}</span>
+          <span class="meta">
+            {% set top = combo[0] %}
+            {% if top.source == 'shared' %}<span class="stamp shared" style="transform:none;padding:2px 5px;font-size:9px">community</span>{% else %}from your {{ 'answers' if top.source == 'user' else 'receipts' }}{% endif %}
+            {% if m.scope == 'other locations' %} · at {{ combo|map(attribute='location')|unique|join(', ') }}{% endif %}
+            {% if top.times and top.source != 'shared' %} · ordered {{ top.times }}×{% endif %}
+          </span>
+        </span>
+      </label>
+      {% endfor %}
+      <label class="option">
+        <input type="radio" name="choice" value="other" {% if not m.candidates %}checked{% endif %}>
+        <span><span class="what">Something else</span>
+          <span class="meta">We'll remember it for next time.</span></span>
+      </label>
+      <div class="other-fields">
+        <div><label for="other_name" class="sr-only" style="position:absolute;left:-9999px">Item name</label>
+          <input type="text" id="other_name" name="other_name" placeholder="What you got, e.g. Chicken Caesar Wrap" autocomplete="off"></div>
+        <div><label for="other_price" style="position:absolute;left:-9999px">Price before tax</label>
+          <input type="text" inputmode="decimal" id="other_price" name="other_price" placeholder="{{ suggested }}" title="Price before tax. Leave blank to use {{ suggested }} (the charge minus 7.5% tax)."></div>
+      </div>
+      <p class="hint" style="margin-left:29px">Price is before tax. Leave it blank to use {{ suggested|string }} (the charge minus 7.5% tax).</p>
+    </fieldset>
+    {% if error %}<div class="notice" role="alert" style="margin:0 0 14px">{{ error }}</div>{% endif %}
+    <div class="actions" style="margin-top:14px">
+      <button class="btn" type="submit" name="action" value="confirm">Confirm →</button>
+      <button class="btn ghost" type="submit" name="action" value="skip">Skip</button>
+    </div>
+  </form>
+  {% endif %}
+</article>
+{% else %}
+<article class="receipt review-card done-card" id="stage-card">
+  {% if result and result.action == "confirmed" and result.also_resolved %}
+    <div class="notice ok" style="margin:0 0 16px;text-align:left">Saved. That also figured out <strong>{{ result.also_resolved }}</strong> other charge{{ 's' if result.also_resolved != 1 }}.</div>
+  {% endif %}
+  <div class="big">All caught up.</div>
+  <p class="muted">{% if counts.skipped %}You skipped {{ counts.skipped }}. They'll be here when you're ready.{% else %}Every in-person charge is accounted for.{% endif %}</p>
+  <div class="actions" style="justify-content:center;margin-top:18px">
+    <a class="btn" href="/">See where it all went →</a>
+    {% if counts.skipped %}<a class="btn ghost" href="/review?skipped=1">Review skipped</a>{% endif %}
+  </div>
+</article>
+{% endif %}

@@ -80,6 +80,8 @@ def entry_to_json(e: core_catalog.CatalogEntry) -> dict:
         "price_cents": to_cents(e.price),
         "kind": e.kind,
         "variants": sorted(e.variants),
+        "times": e.times,
+        "source": e.source,
     }
 
 

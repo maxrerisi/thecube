@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Review · Duke Dining Tracker{% endblock %}
+{% block main %}
+<div class="page-head reveal">
+  <h1>What did you <em>get</em>?</h1>
+  <p class="lede">In-person charges only show a place and a price. Pick what matches, or tell us. Each answer
+    teaches the catalog, and that can clear up other charges too.</p>
+</div>
+<div class="review-stage">
+  {% include "_review_card.html" %}
+  {% include "_review_side.html" %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  // keyboard: 1-9 pick an option, Enter confirms, S skips
+  document.addEventListener("keydown", ev => {
+    if (ev.target.matches("input[type=text], textarea") || ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    const card = document.getElementById("stage-card");
+    if (!card) return;
+    if (/^[1-9]$/.test(ev.key)) {
+      const opt = card.querySelectorAll("input[name=choice]")[+ev.key - 1];
+      if (opt) { opt.checked = true; opt.dispatchEvent(new Event("change", {bubbles: true})); ev.preventDefault(); }
+    } else if (ev.key === "s" || ev.key === "S") {
+      card.querySelector("button[value=skip]")?.click();
+    }
+  });
+  // choosing "something else" focuses the name field
+  document.addEventListener("change", ev => {
+    if (ev.target.name === "choice" && ev.target.value === "other") document.getElementById("other_name")?.focus();
+  });
+</script>
+{% endblock %}

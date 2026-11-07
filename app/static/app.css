@@ -191,12 +191,13 @@ tr.dim td { color: var(--muted); }
   display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; margin-bottom: 8px; cursor: pointer;
   border: 1.5px solid var(--rule); border-radius: var(--radius); background: #fff;
   transition: border-color .12s, background-color .12s;
+  font: 14px/1.5 var(--sans); text-transform: none; letter-spacing: 0;
 }
 .option:hover { border-color: var(--ink-2); }
 .option:has(input:checked) { border-color: var(--ink); background: rgba(255,210,63,.22); box-shadow: inset 4px 0 0 var(--ink); }
 .option input { margin-top: 3px; accent-color: var(--ink); width: 17px; height: 17px; flex: 0 0 auto; }
-.option .what { font: 13px/1.5 var(--mono); }
-.option .meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.option .what { display: block; font: 13px/1.5 var(--mono); }
+.option .meta { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
 .other-fields { display: grid; grid-template-columns: 1fr 130px; gap: 10px; margin: 6px 0 4px 29px; }
 .progress { height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; margin: 8px 0 4px; }
 .progress span { display: block; height: 100%; background: var(--ink); transition: width .3s; }

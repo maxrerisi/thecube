@@ -1,0 +1,15 @@
+<aside id="review-side" class="reveal" {% if oob %}hx-swap-oob="true"{% endif %}>
+  <h3>Progress</h3>
+  <div class="tally" style="grid-template-columns:1fr 1fr">
+    <div><div class="n {% if counts.left %}alert{% endif %}">{{ counts.left }}</div><div class="k">left</div></div>
+    <div><div class="n">{{ counts.confirmed }}</div><div class="k">answered</div></div>
+  </div>
+  {% if counts.skipped %}
+  <p class="small" style="margin-top:12px">{{ counts.skipped }} skipped ·
+    <a href="/review?skipped=1">review skipped</a></p>
+  {% endif %}
+  <h3 style="margin-top:28px">How matching works</h3>
+  <p class="small muted">We look for up to 3 things from that place whose price plus 7.5% tax equals the charge exactly.
+    Fewest items first, then what you order most. If nothing fits there, we try other places.</p>
+  <p class="small muted mono">Keys: 1–9 pick · Enter confirm · S skip</p>
+</aside>

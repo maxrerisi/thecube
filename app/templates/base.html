@@ -17,7 +17,7 @@
       <a class="wordmark" href="/"><b>Duke Dining</b><small>Food Points, itemized</small></a>
       <nav class="nav" aria-label="Main">
         <a href="/" {% if active == 'dashboard' %}aria-current="page"{% endif %}>Dashboard</a>
-        <a href="/review" {% if active == 'review' %}aria-current="page"{% endif %}>Review{% if nav_review %}<span class="badge" aria-label="{{ nav_review }} to review">{{ nav_review }}</span>{% endif %}</a>
+        <a href="/review" {% if active == 'review' %}aria-current="page"{% endif %}>Review{% include "_nav_badge.html" %}</a>
         <a href="/purchases" {% if active == 'purchases' %}aria-current="page"{% endif %}>Purchases</a>
         <a href="/catalog" {% if active == 'catalog' %}aria-current="page"{% endif %}>Catalog</a>
         <a href="/upload" {% if active == 'upload' %}aria-current="page"{% endif %}>Import</a>
