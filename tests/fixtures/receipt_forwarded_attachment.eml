@@ -1,0 +1,36 @@
+From: Student <student@example.edu>
+To: receipts@example.com
+Subject: FW: #900000010 Receipt
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="OUTER"
+
+--OUTER
+Content-Type: text/plain; charset="utf-8"
+
+Forwarding my receipt.
+
+--OUTER
+Content-Type: message/rfc822
+
+From: Transact Mobile Ordering <mobileorder@transactcampus.com>
+Subject: #900000010 Receipt
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+2026-09-10 8:00 AM
+Beyu Blue
+Bryan Center
+1. Latte
+        Oat Milk
+$5.25
+Subtotal
+$5.25
+Tax
+$0.39
+Total
+$5.64
+DukeCard
+Student Food
+$5.64
+
+--OUTER--
