@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends
 
 from app import settings_store
 from app.auth import require_token
+from app.coach import gemini
 from app.core import budget, clock, macros
 from app.db import get_conn
 
@@ -46,10 +47,11 @@ def today_payload(conn, user_id: int) -> dict:
         "user": {"id": user["id"], "name": user["name"], "is_demo": user["is_demo"]},
         "targets": {"calories": s.targets.calories if s.show_calories else None, "protein_g": s.targets.protein_g},
         "show_calories": s.show_calories,
+        "semester_end": s.semester_end.isoformat(),
         "eaten": eaten,
         "protein_hit_days_7": protein_hit_days(conn, user_id, today, s.targets.protein_g),
         "points": pts.to_json(),
-        "coach": None,
+        "coach": None,  # filled by get_today (kept out of the payload the coach reads)
         "meals": [{
             "id": m["id"], "ts": m["ts"].isoformat(), "vendor": m["vendor"], "items": m["items"],
             "points_spent": float(m["points_spent"]), "swipes_used": m["swipes_used"], "source": m["source"],
@@ -61,4 +63,6 @@ def today_payload(conn, user_id: int) -> dict:
 
 @router.get("/today")
 def get_today(user_id: int, conn=Depends(get_conn)):
-    return today_payload(conn, user_id)
+    payload = today_payload(conn, user_id)
+    payload["coach"] = gemini.recap(payload, conn)
+    return payload

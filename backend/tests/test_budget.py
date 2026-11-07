@@ -90,7 +90,7 @@ def test_today_and_balance_api(client, monkeypatch):
     assert [m["vendor"] for m in t["meals"]] == ["Sazon"]
     assert t["eaten"]["protein_g"] > 0 and t["meals"][0]["items"] == ["Arepa Bowl"]
     assert t["points"]["spent_today"] == pytest.approx(13.81)
-    assert t["coach"] is None
+    assert t["coach"]["headline"] and t["coach"]["source"] in ("template", "gemini", "cache")
     assert t["points"]["points"] is None  # the only snapshot is stamped now (Nov), after the demo day
     with connect() as conn:  # a snapshot the morning of: today's $13.81 comes off it
         conn.execute("INSERT INTO balance_snapshots VALUES (1, '2026-09-08 08:00-04', 500, 12)")

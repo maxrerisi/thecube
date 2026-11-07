@@ -7,3 +7,4 @@ requests>=2.34
 rapidfuzz>=3.14
 pytest>=9
 httpx>=0.28
+google-genai>=3.0

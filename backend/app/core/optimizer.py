@@ -229,4 +229,5 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
         "headroom": None if headroom is None else round(headroom, 2),
         "restrictions": {"require_diets": s.require_diets, "avoid_allergens": s.avoid_allergens},
         "open_fallback": fallback, "candidates": len(cands), "picks": picks, "coach": None,
+        "show_calories": s.show_calories,
     }
