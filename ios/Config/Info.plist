@@ -6,6 +6,8 @@
 	<string>$(API_BASE_URL)</string>
 	<key>APP_TOKEN</key>
 	<string>$(APP_TOKEN)</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Connects to the thecube server on your Mac during development.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>

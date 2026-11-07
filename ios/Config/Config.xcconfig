@@ -2,4 +2,6 @@
 // Empty API_BASE_URL = the app runs on the bundled mock JSON (Mock/*.json).
 API_BASE_URL =
 APP_TOKEN =
+// Your Apple team ID (Xcode > Settings > Accounts) for running on a real iPhone.
+DEVELOPMENT_TEAM =
 #include? "Secrets.xcconfig"
