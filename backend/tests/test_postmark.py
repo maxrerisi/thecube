@@ -55,9 +55,10 @@ def test_attachment_forward(pm):
     assert r["status"] == "ok" and r["imported"] == 1
 
 
-def test_unknown_sender_and_non_receipt_ignored(pm):
+def test_alias_sender_lands_on_blue_devil_and_non_receipt_ignored(pm):
     client, william = pm
-    assert client.post("/ingest/postmark", json=inline_payload(SAMPLES[0], "stranger@example.com"),
-                       auth=BASIC).json() == {"status": "ignored", "reason": "unknown sender"}
+    # Outlook may send from an alias (william.z@) rather than the NetID address on the receipts
+    r = client.post("/ingest/postmark", json=inline_payload(SAMPLES[0], "william.z@duke.edu"), auth=BASIC).json()
+    assert r["status"] == "ok" and r["user_id"] == 2 and r["imported"] == 1
     r = client.post("/ingest/postmark", json={"From": william, "Subject": "lunch?", "TextBody": "hi"}, auth=BASIC)
     assert r.status_code == 200 and r.json()["status"] == "ignored"

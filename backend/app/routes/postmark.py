@@ -31,9 +31,13 @@ async def ingest_postmark(request: Request, conn=Depends(get_conn)):
     Postmark doesn't retry them; the reason is in the body and the log."""
     payload = await request.json()
     who = postmark.sender(payload)
-    user = conn.execute("SELECT id FROM users WHERE lower(email) = %s", (who,)).fetchone()
+    # One-user app: a known sender address picks its user; anything else goes to the demo
+    # student (Blue Devil), e.g. Outlook sending from an alias (william.z@) rather than the
+    # NetID address the receipts were sent to (wz231@). The webhook itself needs basic auth.
+    user = conn.execute("SELECT id FROM users WHERE lower(email) = %s", (who,)).fetchone() \
+        or conn.execute("SELECT id FROM users WHERE is_demo ORDER BY id LIMIT 1").fetchone()
     if not user:
-        log.warning("postmark: unknown sender %r", who)
+        log.warning("postmark: no user for sender %r", who)
         return {"status": "ignored", "reason": "unknown sender"}
     try:
         result = import_emls(conn, user["id"], [postmark.to_eml(payload)])
