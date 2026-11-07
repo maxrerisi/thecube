@@ -29,7 +29,8 @@ final class AppState {
     func loadUsers() async {
         do {
             users = try await api.users()
-            if !users.contains(where: { $0.id == userId }), let first = users.first { userId = first.id }
+            // One user: the demo student (Blue Devil). Forwarded receipts land there too.
+            if let me = users.first(where: \.isDemo) ?? users.first { userId = me.id }
             loadError = nil
         } catch {
             loadError = error.localizedDescription
@@ -49,26 +50,6 @@ struct RootView: View {
             Tab("Log", systemImage: "plus.circle") { LogView() }
             Tab("Settings", systemImage: "gearshape") { SettingsView() }
         }
-    }
-}
-
-/// Toolbar menu to switch between William and Blue Devil.
-struct UserSwitcher: View {
-    @Environment(AppState.self) private var app
-
-    /// Two users in the demo, so one tap flips between them; the current name is always visible.
-    var body: some View {
-        Button {
-            guard let i = app.users.firstIndex(where: { $0.id == app.userId }), !app.users.isEmpty else { return }
-            app.userId = app.users[(i + 1) % app.users.count].id
-        } label: {
-            HStack(spacing: 6) {
-                Image(systemName: "arrow.left.arrow.right")
-                Text(app.user?.name ?? "User").fontWeight(.semibold)
-            }
-            .fixedSize()
-        }
-        .accessibilityLabel("Switch user, now \(app.user?.name ?? "none")")
     }
 }
 

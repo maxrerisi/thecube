@@ -34,7 +34,6 @@ struct TodayView: View {
                 }
             }
             .navigationTitle("Today")
-            .toolbar { ToolbarItem(placement: .topBarTrailing) { UserSwitcher() } }
             .refreshable { await vm.load(userId: app.userId) }
             // Poll every 5 s while visible so a live-forwarded receipt shows up on stage.
             .task(id: "\(app.userId)-\(app.dataVersion)") {

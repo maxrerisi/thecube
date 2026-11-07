@@ -29,7 +29,6 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) { UserSwitcher() }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") { Task { if await vm.save(userId: app.userId) { app.dataChanged() } } }
                         .disabled(!vm.dirty)

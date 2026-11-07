@@ -28,6 +28,8 @@ struct EatNextView: View {
                     ForEach(Array(r.picks.enumerated()), id: \.element.id) { i, p in
                         Section {
                             PickCard(pick: p, rank: i + 1, coach: r.coach?.chosenIndex == i ? r.coach : nil)
+                        } header: {
+                            if i == 1 { Text("Other options") }
                         }
                     }
                 } else if vm.loading {
@@ -35,7 +37,6 @@ struct EatNextView: View {
                 }
             }
             .navigationTitle("Eat next")
-            .toolbar { ToolbarItem(placement: .topBarTrailing) { UserSwitcher() } }
             .refreshable { await vm.load(userId: app.userId) }
             .task(id: "\(app.userId)-\(vm.bias.rawValue)-\(app.dataVersion)") { await vm.load(userId: app.userId) }
         }
@@ -47,7 +48,7 @@ struct TargetHeader: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(result.mealsLeft == 1 ? "Still to eat today" : "Aim for this meal (2 left today)")
+            Text(result.mealsLeft == 1 ? "Remaining today" : "This meal (2 meals left today)")
                 .font(.caption.weight(.semibold)).foregroundStyle(.secondary).textCase(.uppercase)
             HStack(alignment: .top) {
                 Stat(label: "protein", value: Fmt.g(result.perMealTarget.proteinG))
@@ -85,7 +86,7 @@ struct PickCard: View {
         VStack(alignment: .leading, spacing: 8) {
             if let coach {
                 VStack(alignment: .leading, spacing: 4) {
-                    Label("Coach pick", systemImage: "star.fill").font(.caption.bold()).foregroundStyle(.orange)
+                    Label("Blue Devil pick", systemImage: "star.fill").font(.caption.bold()).foregroundStyle(.orange)
                     Text(coach.headline).font(.subheadline.bold())
                     Text(coach.reason).font(.subheadline).foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)

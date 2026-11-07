@@ -1,13 +1,10 @@
 import SwiftUI
-import UniformTypeIdentifiers
 
 /// SPEC 13 Log: vendor list -> menu by course -> item rows with macros and trait icons ->
-/// tap for full label. Add items, enter price if unknown, save. "Import receipts" (.eml).
+/// tap for full label. Add items, enter points paid, save. (Receipts arrive by email forward.)
 struct LogView: View {
     @Environment(AppState.self) private var app
     @State private var vm = LogViewModel()
-    @State private var importing = false
-    @State private var importMessage: String?
 
     var body: some View {
         NavigationStack {
@@ -31,44 +28,8 @@ struct LogView: View {
             }
             .navigationTitle("Log")
             .navigationDestination(for: Vendor.self) { MenuView(vendor: $0) }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button { importing = true } label: { Label("Import receipts", systemImage: "tray.and.arrow.down") }
-                }
-                ToolbarItem(placement: .topBarTrailing) { UserSwitcher() }
-            }
-            .fileImporter(isPresented: $importing, allowedContentTypes: Self.emlTypes, allowsMultipleSelection: true) { result in
-                Task { await importFiles(result) }
-            }
-            .alert("Import", isPresented: Binding(get: { importMessage != nil }, set: { if !$0 { importMessage = nil } })) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text(importMessage ?? "")
-            }
             .task(id: app.dataVersion) { await vm.load() }
             .refreshable { await vm.load() }
-        }
-    }
-
-    static let emlTypes: [UTType] = [UTType(filenameExtension: "eml") ?? .data, .emailMessage]
-
-    private func importFiles(_ result: Result<[URL], Error>) async {
-        do {
-            let urls = try result.get()
-            var files: [(name: String, data: Data)] = []
-            for u in urls {
-                let scoped = u.startAccessingSecurityScopedResource()
-                defer { if scoped { u.stopAccessingSecurityScopedResource() } }
-                files.append((u.lastPathComponent, try Data(contentsOf: u)))
-            }
-            guard !files.isEmpty else { return }
-            let r = try await APIClient.shared.importEmls(userId: app.userId, files: files)
-            var msg = "\(r.imported) imported, \(r.duplicates) already had."
-            if !r.partial.isEmpty { msg += " \(r.partial.count) with partial macros." }
-            importMessage = msg
-            app.dataChanged()
-        } catch {
-            importMessage = error.localizedDescription
         }
     }
 }
