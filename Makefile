@@ -1,4 +1,4 @@
-.PHONY: install test lint fmt report
+.PHONY: install test lint fmt report dev seed demo
 
 install:
 	uv sync
@@ -16,3 +16,11 @@ fmt:
 
 report:
 	uv run python -m dukedining data/receipts_raw.txt data/eaccounts_raw.csv out/
+
+dev:
+	uv run uvicorn app.main:app --reload --port 8000
+
+seed:
+	uv run python scripts/seed_demo.py
+
+demo: seed dev

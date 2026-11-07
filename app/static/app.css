@@ -204,6 +204,7 @@ tr.dim td { color: var(--muted); }
 .progress span { display: block; height: 100%; background: var(--ink); transition: width .3s; }
 .done-card { text-align: center; padding: 44px 24px 52px; }
 .done-card .big { font: 600 italic 40px/1.1 var(--serif); }
+@media (max-width: 520px) { .other-fields { grid-template-columns: 1fr; margin-left: 0; } }
 @keyframes slide-in { from { opacity: 0; transform: translateY(14px) rotate(-.6deg); } to { opacity: 1; transform: none; } }
 
 /* ---------------------------------------------------------------- page-load stagger */

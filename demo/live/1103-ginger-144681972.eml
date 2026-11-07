@@ -1,0 +1,28 @@
+From: Transact Mobile Ordering <mobileorder@transactcampus.com>
+To: jordan.demo@example.edu
+Subject: #144681972 Receipt
+Date: Tue, 03 Nov 2026 13:37:00 -0500
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============0082161794109726730=="
+
+--===============0082161794109726730==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+This receipt is best viewed in an HTML-capable email client.
+
+--===============0082161794109726730==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body><p>Hi Jordan,</p><p>Thanks for ordering with Transact Mobile Orde=
+ring!</p><table><tr><td>2026-11-03 1:37 PM</td><td></td></tr><tr><td><b>Ginge=
+r &amp; Soy</b></td><td></td></tr><tr><td>Brodhead Center</td><td></td></tr><=
+tr><td>1. Pork Dumplings</td><td>$7.99</td></tr><tr><td>Subtotal</td><td>$7.9=
+9</td></tr><tr><td>Tax</td><td>$0.60</td></tr><tr><td>Total</td><td>$8.59</td=
+></tr><tr><td>DukeCard</td><td></td></tr><tr><td>Student Food</td><td>$8.59</=
+td></tr></table><p>Powered by Transact</p></body></html>
+
+--===============0082161794109726730==--

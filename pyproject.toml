@@ -38,3 +38,6 @@ ignore = ["E741"]
 
 [tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["fastapi.Depends", "fastapi.File", "fastapi.Form", "fastapi.Query"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/seed_demo.py" = ["E501"]  # hand-aligned menu data table
