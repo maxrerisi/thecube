@@ -7,7 +7,7 @@ from dukedining.money import money
 
 from ..deps import session_dep, user_dep
 from ..models import Receipt, Transaction, User
-from ..services import ingest
+from ..services import ingest, shared
 from ..web import render
 
 router = APIRouter()
@@ -34,6 +34,7 @@ async def upload(
     eaccounts_text: str = Form(""),
     eaccounts_file: UploadFile | None = File(default=None),
     balance: str = Form(""),
+    share: bool = Form(False),
     session: Session = Depends(session_dep),
     user: User = Depends(user_dep),
 ):
@@ -53,6 +54,14 @@ async def upload(
             reported = money(balance)
         except InvalidOperation:
             e_errors.append(f"current balance {balance!r} isn't a number")
+
+    if share != user.share_catalog:
+        user.share_catalog = share
+        session.add(user)
+        session.commit()
+    if share:
+        shared.contribute_pending(session, user)  # opting in shares receipts imported earlier too
+        session.commit()
 
     r_sum = ingest.import_receipts(session, user, receipts, r_errors) if (receipts or r_errors) else None
     e_sum = None

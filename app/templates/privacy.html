@@ -12,6 +12,10 @@
       <li>• Your eAccounts rows: time, account, place, amount, and the <strong>last 4 digits</strong> of the card.</li>
       <li>• Your answers in the review queue.</li>
     </ul>
+    <h3 style="margin-top:22px">Community catalog</h3>
+    <p style="margin:0">{% if user.share_catalog %}<span class="stamp shared">sharing on</span> Prices from your receipts
+      (place, item, price, day seen) are added to the shared catalog.{% else %}<span class="stamp">sharing off</span>
+      Nothing of yours goes to the shared catalog.{% endif %} Change it on the <a href="/upload">import page</a>.</p>
     <h3 style="margin-top:22px">What we never do</h3>
     <ul class="lines" style="font-family:var(--sans);font-size:15px;line-height:1.7">
       <li>• Ask for, store, or use your NetID password.</li>

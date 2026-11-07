@@ -55,6 +55,7 @@ class Receipt(SQLModel, table=True):
     other_tender: str | None = None  # e.g. "Amex"
     other_tender_cents: int | None = None
     arithmetic_ok: bool = True
+    contributed: bool = False  # its catalog lines were added to the shared catalog (opt-in)
 
 
 class ReceiptItem(SQLModel, table=True):

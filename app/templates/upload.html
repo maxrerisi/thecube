@@ -50,6 +50,15 @@
       </div>
     </section>
 
+    <div class="span-2">
+      <label class="check" for="share">
+        <input type="checkbox" id="share" name="share" value="true" {% if user.share_catalog %}checked{% endif %}>
+        <span><strong>Share my prices with the community catalog.</strong>
+          <span class="muted">Only place, item, price, and the day it was first and last seen. No name, no card, no times.
+          It helps other students' in-person charges get matched. Shared prices stay even if you delete your data later,
+          because they can't be traced back to you.</span></span>
+      </label>
+    </div>
     <div class="span-2 actions">
       <button class="btn" type="submit">Import &amp; match →</button>
       <span class="htmx-indicator mono small">Matching…</span>

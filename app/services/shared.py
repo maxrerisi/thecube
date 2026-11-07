@@ -7,8 +7,28 @@ from sqlmodel import Session, select
 from dukedining.catalog import ADDON, build_catalog
 from dukedining.receipts import Receipt as CoreReceipt
 
-from ..models import SharedCatalogEntry
+from ..models import Receipt, SharedCatalogEntry, User
 from ..money_db import to_cents
+from . import recompute
+
+
+def contribute_pending(session: Session, user: User) -> int:
+    """If the user opted in, contribute every receipt not contributed yet (each receipt
+    exactly once, so re-imports and toggling the checkbox never double-count)."""
+    if not user.share_catalog:
+        return 0
+    pending = session.exec(
+        select(Receipt).where(Receipt.user_id == user.id, Receipt.contributed == False)  # noqa: E712
+    ).all()
+    if not pending:
+        return 0
+    txns = {r.txn for r in pending}
+    core, _ = recompute.core_receipts(session, user.id)
+    n = contribute(session, [r for r in core if r.txn in txns])
+    for r in pending:
+        r.contributed = True
+    session.flush()
+    return n
 
 
 def contribute(session: Session, receipts: list[CoreReceipt]) -> int:

@@ -74,7 +74,6 @@ def import_receipts(
     batch = ImportBatch(user_id=user.id, kind="receipts")
     session.add(batch)
     session.flush()
-    new_receipts = []
     for r in receipts:
         if r.txn in existing:
             summary.duplicate += 1
@@ -101,11 +100,10 @@ def import_receipts(
                 base_price_cents=to_cents(base), line_total_cents=to_cents(it.total),
                 addons=[[a.text, to_cents(a.price)] for a in it.addons], modifiers=it.modifiers,
             ))  # fmt: skip
-        new_receipts.append(r)
         summary.new += 1
     batch.n_new, batch.n_duplicate = summary.new, summary.duplicate
-    if user.share_catalog and new_receipts:
-        shared.contribute(session, new_receipts)
+    session.flush()
+    shared.contribute_pending(session, user)
     summary.need_review = recompute.refresh(session, user.id).need_review
     session.commit()
     return summary
