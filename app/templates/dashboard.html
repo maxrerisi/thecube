@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block head %}<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>{% endblock %}
+{% block main %}
+{% if deleted %}<div class="notice ok" style="margin:0 0 24px">All your data was deleted.</div>{% endif %}
+{% if not d.has_data %}
+<div class="page-head reveal">
+  <h1>Where did your <em>Food Points</em> go?</h1>
+  <p class="lede">eAccounts only tells you where and how much. Import your receipts and transactions and we'll
+    tell you what you actually bought, and when your points will run out.</p>
+</div>
+<div class="receipt reveal" style="max-width:560px">
+  <h3>Nothing here yet</h3>
+  <h2>Start with an import</h2>
+  <p class="muted">Takes about a minute: copy your eAccounts transactions table, drag in some receipt emails.</p>
+  <a class="btn" href="/upload">Import your data →</a>
+</div>
+{% else %}
+<div class="page-head reveal">
+  <h1>Where your <em>Food Points</em> went.</h1>
+  <p class="lede mono small">As of {{ d.as_of|when }}{% if d.first_deposit %} · since {{ d.first_deposit|when('date') }}{% endif %}</p>
+</div>
+
+<div class="grid grid-3 reveal">
+  <section class="receipt kpi">
+    <div class="receipt-head" style="margin-bottom:10px">
+      <h3 style="margin:0">Food balance</h3>
+      {% if d.reconciled is true %}<span class="stamp ok" title="Your transactions add up to the balance eAccounts shows.">data complete ✓</span>
+      {% elif d.reconciled is false %}<span class="stamp bad" title="Your imported transactions don't add up to the balance you entered.">incomplete ✗</span>
+      {% else %}<span class="stamp">computed</span>{% endif %}
+    </div>
+    <div class="big">{{ d.balance_cents|money }}</div>
+    <div class="sub">
+      {% if d.reconciled is true %}Every transaction since your first deposit adds up to the balance eAccounts shows.
+      {% elif d.reconciled is false %}Transactions add up to {{ d.computed_cents|money }}, but eAccounts shows {{ d.reported_cents|money }}
+        ({{ (d.reported_cents - d.computed_cents)|money }} unaccounted). Some rows are probably missing: <a href="/upload">import the full table</a>.
+      {% else %}Computed from your transactions. <a href="/upload">Enter your eAccounts balance</a> when you import to verify it.{% endif %}
+    </div>
+  </section>
+
+  <section class="receipt kpi">
+    <div class="receipt-head" style="margin-bottom:10px"><h3 style="margin:0">Burn rate</h3><span class="stamp">last {{ 4 }} wks</span></div>
+    <div class="big">{{ d.weekly_cents|money }}<span style="font-size:.4em;letter-spacing:0"> /week</span></div>
+    <div class="sub">Average since your first deposit: {{ d.weekly_all_cents|money }}/week.</div>
+  </section>
+
+  <section class="receipt kpi">
+    <div class="receipt-head" style="margin-bottom:10px"><h3 style="margin:0">Runs out</h3>
+      {% if d.run_out and d.run_out < d.term_end %}<span class="stamp bad">before term ends</span>{% elif d.run_out %}<span class="stamp ok">lasts the term</span>{% endif %}</div>
+    {% if d.run_out %}
+      <div class="big">{{ d.run_out.strftime('%b') }} {{ d.run_out.day }}</div>
+      <div class="sub">
+        {% if d.run_out < d.term_end %}About {{ (d.term_end - d.run_out).days }} days before the term ends ({{ d.term_end.strftime('%b') }} {{ d.term_end.day }}) at this pace.
+        {% else %}At this pace you'll have about {{ d.left_at_term_end_cents|money }} left on {{ d.term_end.strftime('%b') }} {{ d.term_end.day }}.{% endif %}
+      </div>
+    {% else %}
+      <div class="big">—</div><div class="sub">Not enough spending yet to project.</div>
+    {% endif %}
+  </section>
+</div>
+
+<div class="tally reveal" style="margin-top:22px">
+  <div><div class="n">{{ d.spent_cents|money }}</div><div class="k">Food Points spent</div></div>
+  <div><div class="n">{{ d.n_purchases }}</div><div class="k">purchases</div></div>
+  <div><div class="n">{{ d.known_pct }}%</div><div class="k">of spending itemized</div></div>
+  <div><div class="n">{{ d.swipes }}</div><div class="k">board swipes on mobile orders<br>{{ d.swipe_value_cents|money }} of value</div></div>
+</div>
+{% if nav_review %}
+<div class="notice reveal" style="margin-top:14px">{{ nav_review }} in-person charge{{ 's' if nav_review != 1 }} could be more than one thing. <a href="/review">Help us pin them down →</a></div>
+{% endif %}
+
+<div class="grid grid-2 reveal" style="margin-top:28px">
+  <section class="receipt flat">
+    <h3>Spend by week</h3>
+    <div class="chart-box"><canvas id="weekChart" role="img" aria-label="Food Points spent each week"></canvas></div>
+    <details class="small" style="margin-top:10px"><summary class="mono">Show as table</summary>
+      <table><thead><tr><th>Week of</th><th class="num">Spent</th></tr></thead><tbody>
+      {% for w, c in d.by_week %}<tr><td>{{ w.strftime('%b') }} {{ w.day }}</td><td class="num">{{ c|money }}</td></tr>{% endfor %}
+      </tbody></table></details>
+  </section>
+  <section class="receipt flat">
+    <h3>Spend by place</h3>
+    <div class="chart-box"><canvas id="placeChart" role="img" aria-label="Food Points spent at each place"></canvas></div>
+    <details class="small" style="margin-top:10px"><summary class="mono">Show as table</summary>
+      <table><thead><tr><th>Place</th><th class="num">Spent</th></tr></thead><tbody>
+      {% for name, c in d.by_location %}<tr><td>{{ name }}</td><td class="num">{{ c|money }}</td></tr>{% endfor %}
+      </tbody></table></details>
+  </section>
+
+  <section class="receipt span-2">
+    <div class="receipt-head"><div><h3>Top items</h3><h2>What you keep coming back for</h2></div><a class="mono small" href="/purchases">All purchases →</a></div>
+    {% if d.top_items %}
+    <ul class="lines" style="font-size:14px">
+      {% for e in d.top_items %}
+      <li><span class="name">{{ e.item }} <span class="muted">· {{ e.place }}</span></span><span class="dots"></span>
+        <span class="amt">{{ e.count }}× · {{ e.cents|money }}</span></li>
+      {% endfor %}
+    </ul>
+    {% else %}<p class="muted">Import receipt emails to see what you buy most.</p>{% endif %}
+  </section>
+</div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+{% if d.has_data %}
+<script>
+  const data = {{ charts_json|safe }};
+  const css = getComputedStyle(document.documentElement);
+  const ink = css.getPropertyValue("--ink").trim(), rule = css.getPropertyValue("--rule").trim(),
+        muted = css.getPropertyValue("--muted").trim(), card = css.getPropertyValue("--card").trim();
+  const usd = v => "$" + v.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  Chart.defaults.font.family = css.getPropertyValue("--mono");
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = muted;
+  const common = {
+    maintainAspectRatio: false, animation: {duration: 500},
+    plugins: {legend: {display: false}, tooltip: {
+      backgroundColor: ink, titleColor: card, bodyColor: card, padding: 10, cornerRadius: 3, displayColors: false,
+      callbacks: {label: c => usd(c.parsed[c.chart.options.indexAxis === "y" ? "x" : "y"])}}},
+  };
+  const bar = {backgroundColor: ink, hoverBackgroundColor: "#3b6fb6", maxBarThickness: 24,
+               borderRadius: 4, borderSkipped: "start"};
+  new Chart(document.getElementById("weekChart"), {
+    type: "bar",
+    data: {labels: data.weeks, datasets: [{...bar, data: data.week_values}]},
+    options: {...common, scales: {
+      x: {grid: {display: false}, border: {color: rule}},
+      y: {grid: {color: rule, lineWidth: 1}, border: {display: false}, ticks: {callback: v => "$" + v}}}},
+  });
+  new Chart(document.getElementById("placeChart"), {
+    type: "bar",
+    data: {labels: data.locations, datasets: [{...bar, data: data.location_values}]},
+    options: {...common, indexAxis: "y", scales: {
+      x: {grid: {color: rule, lineWidth: 1}, border: {display: false}, ticks: {callback: v => "$" + v}},
+      y: {grid: {display: false}, border: {color: rule}, ticks: {color: ink}}}},
+  });
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Catalog · Duke Dining Tracker{% endblock %}
+{% block main %}
+<div class="page-head reveal">
+  <h1>The <em>menu</em>, as you've seen it.</h1>
+  <p class="lede">Prices learned from your receipts and your answers. This is what in-person charges are matched against.</p>
+</div>
+<div class="grid grid-2 reveal">
+  {% for loc, entries in by_loc.items() %}
+  <section class="receipt">
+    <div class="receipt-head"><h2 style="margin:0">{{ loc }}</h2><span class="stamp">{{ entries|length }} line{{ 's' if entries|length != 1 }}</span></div>
+    <ul class="lines">
+      {% for e in entries %}
+      <li class="{% if e.kind == 'addon' %}sub{% endif %}"><span class="name">{{ e.item }}{% if e.variants and e.kind == 'item' %} <span class="muted">({{ e.variants|join(' / ') }})</span>{% endif %}{% if e.source == 'user' %} <span class="stamp" style="transform:none;font-size:8px;padding:2px 4px">you added</span>{% endif %}</span>
+        <span class="dots"></span><span class="amt">{{ e.price_cents|money }} <span class="muted">×{{ e.times_seen }}</span></span></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% else %}
+  <p class="muted">No catalog yet. <a href="/upload">Import receipt emails</a> to build it.</p>
+  {% endfor %}
+</div>
+<section style="margin-top:40px" class="reveal">
+  <div class="page-head"><h2 style="font-size:28px">Community catalog <span class="stamp shared" style="font-size:10px;vertical-align:middle">shared</span></h2>
+    <p class="lede small">Anonymous prices other students chose to share: location, item, price, and how often it's been seen. No names, no times.</p></div>
+  {% if shared %}
+  <div class="table-wrap"><table>
+    <thead><tr><th>Location</th><th>Item</th><th class="num">Price</th><th class="num">Seen</th><th>Last seen</th></tr></thead>
+    <tbody>{% for e in shared %}<tr><td>{{ e.location }}</td><td>{{ e.item }}</td><td class="num">{{ e.base_price_cents|money }}</td><td class="num">{{ e.times_seen }}×</td><td class="when">{{ e.last_seen.strftime('%b') }} {{ e.last_seen.day }}</td></tr>{% endfor %}</tbody>
+  </table></div>
+  {% else %}<p class="muted">Nobody has shared prices yet.</p>{% endif %}
+</section>
+{% endblock %}

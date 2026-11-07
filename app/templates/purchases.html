@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Purchases · Duke Dining Tracker{% endblock %}
+{% block main %}
+<div class="page-head reveal">
+  <h1>Every <em>swipe</em>, explained.</h1>
+  <p class="lede">Each row is one purchase. Splits across Food accounts and voided retries are already combined.</p>
+</div>
+<nav class="actions reveal" style="margin-bottom:16px" aria-label="Filter">
+  <a class="btn {% if show != 'food' %}ghost{% endif %}" href="/purchases">Food</a>
+  <a class="btn {% if show != 'review' %}ghost{% endif %}" href="/purchases?show=review">Needs review</a>
+  <a class="btn {% if show != 'all' %}ghost{% endif %}" href="/purchases?show=all">Everything</a>
+</nav>
+<div class="table-wrap reveal">
+  <table>
+    <thead><tr><th>When</th><th>Where</th><th>What you got</th><th>Status</th><th class="num">Amount</th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+      {% set st = r.match.status if r.match else '' %}
+      <tr class="{% if st == 'not_food' %}dim{% endif %}">
+        <td class="when">{{ r.group.when|when }}</td>
+        <td>{{ r.place }}<div class="mono small muted">{{ r.group.channel }}{% if r.group.n_rows > 1 %} · {{ r.group.n_rows }} rows{% endif %} · ••{{ r.group.card_last4 }}</div></td>
+        <td>{{ r.what }}{% if r.reviewable %} <a class="mono small" href="/review?group_id={{ r.group.id }}">{{ 'change' if st in ('unique', 'user_confirmed') else 'answer' }}</a>{% endif %}</td>
+        <td><span class="stamp {{ st }}">{{ r.label }}</span></td>
+        <td class="num">{{ r.group.spent_cents|money }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="5" class="muted">Nothing here. {% if show == 'review' %}You're all caught up.{% else %}<a href="/upload">Import some data</a>.{% endif %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

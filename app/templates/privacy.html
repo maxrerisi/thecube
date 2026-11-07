@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Privacy · Duke Dining Tracker{% endblock %}
+{% block main %}
+<div class="page-head reveal">
+  <h1>Your data, <em>your call</em>.</h1>
+</div>
+<div class="grid grid-2 reveal">
+  <section class="receipt">
+    <h3>What we keep</h3>
+    <ul class="lines" style="font-family:var(--sans);font-size:15px;line-height:1.7">
+      <li>• What's on your receipts: place, time, items, prices, how you paid.</li>
+      <li>• Your eAccounts rows: time, account, place, amount, and the <strong>last 4 digits</strong> of the card.</li>
+      <li>• Your answers in the review queue.</li>
+    </ul>
+    <h3 style="margin-top:22px">What we never do</h3>
+    <ul class="lines" style="font-family:var(--sans);font-size:15px;line-height:1.7">
+      <li>• Ask for, store, or use your NetID password.</li>
+      <li>• Log in to eAccounts, Transact, or any Duke system for you, or scrape them.</li>
+      <li>• Run analytics or third-party trackers.</li>
+    </ul>
+  </section>
+  <section class="receipt">
+    <h3>Delete everything</h3>
+    <h2>Start over, for real</h2>
+    <p class="muted">This permanently deletes your receipts, transactions, answers, and catalog from this app's database. It can't be undone.
+      Prices you chose to share with the community catalog stay there: they were never linked to you, so there's nothing to trace back.</p>
+    {% if request.query_params.get('error') %}<div class="notice" role="alert">Type DELETE to confirm.</div>{% endif %}
+    <form method="post" action="/privacy/delete" style="margin-top:14px">
+      <div class="field"><label for="confirm">Type DELETE to confirm</label>
+        <input type="text" id="confirm" name="confirm" autocomplete="off" style="max-width:220px"></div>
+      <button class="btn danger" type="submit">Delete all my data</button>
+    </form>
+  </section>
+</div>
+{% endblock %}
