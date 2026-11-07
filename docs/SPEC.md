@@ -305,6 +305,16 @@ Then:
    Bias `protein` → protein weight 1.6. Bias `cheap` → price weight 3.0.
 6. Return the top 3 across at least 2 vendors when possible.
 
+Implementation notes (T9, 2026-11-07; `app/core/optimizer.py`, templates in `seed/templates.json`):
+- **Vegan counts as Halal and Vegetarian.** NetNutrition tags Halal only on meats, so a
+  literal "every component carries halal" removed every bowl (rice, salsa are Vegan only).
+- A pick must cover ≥ 30% of the per-meal calorie target (otherwise an over-budget user
+  is offered a $3 yogurt cup as a "meal").
+- Bias `protein` penalizes only falling short of the protein target, not exceeding it.
+- At most one pick per template per vendor (picks differ by more than the protein).
+- Vendor hours are real (NetNutrition `Unit/GetHoursOfOperationMarkup`), seeded in
+  `seed/aliases.json`.
+
 ## 11. Coach (`app/coach/`)
 
 Same as before; unchanged in spirit:
