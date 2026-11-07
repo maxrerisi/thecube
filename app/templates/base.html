@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Duke Dining Tracker{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="masthead">
+    <div class="inner">
+      <a class="wordmark" href="/"><b>Duke Dining</b><small>Food Points, itemized</small></a>
+      <nav class="nav" aria-label="Main">
+        <a href="/" {% if active == 'dashboard' %}aria-current="page"{% endif %}>Dashboard</a>
+        <a href="/review" {% if active == 'review' %}aria-current="page"{% endif %}>Review{% include "_nav_badge.html" %}</a>
+        <a href="/purchases" {% if active == 'purchases' %}aria-current="page"{% endif %}>Purchases</a>
+        <a href="/catalog" {% if active == 'catalog' %}aria-current="page"{% endif %}>Catalog</a>
+        <a href="/upload" {% if active == 'upload' %}aria-current="page"{% endif %}>Import</a>
+        <a href="/privacy" {% if active == 'privacy' %}aria-current="page"{% endif %}>Privacy</a>
+      </nav>
+    </div>
+  </header>
+  <main>{% block main %}{% endblock %}</main>
+  <footer>
+    Your data stays in this app's database. No passwords, no scraping, no tracking.
+    Card numbers are kept as the last 4 digits only.
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+datetime,account,card_last4,location,type,amount
+9/13/2026 3:00 PM,Food,2222,Farmstead FARReg1,Debit,-10.75
+9/12/2026 5:30 PM,Food,2222,Commons COMReg1,Debit,-7.77
+9/12/2026 4:00 PM,ePrint,2222,General ePrint ePr-OIT-PerkinsLX,Debit,-0.56
+9/11/2026 12:30 PM,Food,2222,Gothic Grill GOTReg1,Debit,-10.75
+9/10/2026 1:10 PM,Food,2222,Il Forno ILFReg1,Debit,-12.90
+9/10/2026 10:00 AM,Food,2222,Lobby Shop 7200-28-NET-LS,Debit,-3.86
+9/9/2026 6:31 PM,Food,1111,Its Thyme THYWeb1,Debit,-0.10
+9/9/2026 6:20 PM,Food,2222,Its Thyme THYKsk1,Credit,0.10
+9/9/2026 6:20 PM,Food,2222,Its Thyme THYKsk1,Debit,-0.10
+9/8/2026 1:01 PM,Food,1111,Il Forno ILFWeb1,Debit,-12.90
+9/7/2026 9:00 PM,Food,2222,Vending - Coke VC - Aycock,Debit,-2.50
+9/6/2026 1:02 PM,Food,1111,Il Forno ILFWeb1,Debit,-12.90
+9/5/2026 2:01 PM,Food,1111,McDonalds MCDWeb1,Debit,-8.37
+9/3/2026 9:31 AM,Food,1111,Skillet SKIWeb1,Debit,-4.28
+9/2/2026 1:06 PM,Food - Orientation,1111,Gothic Grill GOTWeb1,Debit,-4.75
+9/2/2026 1:06 PM,Food,1111,Gothic Grill GOTWeb1,Debit,-6.00
+9/1/2026 12:16 PM,Food,1111,Sazon SAZWeb1,Debit,-14.07
+8/20/2026 3:39 PM,Food - Orientation,1111,DukeCard Offices Cust Srvc Man 4,Credit,25.00
+8/20/2026 11:39 AM,Food,1111,DukeCard Offices DCO TelOfc Manual,Credit,500.00
+8/19/2026 9:00 AM,Food,2222,Vending - Pepsi VP - Southgate,Debit,-1.00

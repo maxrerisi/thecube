@@ -1,0 +1,37 @@
+From: Transact Mobile Ordering <mobileorder@transactcampus.com>
+To: student@example.edu
+Subject: #900000009 Receipt
+Date: Thu, 10 Sep 2026 18:02:00 -0400
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="BOUNDARY"
+
+--BOUNDARY
+Content-Type: text/plain; charset="utf-8"
+
+Your receipt is best viewed in an HTML-capable email client.
+
+--BOUNDARY
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><style>td {font-family: Arial;}</style><title>Receipt</title></head>
+<body><p>Hi Alex,</p><p>Thanks for your order!</p>
+<table>
+<tr><td>2026-09-10 6:00 PM</td></tr>
+<tr><td>Target: 6:15 PM</td></tr>
+<tr><td><b>Ginger &amp; Soy</b></td></tr>
+<tr><td>Brodhead Center</td></tr>
+<tr><td>1. Fried Dumplings</td><td>$7.99</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chili Oil</td><td>$0.50</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extra Napkins</td></tr>
+<tr><td>Subtotal</td><td>$8.49</td></tr>
+<tr><td>Tax</td><td>$0.64</td></tr>
+<tr><td>Total</td><td>$9.13</td></tr>
+<tr><td>DukeCard</td></tr>
+<tr><td>Student Food</td><td>$9.13</td></tr>
+</table>
+<p>Cutlery Needed</p>
+<p style=3D"color:#999">Powered by Transact</p>
+</body></html>
+
+--BOUNDARY--

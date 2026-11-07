@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Import · Duke Dining Tracker{% endblock %}
+{% block main %}
+<div class="page-head reveal">
+  <h1>Bring your <em>receipts</em>.</h1>
+  <p class="lede">Mobile-order receipt emails tell us what you ordered. The eAccounts table tells us where every
+    Food Point went. Import either or both, as often as you like: nothing gets counted twice.</p>
+</div>
+
+<form id="import-form" hx-post="/upload" hx-target="#summary" hx-swap="innerHTML" hx-encoding="multipart/form-data"
+      method="post" action="/upload" enctype="multipart/form-data">
+  <div class="grid grid-2 reveal">
+    <section class="receipt">
+      <div class="receipt-head">
+        <div><h3>Step 1</h3><h2>Receipt emails</h2></div>
+        <span class="stamp">from Transact</span>
+      </div>
+      <div class="field">
+        <label class="drop" id="drop-receipts" for="receipt_files">
+          <strong>Drop .eml files here</strong><br>
+          <span class="small muted">Drag emails out of Outlook or Mail. Subject looks like <span class="mono">#133698646 Receipt</span>.</span>
+          <input type="file" id="receipt_files" name="receipt_files" multiple accept=".eml,.txt,message/rfc822,text/plain">
+        </label>
+      </div>
+      <div class="field">
+        <label for="receipt_text">…or paste a receipt</label>
+        <p class="hint">Open the email, select all, and paste. Several at once is fine.</p>
+        <textarea id="receipt_text" name="receipt_text" placeholder="2026-11-05 2:21 PM&#10;Gothic Grill&#10;Bryan Center&#10;1. Turkey Club Wrap&#10;$12.85&#10;…"></textarea>
+      </div>
+    </section>
+
+    <section class="receipt">
+      <div class="receipt-head">
+        <div><h3>Step 2</h3><h2>eAccounts transactions</h2></div>
+        <span class="stamp">from eAccounts</span>
+      </div>
+      <div class="field">
+        <label for="eaccounts_text">Paste the transactions table</label>
+        <p class="hint">On eAccounts → Account Transactions, select the whole table (header and all), copy, and paste here.</p>
+        <textarea id="eaccounts_text" name="eaccounts_text" placeholder="Date/Time&#9;Account Name&#9;Card Number&#9;Location&#9;Transaction Type&#9;Amount&#10;11/5/2026 2:21 PM&#9;Food&#9;…&#9;Gothic Grill GOTWeb1&#9;Debit&#9;(13.81) USD"></textarea>
+      </div>
+      <div class="field">
+        <label for="eaccounts_file">…or upload a CSV</label>
+        <input type="file" id="eaccounts_file" name="eaccounts_file" accept=".csv,text/csv">
+      </div>
+      <div class="field">
+        <label for="balance">Current Food balance (optional)</label>
+        <p class="hint">The balance eAccounts shows right now. We use it to check your import is complete.</p>
+        <input type="text" inputmode="decimal" id="balance" name="balance" placeholder="433.24" style="max-width:180px">
+      </div>
+    </section>
+
+    <div class="span-2">
+      <label class="check" for="share">
+        <input type="checkbox" id="share" name="share" value="true" {% if user.share_catalog %}checked{% endif %}>
+        <span><strong>Share my prices with the community catalog.</strong>
+          <span class="muted">Only place, item, price, and the day it was first and last seen. No name, no card, no times.
+          It helps other students' in-person charges get matched. Shared prices stay even if you delete your data later,
+          because they can't be traced back to you.</span></span>
+      </label>
+    </div>
+    <div class="span-2 actions">
+      <button class="btn" type="submit">Import &amp; match →</button>
+      <span class="htmx-indicator mono small">Matching…</span>
+      <span class="muted small mono">In your records: {{ n_receipts }} receipts · {{ n_transactions }} transactions</span>
+    </div>
+  </div>
+</form>
+
+<section id="summary" aria-live="polite" style="margin-top:28px">
+  {% if summary %}{% include "_summary.html" %}{% endif %}
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  // drag & drop onto the receipts box fills the file input
+  const drop = document.getElementById("drop-receipts"), input = document.getElementById("receipt_files");
+  ["dragenter", "dragover"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave", "drop"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", ev => { input.files = ev.dataTransfer.files; });
+  document.body.addEventListener("htmx:afterRequest", ev => {
+    if (ev.detail.elt.id === "import-form" && ev.detail.successful) ev.detail.elt.reset();
+  });
+</script>
+{% endblock %}

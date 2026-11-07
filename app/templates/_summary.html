@@ -1,0 +1,23 @@
+<div class="receipt flat reveal" id="import-summary">
+  <div class="receipt-head">
+    <div><h3>Import summary</h3><h2>{% if nothing %}Nothing to import{% else %}Done. Here's what changed.{% endif %}</h2></div>
+    {% if not nothing %}<span class="stamp ok">imported</span>{% endif %}
+  </div>
+  {% if nothing %}
+    <p class="muted">Add receipt emails, pasted text, or your eAccounts table above, then import.</p>
+  {% else %}
+  <div class="tally">
+    <div><div class="n">{{ r.new if r else 0 }}</div><div class="k">new receipts{% if r and r.duplicate %}<br>{{ r.duplicate }} already had{% endif %}</div></div>
+    <div><div class="n">{{ e.new if e else 0 }}</div><div class="k">new transactions{% if e and e.duplicate %}<br>{{ e.duplicate }} already had{% endif %}</div></div>
+    <div><div class="n {% if need_review %}alert{% endif %}">{{ need_review }}</div><div class="k">need your review</div></div>
+  </div>
+  {% set errs = (r.errors if r else []) + (e.errors if e else []) %}
+  {% set warns = (r.warnings if r else []) + (e.warnings if e else []) %}
+  {% if errs %}<div class="notice"><strong>Couldn't read some input:</strong><ul>{% for x in errs %}<li>{{ x }}</li>{% endfor %}</ul></div>{% endif %}
+  {% if warns %}<div class="notice"><strong>Imported, but the math doesn't add up on:</strong><ul>{% for x in warns %}<li>{{ x }}</li>{% endfor %}</ul></div>{% endif %}
+  <div class="actions" style="margin-top:18px">
+    {% if need_review %}<a class="btn" href="/review">Review {{ need_review }} charge{{ 's' if need_review != 1 }} →</a>{% endif %}
+    <a class="btn {% if need_review %}ghost{% endif %}" href="/">See dashboard</a>
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,149 @@
+# Synthetic receipts (invented data) in the receipts_raw.txt transcription format.
+=== #900000001
+2026-09-01 12:15 PM
+Sazon
+Brodhead Center
+1. Burrito Bowl
+        White Rice
+     Pulled Pork
+$11.50
+        Black Beans
+        Guacamole
+$1.59
+        Pico de Gallo
+Subtotal
+$13.09
+Tax
+$0.98
+Total
+$14.07
+DukeCard
+Student Food
+$14.07
+=== #900000002
+2026-09-02 1:05 PM
+Target: 1:20 PM
+Gothic Grill
+
+Bryan Center
+125 Science Dr, Durham, NC 27708
+(919) 555-0100
+1. Smash Burger
+$10.00
+
+        No Onions
+Subtotal
+$10.00
+Tax
+$0.75
+Total
+$10.75
+DukeCard
+Student Food
+$10.75
+Cutlery Needed
+BAG ITEMS - TO-GO
+=== #900000003
+2026-09-03 9:30 AM
+The Skillet
+Brodhead Center
+1. Breakfast Plate
+$10.08
+Subtotal
+$10.08
+Tax
+$0.30
+Total
+$10.38
+DukeCard
+Board Plan Equivalency $6.10
+1 Used - $6.10
+Student Food
+$4.28
+=== #900000004
+2026-09-04 8:45 AM
+Cafe
+Brodhead Center
+1. Bagel
+$3.50
+2. Iced Coffee
+        Large
+$4.00
+Subtotal
+$7.50
+Tax
+$0.56
+Total
+$8.06
+Visa ****4242
+$8.06
+=== #900000005
+2026-09-05 2:00 PM
+McDonald's
+Bryan Center
+1. Meal Deal
+     McChicken
+$5.00
+     Small Fry
+     Large Fountain Drink
+$0.80
+2. Fountain Drink
+     Medium Fountain Drink
+$1.99
+Subtotal
+$7.79
+Tax
+$0.58
+Total
+$8.37
+DukeCard
+Student Food
+$8.37
+=== #900000006
+2026-09-06 1:00 PM
+Il Forno
+Brodhead Center
+1. Meatballs & Spaghetti
+$12.00
+        Breadstick
+Subtotal
+$12.00
+Tax
+$0.90
+Total
+$12.90
+DukeCard
+Student Food
+$12.90
+=== #900000007
+2026-09-08 1:00 PM
+Il Forno
+Brodhead Center
+1. Chicken Alfredo
+$12.00
+Subtotal
+$12.00
+Tax
+$0.90
+Total
+$12.90
+DukeCard
+Student Food
+$12.90
+=== #900000008
+2026-09-09 6:30 PM
+Its Thyme
+Bryan Center
+1. Acai Bowl
+$11.89
+Subtotal
+$11.89
+Tax
+$0.01
+Total
+$11.90
+DukeCard
+Board Plan Equivalency $11.80
+1 Used - $11.80
+Student Food
+$0.10
