@@ -24,3 +24,6 @@ ios/Config/Secrets.xcconfig
 xcuserdata/
 DerivedData/
 *.xcuserstate
+
+# Local-only notes (deploy steps, secrets)
+docs/RUNBOOK.md
