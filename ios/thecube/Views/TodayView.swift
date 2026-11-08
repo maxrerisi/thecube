@@ -15,6 +15,7 @@ struct TodayView: View {
                         Section { CoachCardView(card: c) }
                     }
                     Section { RingsRow(today: t) }
+                    Section { HungryEntry() }
                     EatNextSection(mealCount: t.meals.count)
                     Section("Points") { PointsCard(points: t.points, semesterEnd: t.semesterEnd) }
                     Section("Today's meals") {
@@ -222,6 +223,30 @@ struct MealRow: View {
     }
 }
 
+/// Entry card for Feeling hungry (its own section, like Wrapped: a button row inside the Eat
+/// next section didn't register taps).
+struct HungryEntry: View {
+    @Environment(AppState.self) private var app
+
+    var body: some View {
+        Button { app.showHungry = true } label: {
+            HStack(spacing: 12) {
+                PixelDevil(mood: app.mood, size: 36)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Feeling hungry?").font(.headline)
+                    Text("Tap and the devil cooks you a pick").font(.caption).foregroundStyle(.secondary)
+                }
+                Spacer()
+                Image(systemName: "frying.pan.fill").foregroundStyle(.orange)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .listRowBackground(
+            LinearGradient(colors: [Color.orange.opacity(0.22), Color.red.opacity(0.14)], startPoint: .leading, endPoint: .trailing))
+    }
+}
+
 /// Entry card for the semester recap story.
 struct WrappedEntry: View {
     @Environment(AppState.self) private var app
@@ -237,6 +262,7 @@ struct WrappedEntry: View {
                 Spacer()
                 Image(systemName: "chevron.right").foregroundStyle(.tertiary)
             }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .listRowBackground(

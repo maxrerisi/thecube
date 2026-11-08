@@ -21,6 +21,7 @@ from app.ingest.matcher import FORMAT_WORD
 TEMPLATES = Path(__file__).resolve().parents[2] / "seed" / "templates.json"
 TAX = 0.075
 CAP_PER_VENDOR = 200
+MIN_MEAL_PROTEIN, MIN_MEAL_CAL = 20.0, 400.0  # scoring floor when today's targets are already met
 MIN_MEAL_SHARE = 0.3       # a pick must cover >= 30% of the per-meal calorie target (no yogurt-cup "meals")
 MAX_COMPONENT_CAL = 1500  # skip "Batch"-sized labels (It's Thyme White Rice: 8,500 cal)
 MACRO_KEYS = ("calories", "protein_g", "carbs_g", "fat_g")
@@ -202,6 +203,9 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
     meals_left = 1 if at.hour >= 17 else 2
     p_t = max(s.targets.protein_g - eaten["protein_g"], 0) / meals_left
     c_t = max(s.targets.calories - eaten["calories"], 0) / meals_left
+    # Score against at least a real meal's worth: once today's targets are met, a 0 target would
+    # make sauces and sides the "best" picks. The displayed per-meal target stays the true one.
+    p_s, c_s = max(p_t, MIN_MEAL_PROTEIN), max(c_t, MIN_MEAL_CAL)
     pts = budget.status(conn, user_id, s.semester_end, today, s.meal_plan)
     headroom = None if pts.daily_budget is None else pts.daily_budget - pts.spent_today
     ref_price = max((pts.daily_budget or 24.0) / 2, 8.0)  # a typical meal for this budget
@@ -229,8 +233,8 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
             c["points_cost"] = round(c["price"] * (1 + TAX), 2)
             c.update(vendor_id=v["id"], vendor=v["name"],
                      opens_at=None if not fallback else hours.opens_within(v["hours"], at, __import__("datetime").timedelta(hours=2)).isoformat())
-            c["score"] = round(score(c, p_t, c_t, headroom, hist.get(v["id"], 0) / n_orders, bias, ref_price), 4)
-        vc = [c for c in vc if c["calories"] >= MIN_MEAL_SHARE * c_t]
+            c["score"] = round(score(c, p_s, c_s, headroom, hist.get(v["id"], 0) / n_orders, bias, ref_price), 4)
+        vc = [c for c in vc if c["calories"] >= MIN_MEAL_SHARE * c_s]
         cands += sorted(vc, key=lambda c: -c["score"])[:CAP_PER_VENDOR]
     picks = pick_top(cands)
     if not s.show_calories:

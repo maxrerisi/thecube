@@ -80,30 +80,20 @@ struct RootView: View {
 /// Back). Tap: it says how things are going and offers Feeling hungry / Wrapped.
 struct DevilToolbar: ToolbarContent {
     @Environment(AppState.self) private var app
-    @State private var talking = false
 
+    // Static sprite: an animating label rebuilt the bar button every frame and dropped taps.
+    // A native Menu: the sheet/popover versions couldn't reliably hand off to the full-screen covers.
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button { talking = true } label: { PixelDevil(mood: app.mood, size: 30) }
-                .sensoryFeedback(.impact(weight: .light), trigger: talking)
-                .popover(isPresented: $talking) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack(alignment: .top, spacing: 10) {
-                            PixelDevil(mood: app.mood, size: 40)
-                            Text(app.mood.line).font(.subheadline).fixedSize(horizontal: false, vertical: true)
-                        }
-                        Button { talking = false; app.showHungry = true } label: {
-                            Label("Feeling hungry?", systemImage: "frying.pan")
-                        }
-                        Button { talking = false; app.showWrapped = true } label: {
-                            Label("My Fall 2026 Wrapped", systemImage: "sparkles")
-                        }
-                    }
-                    .padding()
-                    .frame(width: 280)
-                    .presentationCompactAdaptation(.popover)
+            Menu {
+                Section(app.mood.line) {
+                    Button { app.showHungry = true } label: { Label("Feeling hungry?", systemImage: "frying.pan.fill") }
+                    Button { app.showWrapped = true } label: { Label("Your Wrapped", systemImage: "sparkles") }
                 }
-                .accessibilityLabel("Pitchfork devil")
+            } label: {
+                PixelDevil(mood: app.mood, size: 30, animated: false).padding(4).contentShape(Rectangle())
+            }
+            .accessibilityLabel("Pitchfork devil")
         }
         .sharedBackgroundVisibility(.hidden)
     }

@@ -235,51 +235,69 @@ struct MiniBar: View {
     }
 }
 
-/// Large: mini Today — rings, pace bar, top pick, today's meals as dots.
+/// Large: mini Today, one full-width band per idea, stacked (no side-by-side cramming):
+/// header, the two rings, protein-days dots, points pace, the next pick.
 struct LargeView: View {
     let e: Snapshot
+    private let pink = Color(red: 1, green: 0.35, blue: 0.5)
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack {
-                PixelDevil(mood: e.mood, size: 36, animated: false)
-                Text("Today").font(.title2.bold())
-                Spacer()
-                HStack(spacing: 4) {
-                    ForEach(e.today?.meals ?? [], id: \.id) { _ in Circle().fill(.orange).frame(width: 8, height: 8) }
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 10) {
+                PixelDevil(mood: e.mood, size: 34, animated: false)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Today").font(.title3.bold())
+                    Text(e.mood.line).font(.caption2).opacity(0.8).lineLimit(2)
                 }
+                Spacer(minLength: 0)
             }
-            HStack(spacing: 18) {
-                ring(e.protein, e.proteinTarget, "protein", Color(red: 1, green: 0.35, blue: 0.5))
+            Spacer(minLength: 8)
+            HStack {
+                Spacer()
+                ring(e.protein, e.proteinTarget, "g protein", pink)
+                Spacer()
                 if let c = e.today?.eaten.calories, let t = e.today?.targets.calories {
                     ring(c, Double(t), "calories", .orange)
-                }
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("\(e.today?.proteinHitDays7 ?? 0) of 7").font(.title3.bold())
-                    Text("days protein hit").font(.caption2).opacity(0.8)
+                    Spacer()
                 }
             }
+            Spacer(minLength: 8)
+            HStack(spacing: 6) {
+                let hit = e.today?.proteinHitDays7 ?? 0
+                ForEach(0..<7, id: \.self) { i in
+                    Circle().fill(i < hit ? pink : .white.opacity(0.22)).frame(width: 9, height: 9)
+                }
+                Text("protein hit \(hit) of last 7 days").font(.caption2).opacity(0.85).padding(.leading, 4)
+            }
+            Spacer(minLength: 8)
             if let pts = e.today?.points, let p = pts.points, let target = pts.paceTarget {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 5) {
                     HStack {
-                        Text("Plan \(pts.mealPlan ?? "") pace").font(.caption.weight(.semibold))
+                        Text("Points pace").font(.caption.weight(.semibold))
                         Spacer()
                         Text(pts.vsPace.map { $0 < 0 ? String(format: "%.0f behind", -$0) : String(format: "%.0f ahead", $0) } ?? "")
-                            .font(.caption.weight(.semibold).monospacedDigit())
+                            .font(.caption.weight(.bold).monospacedDigit())
+                            .foregroundStyle((pts.vsPace ?? 0) < 0 ? .orange : .green)
                     }
-                    PaceBar(points: p, paceTarget: target, height: 9)
+                    PaceBar(points: p, paceTarget: target, height: 10)
                     Text(pts.runout.map { "Runs out \(Fmt.day($0))" } ?? "Lasts the semester")
-                        .font(.caption2).foregroundStyle(pts.runout == nil ? .green : .orange)
+                        .font(.caption2).opacity(0.85)
                 }
             }
+            Spacer(minLength: 8)
             if let pick = e.pick {
-                HStack {
+                HStack(spacing: 10) {
                     Image(systemName: "star.fill").foregroundStyle(.orange)
-                    VStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text("Eat next").font(.caption2.weight(.heavy)).foregroundStyle(.orange)
                         Text(pick.title).font(.subheadline.weight(.semibold)).lineLimit(1)
                         Text("\(pick.vendor) · \(Int(pick.proteinG.rounded())) g · \(String(format: "%.2f", pick.pointsCost)) pts")
-                            .font(.caption2).opacity(0.8)
+                            .font(.caption2).opacity(0.8).lineLimit(1)
                     }
+                    Spacer(minLength: 0)
                 }
+                .padding(10)
+                .background(.white.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
             }
         }
         .foregroundStyle(.white)
@@ -287,13 +305,16 @@ struct LargeView: View {
     }
 
     private func ring(_ v: Double, _ t: Double, _ label: String, _ c: Color) -> some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 5) {
             ZStack {
-                ProteinRing(value: v, target: t, width: 8, color: c)
-                Text("\(Int(v.rounded()))").font(.caption.weight(.bold).monospacedDigit())
+                ProteinRing(value: v, target: t, width: 10, color: c)
+                VStack(spacing: 0) {
+                    Text("\(Int(v.rounded()))").font(.headline.monospacedDigit())
+                    Text("/ \(Int(t))").font(.caption2).opacity(0.7)
+                }
             }
-            .frame(width: 58, height: 58)
-            Text(label).font(.caption2).opacity(0.8)
+            .frame(width: 84, height: 84)
+            Text(label).font(.caption2).opacity(0.85)
         }
     }
 }

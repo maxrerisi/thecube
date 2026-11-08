@@ -43,9 +43,10 @@ Today refreshes every 5 seconds, so a forwarded receipt shows up while you watch
 
 ### The devil, Feeling hungry, Wrapped, widgets
 - **Pixel devil** (top-right of every tab): its mood is computed from Today: sleepy before the
-  first meal, happy once protein is hit, sweating when behind on points. Tap it for a one-line
-  status and shortcuts.
-- **Feeling hungry?** Our "I'm feeling lucky": hold the button, the devil stirs a pot (haptics
+  first meal, happy once protein is hit, sweating when behind on points. Tap it for a menu with its one-line
+  status and shortcuts to Feeling hungry and Wrapped.
+- **Feeling hungry?** Our "I'm feeling lucky": tap or hold the pan (a card on Today, or
+  the devil menu), the devil stirs a pot (haptics
   speed up), the lid pops and a meal card flips over with its macros counting up. Swipe left for
   another, right for "Let's go". The cards are the optimizer's picks for all three goals.
 - **Wrapped:** a Spotify-style story of the semester so far: dining days, meals, your spot, your
@@ -137,5 +138,5 @@ A made-up student so the demo has a story. Real menus and prices, invented histo
 
 Name **Pitchfork** (a devil's pitchfork is also a fork). Logo: "W/U" (WU, Duke's main dining
 hall) in Garamond Bold with a code-drawn pitchfork as the slash, on Duke blue
-(`design/logo_fork.svg` + `design/make_logo.sh`). Mascot: a 14×13 pixel Blue Devil drawn from
+(`design/logo_fork.svg` + `design/make_logo.sh`). Mascot: a 16×18 pixel Blue Devil holding a pitchfork, drawn from
 strings in code (`ios/Shared/PixelDevil.swift`), no image assets.

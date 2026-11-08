@@ -71,7 +71,7 @@ struct HungryView: View {
             Spacer()
             KitchenScene(mood: app.mood, pressStart: pressStart, holdSeconds: holdSeconds, lidPopped: lidPopped)
                 .frame(height: 260)
-            Text(pressStart == nil ? "Hold to cook up your next meal" : "Cooking...")
+            Text(pressStart == nil ? "Tap or hold the pan to cook" : "Cooking...")
                 .font(.title3.weight(.semibold))
             ZStack {
                 Circle().stroke(.white.opacity(0.25), lineWidth: 10)
@@ -114,8 +114,13 @@ struct HungryView: View {
                 }
             }
         } else if !cooked {
-            pressStart = nil
-            withAnimation(.easeOut(duration: 0.25)) { progress = 0 }
+            // A tap or early release still cooks: finish the stir on its own (people didn't
+            // know to hold). Holding is just the fun way, with the haptics.
+            let held = Date().timeIntervalSince(pressStart ?? .now)
+            let left = max(0.6, holdSeconds - held)
+            if pressStart == nil { pressStart = .now }
+            withAnimation(.linear(duration: left)) { progress = 1 }
+            DispatchQueue.main.asyncAfter(deadline: .now() + left) { if !cooked { cookDone() } }
         }
     }
 

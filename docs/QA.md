@@ -82,7 +82,7 @@ rehearsal of the demo (forward → Today → picks → restrictions → log → 
 
 ## Delight features
 
-**What's Feeling hungry?** Our "I'm feeling lucky": hold to cook, a pick flips over, swipe for
+**What's Feeling hungry?** Our "I'm feeling lucky": tap (or hold) the pan, a pick flips over, swipe for
 another. Same optimizer picks, just a faster way to decide when you don't care which goal.
 
 **Is Wrapped made up by the AI?** No. Every stat (meals, top spot, signature order, protein,
