@@ -14,7 +14,7 @@ cards to A.
 
 | Time | Who | Screen | Say |
 | --- | --- | --- | --- |
-| 0:00–0:20 | A | Slide 1 (title) | "Hands up if you've run out of food points before finals, or come close." Pause. "Duke puts menus in one place and your balance in another. Nothing tells you if you'll make it." |
+| 0:00–0:20 | A | Slide 1 (title) | "Hands up if you know whether your food points will last until December 14." (pause) "First semester, nobody does. You find out during finals." Pause. "Duke puts menus in one place and your balance in another. Nothing tells you if you'll make it." |
 | 0:20–0:50 | A | Slide 2 (receipt → app) | "Pitchfork: forward your Duke receipt email. We log the meal with Duke's own nutrition data, check your points against the Registrar calendar, and tell you what to eat next. No Duke login, nothing scraped from your account." |
 | 0:50–2:40 | B | Slide 3 dark → simulator | Live demo, 1:50, beats below. A says nothing. |
 | 2:40–3:15 | A | Slide 4 (numbers) | "Every number is computed by code. The AI only writes the sentences, and any sentence with a number we didn't compute is thrown out. 527 real Duke dishes, 31 of 31 real receipts read right, zero Duke logins, and the real Fall 2026 calendar: 104 dining days, breaks skipped. 63 automated tests." |
