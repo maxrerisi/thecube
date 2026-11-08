@@ -249,6 +249,11 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
     fallback = not cands
     if fallback:
         cands = candidates([v for v in vendors if hours.opens_within(v["hours"], at, timedelta(hours=2))], soon=True)
+    elif len({c["vendor_id"] for c in cands}) < 2:
+        # One place open (Sunday 10:30: only The Skillet): also offer places opening within the
+        # hour, labeled with their opening time, so the tabs aren't all the same breakfast.
+        cands += candidates([v for v in vendors if hours.opens_within(v["hours"], at, timedelta(hours=1))
+                             and not hours.is_open(v["hours"], at)], soon=True)
     picks = pick_top(cands)
     if not s.show_calories:
         for p in picks:
