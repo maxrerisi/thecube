@@ -1,8 +1,10 @@
 import SwiftUI
+import WidgetKit
 
 @main
 struct thecubeApp: App {
     @State private var app = AppState()
+    @Environment(\.scenePhase) private var phase
 
     var body: some Scene {
         WindowGroup {
@@ -10,6 +12,11 @@ struct thecubeApp: App {
                 .environment(app)
                 .task { await app.loadUsers() }
                 .onOpenURL { app.open($0) }
+        }
+        // Leaving the app (going home to the widgets): redraw them with the latest picks now,
+        // not on their own 15-minute schedule.
+        .onChange(of: phase) { _, p in
+            if p != .active { WidgetCenter.shared.reloadAllTimelines() }
         }
     }
 }

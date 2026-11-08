@@ -1,4 +1,5 @@
 import SwiftUI
+import WidgetKit
 
 /// SPEC 13 Today: coach card; protein + calorie rings; what to eat next; points, swipes, daily budget, run-out
 /// date; today's meals. Pull to refresh, swipe to delete, polls /today every 5 s while visible.
@@ -43,7 +44,7 @@ struct TodayView: View {
             .task(id: "\(app.userId)-\(app.dataVersion)") {
                 while !Task.isCancelled {
                     await vm.load(userId: app.userId)
-                    if let t = vm.today, app.today != t { app.today = t }
+                    if let t = vm.today, app.today != t { app.today = t; WidgetCenter.shared.reloadAllTimelines() }
                     try? await Task.sleep(for: .seconds(5))
                 }
             }
