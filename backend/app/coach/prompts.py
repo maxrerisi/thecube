@@ -23,7 +23,9 @@ Rules:
 RECAP_INSTRUCTIONS = """Write today's recap card for this student from the input.
 tone: "praise" if they are on track (protein target reached or close, points on pace),
 "warning" if points will run out before the semester ends, otherwise "nudge".
-Mention the most useful single next step."""
+message: at most two short, grammatical sentences (under 180 characters total) and at most
+three numbers. Say what happens at this pace, then the single most useful next step (if
+spend_less_per_day_to_last is given, that is the step). headline: a few plain words."""
 
 PICK_INSTRUCTIONS = """The app ranked meal options for the student's next meal; option index 0 is the
 app's top pick for the selected tab (bias). Explain in one or two sentences why option 0 fits

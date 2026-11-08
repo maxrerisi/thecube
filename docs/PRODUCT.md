@@ -36,7 +36,9 @@ Top to bottom:
    Picks respect diet and allergen settings (e.g. halal, no peanut), and only places that are
    open now (or opening within 2 hours).
 4. **Points.** Points left, swipes left, daily budget, spent today, 7-day average, run-out
-   date, and **Plan pace**: where an even spend of your meal plan would leave you today.
+   date, and **Plan pace**: where an even spend of your meal plan would leave you today. When
+   points would run out early, one orange line says the fix: "Spend 4.56 less a day and your
+   points last through Dec 14" (7-day average minus daily budget).
 5. **Today's meals.** Each meal with vendor, items, protein, calories and points. Swipe to delete.
 
 Today refreshes every 5 seconds. A forwarded receipt is logged on the day it was bought (the
@@ -64,7 +66,8 @@ items, type the points you paid, save. It shows up on Today.
 
 ### Settings
 Goal (build muscle / maintain / lose), protein and calorie targets, diet and allergen
-filters, show calories on/off, meal plan (A–J), and points/swipes balance.
+filters, show calories on/off, meal plan (A–J), points/swipes balance, and the address to
+forward receipts to (with a copy button).
 
 ## Where every number comes from
 

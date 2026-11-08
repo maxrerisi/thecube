@@ -29,3 +29,4 @@ DerivedData/
 docs/RUNBOOK.md
 ios/build/
 ios/build-device/
+ios/build-sim/

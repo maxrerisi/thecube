@@ -242,6 +242,14 @@ def _pace_facts(pts: dict) -> dict:
             **({"behind_pace_by": gap} if pts["vs_pace"] < 0 else {"ahead_of_pace_by": gap})}
 
 
+def _cut_facts(pts: dict) -> dict:
+    """How much less a day makes the points last (trailing spend minus the daily budget)."""
+    if pts.get("trailing_daily") is None or pts.get("daily_budget") is None:
+        return {}
+    cut = round(pts["trailing_daily"] - pts["daily_budget"], 2)
+    return {"spend_less_per_day_to_last": cut} if cut > 0 else {}
+
+
 def recap_input(today: dict) -> dict:
     """Only what the card needs, numbers already computed by code (SPEC 11)."""
     pts = today["points"]
@@ -256,7 +264,7 @@ def recap_input(today: dict) -> dict:
             "trailing_daily": pts["trailing_daily"], "on_pace": pts["on_pace"],
             "runs_out_on": _words(pts["runout"]), "semester_ends_on": _words(today.get("semester_end")),
             "days_early": _days_between(pts["runout"], today.get("semester_end")),
-            **_pace_facts(pts)},
+            **_cut_facts(pts), **_pace_facts(pts)},
     }
     if today["show_calories"]:
         d["calories"], d["calorie_target"] = today["eaten"]["calories"], today["targets"]["calories"]

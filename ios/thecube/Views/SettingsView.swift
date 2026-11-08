@@ -5,6 +5,11 @@ struct SettingsView: View {
     @Environment(AppState.self) private var app
     @State private var vm = SettingsViewModel()
     @AppStorage("onboarded") private var onboarded = false
+    @State private var copied = false
+
+    private var inbound: String {
+        (Bundle.main.object(forInfoDictionaryKey: "INBOUND_EMAIL") as? String ?? "").trimmingCharacters(in: .whitespaces)
+    }
 
     var body: some View {
         NavigationStack {
@@ -23,6 +28,23 @@ struct SettingsView: View {
                     Text("Balance")
                 } footer: {
                     Text("From DukeCard / eAccounts. Spending after this is subtracted automatically.")
+                }
+                if !inbound.isEmpty {
+                    Section {
+                        Text(inbound).font(.callout.monospaced()).lineLimit(1).minimumScaleFactor(0.5)
+                            .textSelection(.enabled)
+                        Button {
+                            UIPasteboard.general.string = inbound
+                            copied = true
+                        } label: {
+                            Label(copied ? "Copied" : "Copy address", systemImage: copied ? "checkmark" : "doc.on.doc")
+                        }
+                        .sensoryFeedback(.success, trigger: copied)
+                    } header: {
+                        Text("Forward receipts to")
+                    } footer: {
+                        Text("Forward any Duke dining receipt here; it's logged on the day you bought it.")
+                    }
                 }
                 Section {
                     Button("Show welcome again") { onboarded = false }

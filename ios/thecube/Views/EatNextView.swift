@@ -31,7 +31,9 @@ struct EatNextSection: View {
                         .font(.subheadline)
                     }
                 } else {
-                    Text("Nothing open right now matches your settings.").foregroundStyle(.secondary)
+                    Text(r.openFallback ? "Everything's closed for the night. Picks come back when dining opens."
+                                        : "Nothing open right now matches your settings.")
+                        .foregroundStyle(.secondary)
                 }
             } else if vm.loading {
                 ProgressView().frame(maxWidth: .infinity)
@@ -74,7 +76,7 @@ struct TargetLine: View {
                     ForEach(r.avoidAllergens, id: \.self) { TraitChip(text: "no " + $0) }
                 }
             }
-            if result.openFallback {
+            if result.openFallback && !result.picks.isEmpty {
                 Text("Nothing is open now; showing places opening within 2 hours.")
                     .font(.caption).foregroundStyle(.secondary)
             }
