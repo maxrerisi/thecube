@@ -33,7 +33,7 @@ def loaded(client):  # client resets the test DB and seeds users
         if NN_JSON.exists():
             netnutrition.write_db(conn, json.loads(NN_JSON.read_text()))
         assert seed_vendors(conn) == []
-        william = conn.execute("SELECT id FROM users WHERE name = 'William'").fetchone()["id"]
+        william = conn.execute("SELECT id FROM users WHERE name = 'Blue Devil'").fetchone()["id"]
     return client, william
 
 

@@ -39,7 +39,8 @@ Top to bottom:
    date, and **Plan pace**: where an even spend of your meal plan would leave you today.
 5. **Today's meals.** Each meal with vendor, items, protein, calories and points. Swipe to delete.
 
-Today refreshes every 5 seconds, so a forwarded receipt shows up while you watch.
+Today refreshes every 5 seconds. A forwarded receipt is logged on the day it was bought (the
+date on the receipt), so a receipt from last week goes into last week, not today.
 
 ### The devil, Feeling hungry, Wrapped, widgets
 - **Pixel devil** (top-right of every tab): its mood is computed from Today: sleepy before the
@@ -116,7 +117,8 @@ A made-up student so the demo has a story. Real menus and prices, invented histo
 - Plan A, 839.54 points left, **135 behind an even pace**. At their 30.80/day average, points
   **run out Dec 9, the first day of finals**.
 - Goal: build muscle, 150 g protein; 74 g so far today; hit protein 2 of the last 7 days.
-- Any receipt forwarded to the app lands on Blue Devil (it's a one-user demo).
+- Blue Devil is the app's only account; any receipt forwarded to the app lands in Blue Devil's
+  log. The 31 real receipts are used only as a price list, so the meals cost what they really cost.
 
 ## Rules we hold ourselves to
 

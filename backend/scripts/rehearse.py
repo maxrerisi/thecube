@@ -2,8 +2,8 @@
 
   ../.venv/bin/python scripts/rehearse.py --base http://localhost:8000   (or the Railway URL)
 
-Steps mirror the pitch (one user, Blue Devil): reset -> a receipt is forwarded (Postmark) and
-lands on Blue Devil -> Today coach card -> Eat next -> More protein -> Halal + Peanut -> picks
+Steps mirror the pitch (one account, Blue Devil): reset -> Today coach card -> a receipt is
+forwarded (Postmark) and lands in Blue Devil's log on its purchase date (not today) -> Eat next -> More protein -> Halal + Peanut -> picks
 change, none violate -> log an in-person meal -> it shows on Today -> Wrapped. Exit 1 on any failure.
 Needs APP_TOKEN, POSTMARK_WEBHOOK_USER/PASS (backend/.env).
 """
@@ -16,7 +16,7 @@ from email import policy
 
 import requests
 
-from demo_reset import load_env, reset
+from demo_reset import load_env, receipts, reset
 
 
 class Run:
@@ -60,21 +60,23 @@ def rehearse(base, token) -> Run:
     pm_auth = (os.environ.get("POSTMARK_WEBHOOK_USER", ""), os.environ.get("POSTMARK_WEBHOOK_PASS", ""))
 
     def do_reset():
-        out = reset(base, token, hold_back=1)
-        state["held"] = out["held_back"][0]
+        out = reset(base, token)
         users = run.get("/users")
-        state["william"] = next(u["id"] for u in users if u["name"] == "William")
-        state["devil"] = next(u["id"] for u in users if u["name"] == "Blue Devil")
-        return f"blue devil {out['reset']['blue_devil']['orders']} orders, william {out['import']['imported']} imported, holding {state['held']}"
+        assert [u["name"] for u in users] == ["Blue Devil"], f"expected one account, got {users}"
+        state["devil"] = users[0]["id"]
+        r = out["reset"]
+        return f"one account (Blue Devil): {r['blue_devil']['orders']} orders; prices from {r['price_receipts']} receipts"
 
     def forward():
-        from demo_reset import EMAILS
-        r = requests.post(f"{base}/ingest/postmark", json=outlook_forward(EMAILS / state["held"]), auth=pm_auth, timeout=60)
+        path = receipts()[-1]
+        r = requests.post(f"{base}/ingest/postmark", json=outlook_forward(path), auth=pm_auth, timeout=60)
         r.raise_for_status()
         j = r.json()
         assert j.get("status") == "ok" and j.get("imported") == 1, j
         assert j["user_id"] == state["devil"], f"forward landed on user {j['user_id']}, not Blue Devil"
-        return f"imported 1 for Blue Devil (user {j['user_id']})"
+        t = run.get("/today", user_id=state["devil"])
+        assert len(t["meals"]) == state["devil_meals"], "an old receipt showed up on Today"
+        return f"{path.name} -> Blue Devil, logged on its purchase date (Today unchanged)"
 
     def wrapped():
         w = run.get("/wrapped", user_id=state["devil"])
@@ -131,9 +133,9 @@ def rehearse(base, token) -> Run:
         assert len(t["meals"]) == state["devil_meals"] + 1, "logged meal not on Today"
         return f"logged {item['name']} ({r.json()['macros']['protein_g']:.0f} g); Today shows {len(t['meals'])} meals"
 
-    run.step("reset demo (hold back newest receipt)", do_reset)
-    run.step("forward a receipt (Postmark) -> Blue Devil", forward)
+    run.step("reset demo", do_reset)
     run.step("Blue Devil: Today coach card", devil_today)
+    run.step("forward a receipt (Postmark) -> Blue Devil's log", forward)
     run.step("Eat next (Balanced)", eat_next("balanced"))
     run.step("Eat next (More protein)", eat_next("protein"))
     run.step("toggle Halal + Peanut -> picks change, none violate", restrictions)

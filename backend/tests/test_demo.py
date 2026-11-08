@@ -18,7 +18,7 @@ def fixed_day(monkeypatch):
 
 def test_two_resets_identical_and_story(menus):
     r1 = menus.post("/admin/reset-demo", headers=AUTH).json()
-    assert r1["william"]["imported"] == 31 and r1["warnings"] == []
+    assert r1["price_receipts"] == 31 and r1["warnings"] == []
 
     # what a live demo does: log a meal, toggle Halal + Peanut, type a price, enter a balance
     sazon = next(v["id"] for v in menus.get("/vendors", headers=AUTH).json() if v["name"] == "Sazon")
@@ -28,7 +28,7 @@ def test_two_resets_identical_and_story(menus):
     s = menus.get("/settings?user_id=2", headers=AUTH).json()
     s.update(require_diets=["halal"], avoid_allergens=["peanut"])
     menus.put("/settings?user_id=2", json=s, headers=AUTH)
-    menus.post("/balance", json={"user_id": 1, "points": 321.0, "swipes": 3}, headers=AUTH)
+    menus.post("/balance", json={"user_id": 2, "points": 321.0, "swipes": 3}, headers=AUTH)
 
     r2 = menus.post("/admin/reset-demo", headers=AUTH).json()
     assert r2["fingerprint"] == r1["fingerprint"]
@@ -54,11 +54,10 @@ def test_two_resets_identical_and_story(menus):
         assert n == 0
 
 
-def test_william_balance_restored(menus, monkeypatch):
-    monkeypatch.setenv("WILLIAM_BALANCE", "512.34,9,2026-11-01T09:00-04:00")
+def test_one_account_and_receipts_are_only_prices(menus):
+    """The app has one account; the real receipts teach prices but leave no orders behind."""
     menus.post("/admin/reset-demo", headers=AUTH)
-    menus.post("/balance", json={"user_id": 1, "points": 1.0, "swipes": 0}, headers=AUTH)  # during the demo
-    menus.post("/admin/reset-demo", headers=AUTH)
+    assert [u["name"] for u in menus.get("/users", headers=AUTH).json()] == ["Blue Devil"]
     with connect() as conn:
-        rows = conn.execute("SELECT points, swipes FROM balance_snapshots WHERE user_id = 1").fetchall()
-    assert [(float(r["points"]), r["swipes"]) for r in rows] == [(512.34, 9)]
+        assert conn.execute("SELECT count(*) AS n FROM orders WHERE source = 'email'").fetchone()["n"] == 0
+        assert conn.execute("SELECT count(*) AS n FROM prices WHERE source = 'receipt'").fetchone()["n"] > 20

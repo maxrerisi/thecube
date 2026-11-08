@@ -33,18 +33,22 @@ def william_email() -> str | None:
 
 
 def seed_users(conn) -> None:
-    """William (real receipts) and Blue Devil (demo student). William's Duke address belongs to
-    Blue Devil, so a receipt William forwards live during the pitch lands on Blue Devil's Today."""
+    """One account: Blue Devil (the demo student). It owns the Duke address the receipts were
+    sent to, so any receipt forwarded from that Outlook lands on Blue Devil. The real receipts in
+    emails/ are only a price list (see demo.reset); there is no second account."""
     conn.execute("UPDATE users SET name = 'Blue Devil' WHERE name = 'Jordan'")  # renamed 2026-11-07
-    rows = [("William", False, WILLIAM), ("Blue Devil", True, BLUE_DEVIL)]
-    for name, demo, settings in rows:
-        conn.execute(
-            """INSERT INTO users (name, is_demo, settings)
-               SELECT %s, %s, %s WHERE NOT EXISTS (SELECT 1 FROM users WHERE name = %s)""",
-            (name, demo, json.dumps(settings.model_dump(mode="json")), name))
+    conn.execute(
+        """INSERT INTO users (name, is_demo, settings)
+           SELECT 'Blue Devil', TRUE, %s WHERE NOT EXISTS (SELECT 1 FROM users WHERE name = 'Blue Devil')""",
+        (json.dumps(BLUE_DEVIL.model_dump(mode="json")),))
+    # Earlier builds had a second account ("William") holding the real receipts; remove it.
+    old = [r["id"] for r in conn.execute("SELECT id FROM users WHERE name <> 'Blue Devil'").fetchall()]
+    if old:
+        conn.execute("DELETE FROM orders WHERE user_id = ANY(%s)", (old,))
+        conn.execute("DELETE FROM balance_snapshots WHERE user_id = ANY(%s)", (old,))
+        conn.execute("DELETE FROM users WHERE id = ANY(%s)", (old,))
     addr = william_email()
     if addr:
-        conn.execute("UPDATE users SET email = NULL WHERE name <> 'Blue Devil' AND lower(email) = %s", (addr,))
         conn.execute("UPDATE users SET email = %s WHERE name = 'Blue Devil'", (addr,))
 
 

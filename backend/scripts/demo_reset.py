@@ -1,9 +1,8 @@
-"""Reset the demo on any server (local or Railway): POST /admin/reset-demo, then upload
-William's receipts from emails/ (a deployed server has no emails/).
+"""Reset the demo: POST /admin/reset-demo. The server rebuilds Blue Devil (the only account),
+reading the real receipts in emails/ as a price list only.
 
-  ../.venv/bin/python scripts/demo_reset.py --base https://...railway.app [--hold-back 1]
+  ../.venv/bin/python scripts/demo_reset.py [--base http://localhost:8000]
 
---hold-back N keeps the N newest receipts out, so one can be forwarded live (rehearse.py does).
 Reads APP_TOKEN (and --base default API_BASE_URL) from the environment / backend/.env.
 """
 import argparse
@@ -26,37 +25,24 @@ def load_env():
                 os.environ.setdefault(k.strip(), v.strip())
 
 
-def receipts(hold_back: int) -> tuple[list[Path], list[Path]]:
-    files = sorted(EMAILS.glob("*.eml"), key=lambda p: int(p.name.split()[0].lstrip("#")))  # order no. ~ time
-    return (files[:-hold_back], files[-hold_back:]) if hold_back else (files, [])
+def receipts() -> list[Path]:
+    return sorted(EMAILS.glob("*.eml"), key=lambda p: int(p.name.split()[0].lstrip("#")))  # order no. ~ time
 
 
-def reset(base: str, token: str, hold_back: int = 0) -> dict:
-    h = {"Authorization": f"Bearer {token}"}
-    r = requests.post(f"{base}/admin/reset-demo", headers=h, params={"emails": "false"}, timeout=120)
+def reset(base: str, token: str) -> dict:
+    r = requests.post(f"{base}/admin/reset-demo", headers={"Authorization": f"Bearer {token}"}, timeout=180)
     r.raise_for_status()
-    out = {"reset": r.json()}
-    users = requests.get(f"{base}/users", headers=h, timeout=30).json()
-    william = next(u["id"] for u in users if u["name"] == "William")
-    upload, held = receipts(hold_back)
-    if upload:
-        files = [("files", (p.name, p.read_bytes(), "message/rfc822")) for p in upload]
-        r = requests.post(f"{base}/import/eml", headers=h, data={"user_id": william}, files=files, timeout=120)
-        r.raise_for_status()
-        out["import"] = {k: (len(v) if isinstance(v, list) else v) for k, v in r.json().items()}
-    out["held_back"] = [p.name for p in held]
-    return out
+    return {"reset": r.json()}
 
 
 def main():
     load_env()
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default=os.environ.get("API_BASE_URL", "http://localhost:8000"))
-    ap.add_argument("--hold-back", type=int, default=0)
     a = ap.parse_args()
     if not os.environ.get("APP_TOKEN"):
         sys.exit("APP_TOKEN not set (backend/.env)")
-    print(reset(a.base.rstrip("/"), os.environ["APP_TOKEN"], a.hold_back))
+    print(reset(a.base.rstrip("/"), os.environ["APP_TOKEN"]))
 
 
 if __name__ == "__main__":

@@ -10,9 +10,9 @@ def test_wrong_token_401(client):
     assert client.get("/users", headers={"Authorization": "Bearer nope"}).status_code == 401
 
 
-def test_users_returns_two(client):
+def test_users_returns_one_account(client):
     r = client.get("/users", headers=AUTH)
     assert r.status_code == 200
     users = r.json()
-    assert [u["name"] for u in users] == ["William", "Blue Devil"]
-    assert [u["is_demo"] for u in users] == [False, True]
+    assert [u["name"] for u in users] == ["Blue Devil"]
+    assert [u["is_demo"] for u in users] == [True]

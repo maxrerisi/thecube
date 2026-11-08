@@ -19,6 +19,7 @@ def reset_db():
     with connect() as conn:
         conn.execute("DROP SCHEMA public CASCADE; CREATE SCHEMA public")
         init_schema(conn)
+        conn.execute("ALTER SEQUENCE users_id_seq RESTART WITH 2")  # Blue Devil is user 2, as on the live DB
         seed_users(conn)
 
 

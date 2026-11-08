@@ -36,8 +36,9 @@ Receipt forwarding gives us the same data with the student's consent.
 Registrar calendar (Aug 24 – Dec 14, minus fall break and Thanksgiving). Duke's own chart
 ignores breaks; ours doesn't.
 
-**Is Blue Devil real?** No. A made-up student with real menus and real prices. Their history
-is generated so the story is clear: behind pace, short on protein.
+**Is Blue Devil real?** No. A made-up student with real menus and real prices (from our 31
+real receipts). Their history is generated so the story is clear: behind pace, short on
+protein. It's the only account in the app.
 
 ## AI
 
@@ -78,7 +79,8 @@ user it's a few rows per meal. The coach is cached per input, so repeated views 
 
 **Tested?** 5 iPhone UI tests that tap every button through iOS's real touch system, 3 times each. 62 backend tests: receipt parsing on all 31 receipts, duplicate forwarding, pace
 and breaks, optimizer goals produce different picks, coach validation. Plus a scripted
-rehearsal of the demo (forward → Today → picks → restrictions → log → Wrapped, ~7 s).
+rehearsal of the demo (Today → forward lands on its purchase date → picks → restrictions → log →
+Wrapped). Live Outlook forwards tested: 7 of 7 read correctly.
 
 ## Delight features
 

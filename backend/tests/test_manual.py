@@ -50,7 +50,7 @@ def test_manual_sazon_burrito_macros(menus):
     # tortilla 290 + rice 70 + chicken 150 + beans 45 + pico 10 = 565 cal; 8+2+19+2+0 = 31 g
     assert exp == {"calories": 565, "protein_g": 31}
     items[2]["price"] = 12.85  # typed: Chipotle Chicken has no receipt price
-    r = menus.post("/orders/manual", json={"user_id": 1, "vendor_id": sazon, "items": items}, headers=AUTH)
+    r = menus.post("/orders/manual", json={"user_id": 2, "vendor_id": sazon, "items": items}, headers=AUTH)
     assert r.status_code == 200, r.text
     o = r.json()
     assert o["macros"]["calories"] == 565 and o["macros"]["protein_g"] == 31
@@ -59,14 +59,14 @@ def test_manual_sazon_burrito_macros(menus):
     m2 = menus.get(f"/vendors/{sazon}/menu", headers=AUTH).json()
     assert find(m2, "Chipotle Chicken")["known_price"]["price"] == 12.85
     # delete: wrong user 404, right user ok
-    assert menus.delete(f"/orders/{o['id']}?user_id=2", headers=AUTH).status_code == 404
-    assert menus.delete(f"/orders/{o['id']}?user_id=1", headers=AUTH).json() == {"deleted": o["id"]}
+    assert menus.delete(f"/orders/{o['id']}?user_id=999", headers=AUTH).status_code == 404
+    assert menus.delete(f"/orders/{o['id']}?user_id=2", headers=AUTH).json() == {"deleted": o["id"]}
 
 
 def test_manual_rejects_item_from_another_vendor(menus):
     skillet_item = find(menus.get(f"/vendors/{vid(menus, 'The Skillet')}/menu", headers=AUTH).json(), "Bacon")
     p = skillet_item["portions"][0]
-    r = menus.post("/orders/manual", json={"user_id": 1, "vendor_id": vid(menus, "Sazon"),
+    r = menus.post("/orders/manual", json={"user_id": 2, "vendor_id": vid(menus, "Sazon"),
                    "items": [{"item_oid": skillet_item["item_oid"], "uofm_oid": p["uofm_oid"]}]}, headers=AUTH)
     assert r.status_code == 422
 

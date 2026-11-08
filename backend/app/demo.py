@@ -1,12 +1,11 @@
-"""POST /admin/reset-demo (SPEC 14): rebuild Blue Devil; re-import William from emails/.
+"""POST /admin/reset-demo (SPEC 14): rebuild Blue Devil, the app's only account.
 
-On a deployed server there is no emails/ (gitignored, public repo): run
-scripts/demo_reset.py from a laptop, which calls this and then uploads emails/.
+The real receipts in emails/ are read as a price list (Blue Devil's meals cost what they
+really cost) and the orders they create are dropped again, so Blue Devil's log holds only
+its generated history plus anything forwarded since.
 
 Removes everything a live demo adds (manual logs, forwarded receipts, typed prices, auto-
 written aliases, toggled settings, entered balances) so the next run starts identical.
-William's real balance is "entered by hand" once in the env var WILLIAM_BALANCE
-("points,swipes,2026-11-07T09:00-05:00"); every reset restores exactly that snapshot.
 """
 import hashlib
 import json
@@ -17,15 +16,7 @@ from pathlib import Path
 from app import settings_store
 from app.core import clock
 from app.ingest.importer import import_emls
-from app.seed import BLUE_DEVIL, EMAILS, WILLIAM, seed_users, seed_vendors
-
-
-def william_balance() -> tuple[float, int | None, datetime] | None:
-    raw = os.environ.get("WILLIAM_BALANCE")
-    if not raw:
-        return None
-    pts, swipes, ts = (x.strip() for x in raw.split(","))
-    return float(pts), int(swipes) if swipes else None, datetime.fromisoformat(ts)
+from app.seed import BLUE_DEVIL, EMAILS, seed_users, seed_vendors
 
 
 def _user(conn, name):
@@ -35,24 +26,27 @@ def _user(conn, name):
 def reset(conn, emails_dir: Path = EMAILS, import_emails: bool = True) -> dict:
     from seed import blue_devil  # backend/seed/blue_devil.py
     seed_users(conn)
-    william, devil_id = _user(conn, "William"), _user(conn, "Blue Devil")
-    conn.execute("DELETE FROM orders WHERE user_id = ANY(%s)", ([william, devil_id],))
-    conn.execute("DELETE FROM balance_snapshots WHERE user_id = %s", (william,))
-    if base := william_balance():
-        conn.execute("INSERT INTO balance_snapshots (user_id, ts, points, swipes) VALUES (%s, %s, %s, %s)",
-                     (william, base[2], base[0], base[1]))
-    # Receipt prices stay (Blue Devil's meals are priced from them, and a deployed server has no
-    # emails/ to re-derive them); prices typed during a demo go.
+    devil_id = _user(conn, "Blue Devil")
+    conn.execute("DELETE FROM orders WHERE user_id = %s", (devil_id,))
+    conn.execute("DELETE FROM balance_snapshots WHERE user_id = %s", (devil_id,))
+    # Receipt prices stay (a server without emails/ can't re-derive them); typed ones go.
     conn.execute("DELETE FROM prices WHERE source = 'manual'")
     conn.execute("TRUNCATE item_aliases, vendor_aliases")
     warnings = seed_vendors(conn)
     files = [p.read_bytes() for p in sorted(emails_dir.glob("*.eml"))] if import_emails else []
-    imported = import_emls(conn, william, files) if files else {"imported": 0}
-    settings_store.save(conn, william, WILLIAM)
+    learned = prices_from_receipts(conn, devil_id, files)
     settings_store.save(conn, devil_id, BLUE_DEVIL)
     built = blue_devil.build(conn, devil_id, clock.today(), BLUE_DEVIL.semester_end)
-    return {"william": {"imported": imported["imported"], "partial": len(imported.get("partial", []))},
-            "blue_devil": built, "warnings": warnings, "fingerprint": fingerprint(conn)}
+    return {"price_receipts": learned, "blue_devil": built, "warnings": warnings, "fingerprint": fingerprint(conn)}
+
+
+def prices_from_receipts(conn, user_id: int, files: list[bytes]) -> int:
+    """Import receipts only for what they teach (prices, auto aliases), then drop the orders."""
+    if not files:
+        return 0
+    n = import_emls(conn, user_id, files)["imported"]
+    conn.execute("DELETE FROM orders WHERE user_id = %s AND source = 'email'", (user_id,))
+    return n
 
 
 def fingerprint(conn) -> str:

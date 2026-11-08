@@ -214,28 +214,34 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
     n_orders = sum(hist.values()) or 1
 
     vendors = conn.execute("SELECT id, name, unit_oid, hours FROM vendors WHERE unit_oid IS NOT NULL ORDER BY id").fetchall()
-    open_now = [v for v in vendors if hours.is_open(v["hours"], at)]
-    fallback = not open_now
-    if fallback:
-        from datetime import timedelta
-        open_now = [v for v in vendors if hours.opens_within(v["hours"], at, timedelta(hours=2))]
+    from datetime import timedelta
     ok = lambda i: allowed(i, s.require_diets, s.avoid_allergens)  # noqa: E731
     templates = json.loads(TEMPLATES.read_text())["templates"]
-    cands = []
-    for v in open_now:
-        items = menu.current_items(conn, v["unit_oid"])
-        rows, alias = _price_lookup(conn, v["id"])
-        tpls = [t for t in templates if t["vendor"] == v["name"]]
-        vc = [c for t in tpls for c in template_candidates(t, items, rows, alias, ok)]
-        vc += simple_candidates(items, rows, alias, {t["price_item"] for t in tpls}, ok)
-        for c in vc:
-            c.update(sum_macros(c["components"]))
-            c["points_cost"] = round(c["price"] * (1 + TAX), 2)
-            c.update(vendor_id=v["id"], vendor=v["name"],
-                     opens_at=None if not fallback else hours.opens_within(v["hours"], at, __import__("datetime").timedelta(hours=2)).isoformat())
-            c["score"] = round(score(c, p_s, c_s, headroom, hist.get(v["id"], 0) / n_orders, bias, ref_price), 4)
-        vc = [c for c in vc if c["calories"] >= MIN_MEAL_SHARE * c_s]
-        cands += sorted(vc, key=lambda c: -c["score"])[:CAP_PER_VENDOR]
+
+    def candidates(vs, soon: bool) -> list[dict]:
+        out = []
+        for v in vs:
+            items = menu.current_items(conn, v["unit_oid"])
+            rows, alias = _price_lookup(conn, v["id"])
+            tpls = [t for t in templates if t["vendor"] == v["name"]]
+            vc = [c for t in tpls for c in template_candidates(t, items, rows, alias, ok)]
+            vc += simple_candidates(items, rows, alias, {t["price_item"] for t in tpls}, ok)
+            opens = hours.opens_within(v["hours"], at, timedelta(hours=2)) if soon else None
+            for c in vc:
+                c.update(sum_macros(c["components"]))
+                c["points_cost"] = round(c["price"] * (1 + TAX), 2)
+                c.update(vendor_id=v["id"], vendor=v["name"], opens_at=opens.isoformat() if opens else None)
+                c["score"] = round(score(c, p_s, c_s, headroom, hist.get(v["id"], 0) / n_orders, bias, ref_price), 4)
+            vc = [c for c in vc if c["calories"] >= MIN_MEAL_SHARE * c_s]
+            out += sorted(vc, key=lambda c: -c["score"])[:CAP_PER_VENDOR]
+        return out
+
+    # Places open now; if none of them has a meal we can price (e.g. only breakfast spots at
+    # 10:30), places opening within 2 hours, labeled with their opening time.
+    cands = candidates([v for v in vendors if hours.is_open(v["hours"], at)], soon=False)
+    fallback = not cands
+    if fallback:
+        cands = candidates([v for v in vendors if hours.opens_within(v["hours"], at, timedelta(hours=2))], soon=True)
     picks = pick_top(cands)
     if not s.show_calories:
         for p in picks:

@@ -90,12 +90,12 @@ def test_today_and_balance_api(client, monkeypatch):
     with connect() as conn:
         netnutrition.write_db(conn, json.loads(nn.read_text()))
         seed_vendors(conn)
-    assert post_all(client, 1).json()["imported"] == 31
+    assert post_all(client, 2).json()["imported"] == 31
     monkeypatch.setenv("DEMO_TODAY", "2026-09-08")   # William: Sazon order 125089644, 3:06 PM
-    assert client.get("/today?user_id=1").status_code == 401
-    r = client.post("/balance", json={"user_id": 1, "points": 400.0, "swipes": 10}, headers=AUTH)
+    assert client.get("/today?user_id=2").status_code == 401
+    r = client.post("/balance", json={"user_id": 2, "points": 400.0, "swipes": 10}, headers=AUTH)
     assert r.status_code == 200
-    t = client.get("/today?user_id=1", headers=AUTH).json()
+    t = client.get("/today?user_id=2", headers=AUTH).json()
     assert t["date"] == "2026-09-08"
     assert [m["vendor"] for m in t["meals"]] == ["Sazon"]
     assert t["eaten"]["protein_g"] > 0 and t["meals"][0]["items"] == ["Arepa Bowl"]
@@ -103,11 +103,11 @@ def test_today_and_balance_api(client, monkeypatch):
     assert t["coach"]["headline"] and t["coach"]["source"] in ("template", "gemini", "cache")
     assert t["points"]["points"] is None  # the only snapshot is stamped now (Nov), after the demo day
     with connect() as conn:  # a snapshot the morning of: today's $13.81 comes off it
-        conn.execute("INSERT INTO balance_snapshots VALUES (1, '2026-09-08 08:00-04', 500, 12)")
-    p = client.get("/today?user_id=1", headers=AUTH).json()["points"]
+        conn.execute("INSERT INTO balance_snapshots VALUES (2, '2026-09-08 08:00-04', 500, 12)")
+    p = client.get("/today?user_id=2", headers=AUTH).json()["points"]
     assert (p["points"], p["swipes"]) == (pytest.approx(486.19), 12)
-    s = client.get("/settings?user_id=1", headers=AUTH).json()
+    s = client.get("/settings?user_id=2", headers=AUTH).json()
     s["show_calories"] = False
-    assert client.put("/settings?user_id=1", json=s, headers=AUTH).status_code == 200
-    t2 = client.get("/today?user_id=1", headers=AUTH).json()
+    assert client.put("/settings?user_id=2", json=s, headers=AUTH).status_code == 200
+    t2 = client.get("/today?user_id=2", headers=AUTH).json()
     assert t2["eaten"]["calories"] is None and t2["targets"]["calories"] is None
