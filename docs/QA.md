@@ -76,7 +76,7 @@ server parses and saves it → the app polls every 5 seconds.
 **Does it scale?** The scrape is shared by every user (menus are the same for everyone). Per
 user it's a few rows per meal. The coach is cached per input, so repeated views are free.
 
-**Tested?** 62 backend tests: receipt parsing on all 31 receipts, duplicate forwarding, pace
+**Tested?** 5 iPhone UI tests that tap every button through iOS's real touch system, 3 times each. 62 backend tests: receipt parsing on all 31 receipts, duplicate forwarding, pace
 and breaks, optimizer goals produce different picks, coach validation. Plus a scripted
 rehearsal of the demo (forward → Today → picks → restrictions → log → Wrapped, ~7 s).
 

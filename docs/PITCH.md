@@ -56,6 +56,32 @@ boxes in the slide tool; it's faster than an image and easier to read.
 - **Forwarder:** has the Outlook draft open on their phone, forwards on cue at beat 2.
 - **Slides:** whoever isn't the presenter flips slides, or put them in the same window.
 
+## On your iPhone
+
+Phone builds talk to this Mac through the Cloudflare tunnel (the `[sdk=iphoneos*]` line in
+`ios/Config/Secrets.xcconfig`), so the live forward shows up on the phone too. If the server
+can't be reached (no Wi-Fi, laptop asleep, tunnel restarted), every screen falls back to a
+snapshot of the demo data bundled in the app (`ios/Shared/Mock/`, refreshed tonight), so the
+phone always has something to show. Writes (logging a meal) need the server.
+
+Install: plug in and unlock the iPhone (Developer Mode on), then
+
+    xcodebuild -project ios/thecube.xcodeproj -scheme thecube -destination 'generic/platform=iOS' -derivedDataPath ios/build-device -allowProvisioningUpdates build
+    xcrun devicectl device install app --device <iPhone UDID> ios/build-device/Build/Products/Debug-iphoneos/thecube.app
+
+If `cloudflared` restarts, its URL changes: update that line and the Postmark webhook, then
+rebuild. Add the widgets from the home screen once it's installed.
+
+## Testing the buttons
+
+`ios/thecubeUITests` taps through iOS's real touch system: the Feeling hungry card, the devil
+menu to Feeling hungry and to Wrapped, the Wrapped card, the goal switch and all three tabs,
+three times each. Passes against the live server and with the server unreachable.
+
+    xcodebuild test -project ios/thecube.xcodeproj -scheme thecubeUITests -destination 'platform=iOS Simulator,name=iPhone 17 Pro Max'
+
+It takes about 4 minutes and doesn't log meals, so no reset is needed after it.
+
 ## Morning checklist (by 10:30)
 
 1. Server running, tunnel running (`cloudflared` URL changes on restart → update the Postmark

@@ -1,0 +1,2266 @@
+{
+    "vendor": {
+        "id": 1,
+        "name": "Sazon"
+    },
+    "has_nutrition": true,
+    "menu_date": null,
+    "courses": [
+        {
+            "name": "Build Your Own Arepa Bowl, Flour or Corn Tortilla Taco, Quesadilla or Burrito (Choose One)",
+            "items": [
+                {
+                    "item_oid": 303709878,
+                    "name": "Latin Arepa Bowl",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Flour Corn Instant Masa Regular Maseca (SELECTED CORN TREATED WITH LIME), Canola Frying Liquid Shortening (CANOLA OIL WITH TBHQ AND CITRIC ACID ADDED AS PRESERVATIVES AND DIMETHYLPOLYSILOXANE ADDED AS AN ANTI-FOAMING AGENT.), Salt Kosher Ground Coarse Box (SALT, YELLOW PRUSSIATE OF SODA), Spice Garlic Granulated 5 lb, White Granulated Cane Sugar (GRANULATED SUGAR)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Arepa",
+                            "is_default": true,
+                            "grams": 72.0,
+                            "calories": 160.0,
+                            "protein_g": 3.0,
+                            "carbs_g": 23.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 180.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709879,
+                    "name": "White Corn Tortilla 6\"",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Tortilla Corn White 6\" (WHOLE GRAIN CORN, WATER, CONTAINS 2 OR LESS OF EACH OF THE FOLLOWING: PRESERVATIVES PROPIONIC ACID, SODIUM HYDROXIDE, BENZOIC ACID, XANTHAM GUM AND TRACES OF FOOD GRADE LIME.)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "2 Tortilla Portion",
+                            "is_default": true,
+                            "grams": 73.0,
+                            "calories": 150.0,
+                            "protein_g": 3.0,
+                            "carbs_g": 32.0,
+                            "fat_g": 1.5,
+                            "fiber_g": 4.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 20.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709881,
+                    "name": "Flour Tortilla 12\"",
+                    "allergens": [
+                        "gluten",
+                        "wheat"
+                    ],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Tortilla Flour 12 Pressed (ENRICHED WHEAT FLOUR (WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMINE MONONITRATE, RIBOFLAVIN, FOLIC ACID), WATER, PALM OIL, CONTAINS 2% OR LESS OF: TORTILLA MIX (SALT, VITAL WHEAT GLUTEN, LEAVENING [SODIUM BICARBONATE, SODIUM ALUMINUM SULFATE, SODIUM ALUMINUM PHOSPHATE], PRESERVATIVE [CALCIUM PROPIONATE], DEXTROSE, DOUGH CONDITIONERS [MONOGLYCERIDES, MONO AND DIGLYCERIDES, ENZYMES AND SODIUM METABISULFITE], FUMARIC ACID, GUAR GUM AND SORBIC ACID).) Contains: Gluten, Wheat",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 3030690,
+                            "name": "Tortilla",
+                            "is_default": true,
+                            "grams": 95.0,
+                            "calories": 290.0,
+                            "protein_g": 8.0,
+                            "carbs_g": 48.0,
+                            "fat_g": 7.0,
+                            "fiber_g": 1.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 560.0
+                        },
+                        {
+                            "uofm_oid": 9104530,
+                            "name": "Burrito",
+                            "is_default": false,
+                            "grams": 95.0,
+                            "calories": 290.0,
+                            "protein_g": 8.0,
+                            "carbs_g": 48.0,
+                            "fat_g": 7.0,
+                            "fiber_g": 1.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 560.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709882,
+                    "name": "Flour Tortilla 6\"",
+                    "allergens": [
+                        "gluten",
+                        "wheat"
+                    ],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Tortilla Flour 6\" Pressed Del Pasado (ENRICHED FLOUR (WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE, RIBOFLAVIN, FOLIC ACID), WATER, PALM OIL, [CONTAINS 2% OR LESS OF: TORILLA MIX (SALT, VITAL WHEAT GLUTEN, LEAVENING (SODIUM BICARBONATE, SODIUM ALUMINUM SULFATE, SODIUM ALUMINUM PHOSPHATE), PRESERVATIVE (CALCIUM PROPIONATE), DEXTROSE, DOUGH CONDITIONERS (MONOGLYCERIDES, MONO- AND DIGLYCERIDES, ENZYMES AND SODIUM METABISULFITE), FUMARIC ACID, GUAR GUM AND SORBIC ACID).) Contains: Gluten, Wheat",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "2 Tortilla Portion",
+                            "is_default": true,
+                            "grams": 99.0,
+                            "calories": 300.0,
+                            "protein_g": 9.0,
+                            "carbs_g": 48.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 570.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Choose Base",
+            "items": [
+                {
+                    "item_oid": 303709884,
+                    "name": "Cilantro Lime White Rice",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Rice Long Grain 20% Broken (EXTRA LONG GRAIN RICE, IRON PHOSPHATE, NIACIN, THIAMINE MONONITRATE AND FOLIC ACID), Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), Herb Cilantro Fresh 4 oz",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 8244746,
+                            "name": "Quesadilla Portion",
+                            "is_default": true,
+                            "grams": 98.0,
+                            "calories": 100.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 22.0,
+                            "fat_g": null,
+                            "fiber_g": 0.5,
+                            "sugar_g": null,
+                            "sodium_mg": 55.0
+                        },
+                        {
+                            "uofm_oid": 3024916,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 98.0,
+                            "calories": 100.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 22.0,
+                            "fat_g": null,
+                            "fiber_g": 0.5,
+                            "sugar_g": null,
+                            "sodium_mg": 55.0
+                        },
+                        {
+                            "uofm_oid": 8244747,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 98.0,
+                            "calories": 100.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 22.0,
+                            "fat_g": null,
+                            "fiber_g": 0.5,
+                            "sugar_g": null,
+                            "sodium_mg": 55.0
+                        },
+                        {
+                            "uofm_oid": 8244748,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 65.0,
+                            "calories": 70.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 15.0,
+                            "fat_g": null,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 35.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709889,
+                    "name": "Romaine Lettuce",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Lettuce Romaine Fillet Pillow (LETTUCE)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 8244780,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": true,
+                            "grams": 75.0,
+                            "calories": 15.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 5.0
+                        },
+                        {
+                            "uofm_oid": 8244778,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 75.0,
+                            "calories": 15.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 5.0
+                        },
+                        {
+                            "uofm_oid": 8244779,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 75.0,
+                            "calories": 15.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 5.0
+                        },
+                        {
+                            "uofm_oid": 8244781,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 75.0,
+                            "calories": 15.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 5.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Choose Protein",
+            "items": [
+                {
+                    "item_oid": 303709894,
+                    "name": "Beef Barbacoa",
+                    "allergens": [],
+                    "diets": [],
+                    "ingredients": "Beef Eye Of Round Choice 171C Raw Ref, Marinade Chipotle (Pepper Chipotle Whole In Adobo Sauce Dom (WHOLE CHIPOTLE PEPPERS, WATER, VINEGAR, TOMATO PASTE, SALT, SPICES, MUSTARD POWDER, NATURAL FLAVORING), Marinade Mojo Criolo Liquid (WATER, SALT, ORANGE JUICE CONCENTRATE, LEMON JUICE CONCENTRATE, GARLIC, ONION, SPICES, SUGAR, 0.1% SODIUM BENZOATE AND POTASSIUM SORBATE AS PRESERVATIVE), Onion White Spring Flat Fresh 15-18 Bunc, Plum Tomatoes, Garlic White Whole Clove Peeled (GARLIC), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA)), Beef Cheek Meat Raw Frozen, Onion White Spring Flat Fresh 15-18 Bunc, Spice Thyme Dried Leaf (THYME LEAVES.)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 3000400,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": true,
+                            "grams": 142.0,
+                            "calories": 220.0,
+                            "protein_g": 29.0,
+                            "carbs_g": 6.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 1.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 530.0
+                        },
+                        {
+                            "uofm_oid": 8244559,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 142.0,
+                            "calories": 220.0,
+                            "protein_g": 29.0,
+                            "carbs_g": 6.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 1.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 530.0
+                        },
+                        {
+                            "uofm_oid": 8244567,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 142.0,
+                            "calories": 220.0,
+                            "protein_g": 29.0,
+                            "carbs_g": 6.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 1.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 530.0
+                        },
+                        {
+                            "uofm_oid": 8244568,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 142.0,
+                            "calories": 220.0,
+                            "protein_g": 29.0,
+                            "carbs_g": 6.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 1.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 530.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709897,
+                    "name": "Chipotle Chicken",
+                    "allergens": [],
+                    "diets": [
+                        "halal"
+                    ],
+                    "ingredients": "Boneless Skinless Chicken Thigh (Fresh Boneless, SkinlessChickenThigh MeatContains up to 5% Retained Water), Marinade Chipotle (Pepper Chipotle Whole In Adobo Sauce Dom (WHOLE CHIPOTLE PEPPERS, WATER, VINEGAR, TOMATO PASTE, SALT, SPICES, MUSTARD POWDER, NATURAL FLAVORING), Marinade Mojo Criolo Liquid (WATER, SALT, ORANGE JUICE CONCENTRATE, LEMON JUICE CONCENTRATE, GARLIC, ONION, SPICES, SUGAR, 0.1% SODIUM BENZOATE AND POTASSIUM SORBATE AS PRESERVATIVE), Onion White Spring Flat Fresh 15-18 Bunc, Plum Tomatoes, Garlic White Whole Clove Peeled (GARLIC), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA))",
+                    "meal": null,
+                    "known_price": {
+                        "price": 12.85,
+                        "source": "receipt",
+                        "label": "Burrito with Grilled Chicken"
+                    },
+                    "portions": [
+                        {
+                            "uofm_oid": 3061330,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 142.0,
+                            "calories": 220.0,
+                            "protein_g": 29.0,
+                            "carbs_g": 3.0,
+                            "fat_g": 10.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 410.0
+                        },
+                        {
+                            "uofm_oid": 8244577,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 142.0,
+                            "calories": 220.0,
+                            "protein_g": 29.0,
+                            "carbs_g": 3.0,
+                            "fat_g": 10.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 410.0
+                        },
+                        {
+                            "uofm_oid": 8244578,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 142.0,
+                            "calories": 220.0,
+                            "protein_g": 29.0,
+                            "carbs_g": 3.0,
+                            "fat_g": 10.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 410.0
+                        },
+                        {
+                            "uofm_oid": 8244579,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 94.0,
+                            "calories": 150.0,
+                            "protein_g": 19.0,
+                            "carbs_g": 2.0,
+                            "fat_g": 6.0,
+                            "fiber_g": null,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 270.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709900,
+                    "name": "Nadura Chorizo",
+                    "allergens": [
+                        "gluten",
+                        "soy",
+                        "wheat"
+                    ],
+                    "diets": [],
+                    "ingredients": "Chicken Sub Ground Medium Meatless (WATER, PEA PROTEIN, SUNFLOWER OIL, SHEA OIL, COCONUT OIL, YEAST EXTRACT, NATURAL FLAVORS, RICE PROTEIN, SALT, LEMON POWDER, WHITE PEPPER. MANUFACTURED IN A FACILITY WHICH PROCESSES SOY AND WHEAT..), Marinade Chipotle (Pepper Chipotle Whole In Adobo Sauce Dom (WHOLE CHIPOTLE PEPPERS, WATER, VINEGAR, TOMATO PASTE, SALT, SPICES, MUSTARD POWDER, NATURAL FLAVORING), Marinade Mojo Criolo Liquid (WATER, SALT, ORANGE JUICE CONCENTRATE, LEMON JUICE CONCENTRATE, GARLIC, ONION, SPICES, SUGAR, 0.1% SODIUM BENZOATE AND POTASSIUM SORBATE AS PRESERVATIVE), Onion White Spring Flat Fresh 15-18 Bunc, Plum Tomatoes, Garlic White Whole Clove Peeled (GARLIC), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA)), Pico de Gallo (Plum Tomatoes, Onion White Spring Flat Fresh 15-18 Bunc, Jalapeno Pepper, Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Herb Cilantro Fresh 4 oz, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA)) Contains: Gluten, Soy, Wheat",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 9104574,
+                            "name": "Arepa",
+                            "is_default": true,
+                            "grams": 175.0,
+                            "calories": 180.0,
+                            "protein_g": 23.0,
+                            "carbs_g": 15.0,
+                            "fat_g": 4.5,
+                            "fiber_g": 4.0,
+                            "sugar_g": 4.0,
+                            "sodium_mg": 1060.0
+                        },
+                        {
+                            "uofm_oid": 9104575,
+                            "name": "Taco",
+                            "is_default": false,
+                            "grams": 175.0,
+                            "calories": 180.0,
+                            "protein_g": 23.0,
+                            "carbs_g": 15.0,
+                            "fat_g": 4.5,
+                            "fiber_g": 4.0,
+                            "sugar_g": 4.0,
+                            "sodium_mg": 1060.0
+                        },
+                        {
+                            "uofm_oid": 9104576,
+                            "name": "Burrito",
+                            "is_default": false,
+                            "grams": 175.0,
+                            "calories": 180.0,
+                            "protein_g": 23.0,
+                            "carbs_g": 15.0,
+                            "fat_g": 4.5,
+                            "fiber_g": 4.0,
+                            "sugar_g": 4.0,
+                            "sodium_mg": 1060.0
+                        },
+                        {
+                            "uofm_oid": 9104577,
+                            "name": "Quesadilla",
+                            "is_default": false,
+                            "grams": 175.0,
+                            "calories": 180.0,
+                            "protein_g": 23.0,
+                            "carbs_g": 15.0,
+                            "fat_g": 4.5,
+                            "fiber_g": 4.0,
+                            "sugar_g": 4.0,
+                            "sodium_mg": 1060.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709906,
+                    "name": "Chorizo",
+                    "allergens": [],
+                    "diets": [],
+                    "ingredients": "Sausage Chorizo Mexican Pork 6\" Link Hot Natural Casing Raw Frz Logan\u2019s Sausage 4 oz (PORIK, VINEGAR, SALT, SPICEES, PAPRIKA, GARLIC POWDER, EXTRACTIVES OF PAPRIKA, NATURAL FLAVOR CITRIC ACID.), Diced Southern Russet Potatoes (POTATOES, DEXTROSE, DISODIUM DIHYDROGEN PYROPHOSPHATE (ADDED TO MAINTAIN COLOR), POTASSIUM SORBATE (ADDED TO MAINTAIN FRESHNESS).), Pepper Red Strip 1/4\" Fire Roasted Shelf Stable Moody Dunbar #10 Cn (BELL PEPPERS, WATER, SALT,CITRIC ACID), Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL), Washed & Destemmed Fresh Cilantro Herb",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 8605929,
+                            "name": "Arepa Portion",
+                            "is_default": true,
+                            "grams": 128.0,
+                            "calories": 260.0,
+                            "protein_g": 15.0,
+                            "carbs_g": 8.0,
+                            "fat_g": 18.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 760.0
+                        },
+                        {
+                            "uofm_oid": 8605930,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 128.0,
+                            "calories": 260.0,
+                            "protein_g": 15.0,
+                            "carbs_g": 8.0,
+                            "fat_g": 18.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 760.0
+                        },
+                        {
+                            "uofm_oid": 8605938,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 128.0,
+                            "calories": 260.0,
+                            "protein_g": 15.0,
+                            "carbs_g": 8.0,
+                            "fat_g": 18.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 760.0
+                        },
+                        {
+                            "uofm_oid": 8605939,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 85.0,
+                            "calories": 170.0,
+                            "protein_g": 10.0,
+                            "carbs_g": 5.0,
+                            "fat_g": 12.0,
+                            "fiber_g": 1.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 500.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709909,
+                    "name": "Hot Honey Chicken",
+                    "allergens": [
+                        "gluten",
+                        "milk",
+                        "wheat"
+                    ],
+                    "diets": [],
+                    "ingredients": "Chicken Breast Single Lobe Bnls Sknls (BONELESS SKINLESS CHICKEN BREASTS WITH RIB MEAT), Sauce Hot Honey Chicken Sazon (Sauce Honey Spicy Plastic Jug (WATER, SUGAR, HONEY, DISTILLED VINEGAR, CORN STARCH, AGED RED CAYENNE PEPPER, SALT, CONTAINS LESS THAN 2% OF SPICES, NATURAL FLAVORS, TURMERIC), Pepper Chipotle Shelf Stable Del Sol #10, Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.)), Canola Frying Liquid Shortening (CANOLA OIL WITH TBHQ AND CITRIC ACID ADDED AS PRESERVATIVES AND DIMETHYLPOLYSILOXANE ADDED AS AN ANTI-FOAMING AGENT.), Milk 2% Reduce Fat Rbst Free Vit A & D (REDUCED FAT MILK, VITAMIN A PALMITATE, VITAMIN D3), Flour All Purpose Bleached (BLEACHED ENRICHED WHEAT FLOUR (BLEACHED WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMINE MONONITRATE, RIBOFLAVIN, FOLIC ACID), MALTED BARLEY FLOUR.) Contains: Gluten, Milk, Wheat",
+                    "meal": null,
+                    "known_price": {
+                        "price": 12.85,
+                        "source": "receipt",
+                        "label": "Quesadilla with Hot Honey Chicken"
+                    },
+                    "portions": [
+                        {
+                            "uofm_oid": 8698898,
+                            "name": "Arepa Portion",
+                            "is_default": true,
+                            "grams": 205.0,
+                            "calories": 380.0,
+                            "protein_g": 30.0,
+                            "carbs_g": 13.0,
+                            "fat_g": 23.0,
+                            "fiber_g": null,
+                            "sugar_g": 10.0,
+                            "sodium_mg": 1030.0
+                        },
+                        {
+                            "uofm_oid": 8698899,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 205.0,
+                            "calories": 380.0,
+                            "protein_g": 30.0,
+                            "carbs_g": 13.0,
+                            "fat_g": 23.0,
+                            "fiber_g": null,
+                            "sugar_g": 10.0,
+                            "sodium_mg": 1030.0
+                        },
+                        {
+                            "uofm_oid": 8698900,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 205.0,
+                            "calories": 380.0,
+                            "protein_g": 30.0,
+                            "carbs_g": 13.0,
+                            "fat_g": 23.0,
+                            "fiber_g": null,
+                            "sugar_g": 10.0,
+                            "sodium_mg": 1030.0
+                        },
+                        {
+                            "uofm_oid": 8698901,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 205.0,
+                            "calories": 380.0,
+                            "protein_g": 30.0,
+                            "carbs_g": 13.0,
+                            "fat_g": 23.0,
+                            "fiber_g": null,
+                            "sugar_g": 10.0,
+                            "sodium_mg": 1030.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709912,
+                    "name": "Chili Lime Mahi",
+                    "allergens": [
+                        "fish"
+                    ],
+                    "diets": [],
+                    "ingredients": "Mahi Mahi 3-5 Lb Fillet PBO Skin On Raw, Marinade Chili Lime Sazon (Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL), Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Lite Amber Honey (HONEY.), Garlic White Whole Clove Peeled (GARLIC), Salt Kosher Ground Coarse Box (SALT, YELLOW PRUSSIATE OF SODA), Spice Chili Powder Mild 5lb (CHILI PEPPER AND OTHER SPICES, SALT AND GARLIC POWDER.), Ground Cumin, Smoked Paprika (PAPRIKA, AND SILICON DIOXIDE (ADDED TO MAKE FREE FLOWING).), Spice Red Pepper Crushed 12 OZ (CRUSHED RED PEPPER.), Spice Pepper Black Ground, Spice Oregano Flake Bag-In-Box) Contains: Fish",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 9104532,
+                            "name": "Arepa",
+                            "is_default": true,
+                            "grams": 113.0,
+                            "calories": 170.0,
+                            "protein_g": 24.0,
+                            "carbs_g": 2.0,
+                            "fat_g": 7.0,
+                            "fiber_g": null,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 125.0
+                        },
+                        {
+                            "uofm_oid": 9104533,
+                            "name": "Taco",
+                            "is_default": false,
+                            "grams": 113.0,
+                            "calories": 170.0,
+                            "protein_g": 24.0,
+                            "carbs_g": 2.0,
+                            "fat_g": 7.0,
+                            "fiber_g": null,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 125.0
+                        },
+                        {
+                            "uofm_oid": 9104541,
+                            "name": "Burrito",
+                            "is_default": false,
+                            "grams": 113.0,
+                            "calories": 170.0,
+                            "protein_g": 24.0,
+                            "carbs_g": 2.0,
+                            "fat_g": 7.0,
+                            "fiber_g": null,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 125.0
+                        },
+                        {
+                            "uofm_oid": 9104544,
+                            "name": "Quesadilla",
+                            "is_default": false,
+                            "grams": 113.0,
+                            "calories": 170.0,
+                            "protein_g": 24.0,
+                            "carbs_g": 2.0,
+                            "fat_g": 7.0,
+                            "fiber_g": null,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 125.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709915,
+                    "name": "Pork Carnitas",
+                    "allergens": [],
+                    "diets": [],
+                    "ingredients": "Pork Shoulder, Vinegar Apple Cider 4% Alcohol Domestic (DISTILLED VINEGAR (DILUTED WITH WATER TO 4% ACIDITY), NATURAL FLAVOR, CARAMEL COLORING), Juice Apple 100% Oceanspray 60 oz (APPLE JUICE (FILTERED WATER, APPLE JUICE FROM CONCENTRATE)), Ground Cumin, Spice Garlic Granulated 5 lb, Spice Thyme Dried Leaf (THYME LEAVES.), Onion White Spring Flat Fresh 15-18 Bunc, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), Ground Allspice (ALLSPICE), Spice Pepper Black Ground 5 lb (GROUND BLACK PEPPER.)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 3028788,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 128.0,
+                            "calories": 190.0,
+                            "protein_g": 15.0,
+                            "carbs_g": 9.0,
+                            "fat_g": 14.0,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 310.0
+                        },
+                        {
+                            "uofm_oid": 8244587,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 128.0,
+                            "calories": 190.0,
+                            "protein_g": 15.0,
+                            "carbs_g": 9.0,
+                            "fat_g": 14.0,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 310.0
+                        },
+                        {
+                            "uofm_oid": 8244588,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 128.0,
+                            "calories": 190.0,
+                            "protein_g": 15.0,
+                            "carbs_g": 9.0,
+                            "fat_g": 14.0,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 310.0
+                        },
+                        {
+                            "uofm_oid": 8244589,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 128.0,
+                            "calories": 190.0,
+                            "protein_g": 15.0,
+                            "carbs_g": 9.0,
+                            "fat_g": 14.0,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 310.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709919,
+                    "name": "Blackened Shrimp",
+                    "allergens": [
+                        "shellfish"
+                    ],
+                    "diets": [],
+                    "ingredients": "SHRIMP, 26-30 WHITE PEELED-&-DEVEINED (SHRIMP, SODIUM METABISULFITE (TO RETAIN COLOR)), Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL), Blackened Seasoning (SALT, CHILI PEPPER AND OTHER SPICES, DEHYDRATED GARLIC, PAPRIKA AND EXTRACTIVES OF PAPRIKA (COLOR), DEHYDRATED ONION, RED PEPPER, NATURAL FLAVOR.) Contains: Shellfish",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 8244614,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": true,
+                            "grams": 139.0,
+                            "calories": 150.0,
+                            "protein_g": 17.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 10.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 1420.0
+                        },
+                        {
+                            "uofm_oid": 7993829,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 139.0,
+                            "calories": 150.0,
+                            "protein_g": 17.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 10.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 1420.0
+                        },
+                        {
+                            "uofm_oid": 8244615,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 139.0,
+                            "calories": 150.0,
+                            "protein_g": 17.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 10.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 1420.0
+                        },
+                        {
+                            "uofm_oid": 8244616,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 139.0,
+                            "calories": 150.0,
+                            "protein_g": 17.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 10.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 1420.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709924,
+                    "name": "Steak",
+                    "allergens": [],
+                    "diets": [],
+                    "ingredients": "Beef Steak Diced 1/2\" Raw Frz Cattleman\u2019, Steak Marinade (Marinade Mojo Liquid Plastic Jug Badia (ORANGE AND GRAPEFRUIT JUICE FROM CONCENTRATE, VINEGAR, DEHYDRATED VEGETABLES GARLIC ONION, SALT, SPICES, HERBS, BITTER ORANGE CONCENTRATE, XANTHAN GUM, SODIUM BENZOATE, POTASSIUM SORBATE AND SODIUM METABISULFITE AS PRESERVATIVES), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA))",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 6418067,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 112.0,
+                            "calories": 240.0,
+                            "protein_g": 34.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 10.0,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 600.0
+                        },
+                        {
+                            "uofm_oid": 8244624,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 112.0,
+                            "calories": 240.0,
+                            "protein_g": 34.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 10.0,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 600.0
+                        },
+                        {
+                            "uofm_oid": 8244625,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 112.0,
+                            "calories": 240.0,
+                            "protein_g": 34.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 10.0,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 600.0
+                        },
+                        {
+                            "uofm_oid": 8244626,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 75.0,
+                            "calories": 160.0,
+                            "protein_g": 23.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 7.0,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 400.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Choose Topping",
+            "items": [
+                {
+                    "item_oid": 303709927,
+                    "name": "Latin Arepa Bowl",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Flour Corn Instant Masa Regular Maseca (SELECTED CORN TREATED WITH LIME), Canola Frying Liquid Shortening (CANOLA OIL WITH TBHQ AND CITRIC ACID ADDED AS PRESERVATIVES AND DIMETHYLPOLYSILOXANE ADDED AS AN ANTI-FOAMING AGENT.), Salt Kosher Ground Coarse Box (SALT, YELLOW PRUSSIATE OF SODA), Spice Garlic Granulated 5 lb, White Granulated Cane Sugar (GRANULATED SUGAR)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Arepa",
+                            "is_default": true,
+                            "grams": 72.0,
+                            "calories": 160.0,
+                            "protein_g": 3.0,
+                            "carbs_g": 23.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 180.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709929,
+                    "name": "Pinto Beans",
+                    "allergens": [],
+                    "diets": [],
+                    "ingredients": "Cnd Pinto Beans in Brine (PREPARED PINTO BEANS, WATER, SALT, CALCIUM CHLORIDE, DISODIUM EDTA ADDED FOR COLOR RETENTION), Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL), Garlic White Whole Clove Peeled (GARLIC), Salt Kosher Ground Coarse Box (SALT, YELLOW PRUSSIATE OF SODA), Smoked Paprika (PAPRIKA, AND SILICON DIOXIDE (ADDED TO MAKE FREE FLOWING).), Spice Onion Powder 20 oz, Spice Pepper Black Ground",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 9061657,
+                            "name": "Arepa",
+                            "is_default": true,
+                            "grams": 113.0,
+                            "calories": 100.0,
+                            "protein_g": 4.0,
+                            "carbs_g": 17.0,
+                            "fat_g": 1.5,
+                            "fiber_g": 3.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 400.0
+                        },
+                        {
+                            "uofm_oid": 9104589,
+                            "name": "Burrito",
+                            "is_default": false,
+                            "grams": 113.0,
+                            "calories": 100.0,
+                            "protein_g": 4.0,
+                            "carbs_g": 17.0,
+                            "fat_g": 1.5,
+                            "fiber_g": 3.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 400.0
+                        },
+                        {
+                            "uofm_oid": 9104590,
+                            "name": "Taco",
+                            "is_default": false,
+                            "grams": 113.0,
+                            "calories": 100.0,
+                            "protein_g": 4.0,
+                            "carbs_g": 17.0,
+                            "fat_g": 1.5,
+                            "fiber_g": 3.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 400.0
+                        },
+                        {
+                            "uofm_oid": 9104591,
+                            "name": "Quesadilla",
+                            "is_default": false,
+                            "grams": 113.0,
+                            "calories": 100.0,
+                            "protein_g": 4.0,
+                            "carbs_g": 17.0,
+                            "fat_g": 1.5,
+                            "fiber_g": 3.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 400.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709932,
+                    "name": "Black Beans",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Bean Black Cn (BLACK BEANS, WATER, SALT, CALCIUM CHORIDE, FERROUS GLUCONATE.), Cnd Whole Fire Roasted Red Pepper (ROASTED PEPPERS, WATER, SALT, CITRIC ACID), Onion White Spring Flat Fresh 15-18 Bunc, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), Ground Cumin, Whole Bay Leaf",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 3025070,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 76.0,
+                            "calories": 60.0,
+                            "protein_g": 4.0,
+                            "carbs_g": 11.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 3.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 640.0
+                        },
+                        {
+                            "uofm_oid": 8244634,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 76.0,
+                            "calories": 60.0,
+                            "protein_g": 4.0,
+                            "carbs_g": 11.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 3.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 640.0
+                        },
+                        {
+                            "uofm_oid": 8244635,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 76.0,
+                            "calories": 60.0,
+                            "protein_g": 4.0,
+                            "carbs_g": 11.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 3.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 640.0
+                        },
+                        {
+                            "uofm_oid": 8244636,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 51.0,
+                            "calories": 45.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 8.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 430.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709938,
+                    "name": "Shredded Cheddar Monterey Jack Cheese",
+                    "allergens": [
+                        "milk"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Feather Shredded Monterey Jack Cheddar (MONTERY JACK CHEESE (PASTEURIZED MILK, CHEESE CULTURE, SALT, ENZYMES), POTATO STARCH AND POWERED CELLULOSE ADDED TO PREVENT CAKING, NATAMYCIN (A NATURAL MOLD INHIBITOR).) Contains: Milk",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 7164098,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": true,
+                            "grams": 11.0,
+                            "calories": 40.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 3.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 65.0
+                        },
+                        {
+                            "uofm_oid": 3932504,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 57.0,
+                            "calories": 200.0,
+                            "protein_g": 12.0,
+                            "carbs_g": 2.0,
+                            "fat_g": 16.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 340.0
+                        },
+                        {
+                            "uofm_oid": 8244522,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 11.0,
+                            "calories": 40.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 3.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 65.0
+                        },
+                        {
+                            "uofm_oid": 8244551,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 11.0,
+                            "calories": 40.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 3.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 65.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709940,
+                    "name": "Cheese Cotija",
+                    "allergens": [
+                        "milk"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Cotija Cheese (PASTEURIZED MILK, NONFAT MILK, PALM OIL, SALT, CHEESE CULTURES, CALCIUM CHLORIDE, ENZYMES, CELLULOSE, NATAMYCIN, POTASSIUM SORBATE (PRESERVATIVE)) Contains: Milk",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 4338276,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 14.0,
+                            "calories": 50.0,
+                            "protein_g": 3.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 4.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 50.0
+                        },
+                        {
+                            "uofm_oid": 8244666,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 14.0,
+                            "calories": 50.0,
+                            "protein_g": 3.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 4.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 50.0
+                        },
+                        {
+                            "uofm_oid": 8244667,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 14.0,
+                            "calories": 50.0,
+                            "protein_g": 3.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 4.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 50.0
+                        },
+                        {
+                            "uofm_oid": 8244668,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 14.0,
+                            "calories": 50.0,
+                            "protein_g": 3.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 4.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 50.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709946,
+                    "name": "Habanero Coleslaw",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Medium Green Cabbage, Jumbo Red Onion, 5% Apple Cider Vinegar (APPLE CIDER VINEGAR AND WATER), Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL), Habanero Chili Pepper, Jumbo Carrots, Herb Cilantro Fresh 4 oz, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), White Granulated Cane Sugar (GRANULATED SUGAR), Spice Oregano Flake Bag-In-Box",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 3019123,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 58.0,
+                            "calories": 60.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 4.0,
+                            "fat_g": 5.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 150.0
+                        },
+                        {
+                            "uofm_oid": 8244756,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 58.0,
+                            "calories": 60.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 4.0,
+                            "fat_g": 5.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 150.0
+                        },
+                        {
+                            "uofm_oid": 8244757,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 58.0,
+                            "calories": 60.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 4.0,
+                            "fat_g": 5.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 150.0
+                        },
+                        {
+                            "uofm_oid": 8244758,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 39.0,
+                            "calories": 45.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 3.0,
+                            "fat_g": 3.5,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 100.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709951,
+                    "name": "Queso Dip",
+                    "allergens": [
+                        "milk"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Sauce Cheese Queso Chili Frozen Boil In (WATER, CHEDDAR CHEESE (PASTEURIZED MILK, CHEESE CULTURE, SALT, ENZYMES), CREAM, POBLANO PEPPERS, HATCH GREEN CHILES, CONTAINS LESS THAN 2% OF MODIFIED FOOD STARCH, JALAPENO PEPPERS (WITH SALT, ACETIC ACID, WATER, CALCIUM CHLORIDE), SODIUM PHOSPHATES, SALT, DEHYDRATED RED BELL PEPPERS, JALAPENO EXTRACTIVE) Contains: Milk",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 8245096,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": true,
+                            "grams": 69.0,
+                            "calories": 130.0,
+                            "protein_g": 6.0,
+                            "carbs_g": 5.0,
+                            "fat_g": 9.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 600.0
+                        },
+                        {
+                            "uofm_oid": 3054303,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 69.0,
+                            "calories": 130.0,
+                            "protein_g": 6.0,
+                            "carbs_g": 5.0,
+                            "fat_g": 9.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 600.0
+                        },
+                        {
+                            "uofm_oid": 8245095,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 69.0,
+                            "calories": 130.0,
+                            "protein_g": 6.0,
+                            "carbs_g": 5.0,
+                            "fat_g": 9.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 600.0
+                        },
+                        {
+                            "uofm_oid": 8245097,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 69.0,
+                            "calories": 130.0,
+                            "protein_g": 6.0,
+                            "carbs_g": 5.0,
+                            "fat_g": 9.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 600.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709952,
+                    "name": "Fried Egg",
+                    "allergens": [
+                        "egg"
+                    ],
+                    "diets": [],
+                    "ingredients": "Egg Shell Extra Large Grade AA White, Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL) Contains: Egg",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Egg",
+                            "is_default": true,
+                            "grams": 57.0,
+                            "calories": 110.0,
+                            "protein_g": 8.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 115.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709956,
+                    "name": "Guacamole",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Avocado Fresh 24 Ct, Plum Tomatoes, Jumbo Red Onion, Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Herb Cilantro Fresh 4 oz, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), Ground Cumin",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 8244913,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 85.0,
+                            "calories": 100.0,
+                            "protein_g": 1.0,
+                            "carbs_g": 7.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 4.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 320.0
+                        },
+                        {
+                            "uofm_oid": 8244950,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 100.0,
+                            "calories": 120.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 8.0,
+                            "fat_g": 10.0,
+                            "fiber_g": 5.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 370.0
+                        },
+                        {
+                            "uofm_oid": 8244951,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 85.0,
+                            "calories": 100.0,
+                            "protein_g": 1.0,
+                            "carbs_g": 7.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 4.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 320.0
+                        },
+                        {
+                            "uofm_oid": 8244952,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 85.0,
+                            "calories": 100.0,
+                            "protein_g": 1.0,
+                            "carbs_g": 7.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 4.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 320.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709959,
+                    "name": "Fresh Jalapeno",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Jalapeno Pepper",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 9200385,
+                            "name": "Arepa Portion",
+                            "is_default": true,
+                            "grams": 5.0,
+                            "calories": 0.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 0.0
+                        },
+                        {
+                            "uofm_oid": 9200417,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 5.0,
+                            "calories": 0.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 0.0
+                        },
+                        {
+                            "uofm_oid": 9200418,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 5.0,
+                            "calories": 0.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 0.0
+                        },
+                        {
+                            "uofm_oid": 9200426,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 5.0,
+                            "calories": 0.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 0.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709961,
+                    "name": "Maduros (Sweet Plantains)",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Plantain Sweet Non Gmo Sliced Iqf Frozen (Ripened plantain, vegetable oil (palm)), Canola Frying Liquid Shortening (CANOLA OIL WITH TBHQ AND CITRIC ACID ADDED AS PRESERVATIVES AND DIMETHYLPOLYSILOXANE ADDED AS AN ANTI-FOAMING AGENT.)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "2 Piece Portion",
+                            "is_default": true,
+                            "grams": 55.0,
+                            "calories": 160.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 25.0,
+                            "fat_g": 6.0,
+                            "fiber_g": 1.0,
+                            "sugar_g": 10.0,
+                            "sodium_mg": 0.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709962,
+                    "name": "Fajita Peppers and Onions",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Jumbo Yellow Onion, Pepper Bell Green Large 22-28, Yellow Bell Pepper (YELLOW BELL PEPPER), Pepper Bell Red Choice 22-28, Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 7994165,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 53.0,
+                            "calories": 60.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 4.5,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 0.0
+                        },
+                        {
+                            "uofm_oid": 8244694,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 53.0,
+                            "calories": 60.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 4.5,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 0.0
+                        },
+                        {
+                            "uofm_oid": 8244695,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 53.0,
+                            "calories": 60.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 4.5,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 0.0
+                        },
+                        {
+                            "uofm_oid": 8244696,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 36.0,
+                            "calories": 40.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 3.0,
+                            "fat_g": 3.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 0.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709968,
+                    "name": "Pico de Gallo",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Plum Tomatoes, Onion White Spring Flat Fresh 15-18 Bunc, Jalapeno Pepper, Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Herb Cilantro Fresh 4 oz, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 3019179,
+                            "name": "Quesadilla Portion",
+                            "is_default": true,
+                            "grams": 45.0,
+                            "calories": 10.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 2.0,
+                            "fat_g": null,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 45.0
+                        },
+                        {
+                            "uofm_oid": 3054291,
+                            "name": "Taco Portion",
+                            "is_default": false,
+                            "grams": 45.0,
+                            "calories": 10.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 2.0,
+                            "fat_g": null,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 45.0
+                        },
+                        {
+                            "uofm_oid": 8244711,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 45.0,
+                            "calories": 10.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 2.0,
+                            "fat_g": null,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 45.0
+                        },
+                        {
+                            "uofm_oid": 8244712,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 50.0,
+                            "calories": 10.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 2.0,
+                            "fat_g": null,
+                            "fiber_g": 0.5,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 50.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709972,
+                    "name": "Corn Salsa",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Corn White Shoepeg Fancy Frz Monarch, Cnd Peeled Diced Green Chili Peppers (GREEN CHILE PEPPERS, WATER, CONTAINS LESS THAN 2% OF CALCIUM CHLORIDE, CITRIC ACID, SALT.), Jumbo Red Onion, Juice Lemon Reconstituted 32 oz (FILTERED WATER, LEMON JUICE CONCENTRATE, SODIUM BISULFITE (PRESERVATIVE), SODIUM BENZOATE (PRESERVATIVE), AND LEMON OIL.), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 3019158,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 32.0,
+                            "calories": 25.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 6.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 140.0
+                        },
+                        {
+                            "uofm_oid": 8244766,
+                            "name": "Quesadilla Portion",
+                            "is_default": false,
+                            "grams": 1.0,
+                            "calories": 0.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 0.0,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 0.0
+                        },
+                        {
+                            "uofm_oid": 8244768,
+                            "name": "Arepa Bowl Portion",
+                            "is_default": false,
+                            "grams": 32.0,
+                            "calories": 25.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 6.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 140.0
+                        },
+                        {
+                            "uofm_oid": 8244769,
+                            "name": "Burrito Portion",
+                            "is_default": false,
+                            "grams": 2.0,
+                            "calories": 0.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 0.0,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 10.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709976,
+                    "name": "Roasted Salsa",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Plum Tomatoes, Onion White Spring Flat Fresh 15-18 Bunc, Cnd Sliced Nacho Jalapeno Peppers (JALAPENO PEPPERS, WATER, VINEGAR, SALT, CALCIUM CHLORIDE AND GARLIC), Garlic White Whole Clove Peeled (GARLIC), Herb Cilantro Fresh 4 oz, Salt Kosher Ground Coarse Box (SALT, YELLOW PRUSSIATE OF SODA)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 7994163,
+                            "name": "Arepa",
+                            "is_default": true,
+                            "grams": 57.0,
+                            "calories": 20.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 160.0
+                        },
+                        {
+                            "uofm_oid": 9104631,
+                            "name": "Quesadilla",
+                            "is_default": false,
+                            "grams": 57.0,
+                            "calories": 20.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 160.0
+                        },
+                        {
+                            "uofm_oid": 9104632,
+                            "name": "Taco",
+                            "is_default": false,
+                            "grams": 57.0,
+                            "calories": 20.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 160.0
+                        },
+                        {
+                            "uofm_oid": 9104633,
+                            "name": "Burrito",
+                            "is_default": false,
+                            "grams": 57.0,
+                            "calories": 20.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 160.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709980,
+                    "name": "Super Food Salad Mix",
+                    "allergens": [],
+                    "diets": [],
+                    "ingredients": "Salad Mix Superfood With Kale Rainbow Brussel Sprout And Napa Cabbage Chopped Cross Valley 2 lb (KALE, BRUSSELS SPROUTS, NAPPA CABBAGE, RED CABBAGE, RADICCHIO)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 9105377,
+                            "name": "Arepa",
+                            "is_default": true,
+                            "grams": 25.0,
+                            "calories": 10.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 10.0
+                        },
+                        {
+                            "uofm_oid": 9105378,
+                            "name": "Quesadilla",
+                            "is_default": false,
+                            "grams": 25.0,
+                            "calories": 10.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 10.0
+                        },
+                        {
+                            "uofm_oid": 9105379,
+                            "name": "Taco",
+                            "is_default": false,
+                            "grams": 25.0,
+                            "calories": 10.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 10.0
+                        },
+                        {
+                            "uofm_oid": 9105381,
+                            "name": "Burrito",
+                            "is_default": false,
+                            "grams": 25.0,
+                            "calories": 10.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 0.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": 0.0,
+                            "sodium_mg": 10.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Choose Sauce",
+            "items": [
+                {
+                    "item_oid": 303709982,
+                    "name": "Hot Cilantro Aioli",
+                    "allergens": [
+                        "egg",
+                        "milk",
+                        "soy"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Mayonnaise Extra Heavy 1 Gal (SOYBEAN OIL, WATER, EGG YOLKS, DISTILLED VINEGAR, CONTAINS LESS THAN 2% OF CORN SYRUP, SALT, SPICE, LEMON JUICE CONCENTRATE, CALCIUM DISODIUM EDTA ADDED TO PROTECT FLAVOR.), Sour Cream (CULTURED CREAM, ENZYME.), Herb Cilantro Fresh 4 oz, Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL), Jalapeno Pepper, Flavoring Chili Aji AMRL (YELLOW HOT PEPPERS, WATER, SEA SALT, CITRIC ACID (AS ACIDULANT), XANTHAN GUM (THICKENING AGENT)), Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), Garlic White Whole Clove Peeled (GARLIC), Vinegar White Distilled Domestic Plastic Whitehouse 1 Gal (WHITE DISTILLED VINEGAR AND WATER), Spice Pepper Black Ground 5 lb (GROUND BLACK PEPPER.) Contains: Egg, Milk, Soy",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Portion",
+                            "is_default": true,
+                            "grams": 28.0,
+                            "calories": 120.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 11.0,
+                            "fiber_g": null,
+                            "sugar_g": 0.5,
+                            "sodium_mg": 290.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709983,
+                    "name": "Mild Cilantro Aioli",
+                    "allergens": [
+                        "egg",
+                        "milk",
+                        "soy"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Mayonnaise Extra Heavy 1 Gal (SOYBEAN OIL, WATER, EGG YOLKS, DISTILLED VINEGAR, CONTAINS LESS THAN 2% OF CORN SYRUP, SALT, SPICE, LEMON JUICE CONCENTRATE, CALCIUM DISODIUM EDTA ADDED TO PROTECT FLAVOR.), Sour Cream (CULTURED CREAM, ENZYME.), Herb Cilantro Fresh 4 oz, Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL), Flavoring Chili Aji AMRL (YELLOW HOT PEPPERS, WATER, SEA SALT, CITRIC ACID (AS ACIDULANT), XANTHAN GUM (THICKENING AGENT)), Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Jalapeno Pepper, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), Garlic White Whole Clove Peeled (GARLIC), Vinegar White Distilled Domestic Plastic Whitehouse 1 Gal (WHITE DISTILLED VINEGAR AND WATER), Spice Pepper Black Ground 5 lb (GROUND BLACK PEPPER.) Contains: Egg, Milk, Soy",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Portion",
+                            "is_default": true,
+                            "grams": 28.0,
+                            "calories": 130.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 12.0,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 300.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709984,
+                    "name": "Chimmichurri Sauce",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Oil Canola Olive Extra Virgin 90/10 Blnd (CANOLA OIL, EXTRA VIRGIN OLIVE OIL), Red Wine Vinegar (RED WINE VINEGAR, DILUTED WITH WATER TO 5 ACIDITY), Garlic White Whole Clove Peeled (GARLIC), Spice Oregano Flake Bag-In-Box, Herb Cilantro Fresh 4 oz, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), Fresh Parsley, Spice Pepper Black Ground 5 lb (GROUND BLACK PEPPER.), Crushed Red Pepper (CRUSHED RED PEPPER.)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "1.5 oz Portion",
+                            "is_default": true,
+                            "grams": 43.0,
+                            "calories": 260.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 4.0,
+                            "fat_g": 26.0,
+                            "fiber_g": 0.5,
+                            "sugar_g": null,
+                            "sodium_mg": 300.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709985,
+                    "name": "Chipotle Crema",
+                    "allergens": [
+                        "egg",
+                        "milk",
+                        "soy"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Sour Cream (CULTURED CREAM, ENZYME.), Mayonnaise Extra Heavy 1 Gal (SOYBEAN OIL, WATER, EGG YOLKS, DISTILLED VINEGAR, CONTAINS LESS THAN 2% OF CORN SYRUP, SALT, SPICE, LEMON JUICE CONCENTRATE, CALCIUM DISODIUM EDTA ADDED TO PROTECT FLAVOR.), Pepper Chipotle Whole In Adobo Sauce Dom (WHOLE CHIPOTLE PEPPERS, WATER, VINEGAR, TOMATO PASTE, SALT, SPICES, MUSTARD POWDER, NATURAL FLAVORING), Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Garlic White Whole Clove Peeled (GARLIC) Contains: Egg, Milk, Soy",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Portion",
+                            "is_default": true,
+                            "grams": 34.0,
+                            "calories": 120.0,
+                            "protein_g": 0.5,
+                            "carbs_g": 2.0,
+                            "fat_g": 12.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 105.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709986,
+                    "name": "Fresco Sauce",
+                    "allergens": [
+                        "milk"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Sour Cream (CULTURED CREAM, ENZYME.), Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.) Contains: Milk",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Portion",
+                            "is_default": true,
+                            "grams": 57.0,
+                            "calories": 100.0,
+                            "protein_g": 2.0,
+                            "carbs_g": 3.0,
+                            "fat_g": 8.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 3.0,
+                            "sodium_mg": 35.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709987,
+                    "name": "Habanero Red Hot Sauce",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Sauce Hot Extra Glass Bottle Valentina (WATER, CHILI PEPPERS, VINEGAR, SALT, SPICES, 0.1% SODIUM BENZOATE AS A PRESERVATIVE), Onion White Spring Flat Fresh 15-18 Bunc, Habanero Chili Pepper, Garlic White Whole Clove Peeled (GARLIC), Fresh Parsley",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Portion",
+                            "is_default": true,
+                            "grams": 32.0,
+                            "calories": 0.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 0.0,
+                            "fat_g": 0.0,
+                            "fiber_g": null,
+                            "sugar_g": null,
+                            "sodium_mg": 380.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Choose Sides",
+            "items": [
+                {
+                    "item_oid": 303709988,
+                    "name": "Chips",
+                    "allergens": [
+                        "gluten",
+                        "wheat"
+                    ],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Tortilla Chip Raw 4 Cut Yellow Corn 6\" (WHOLE GRAIN CORN, WATER, CONTAINS 2% OR LESS OF THE FOLLOWING: PRESERVATIVES (PROPIONIC ACID, SODIUM HYDROXIDE, BENZOIC ACID), LIME. MADE IN A FACILITY THAT ALSO PROCESSES WHEAT.), Canola Frying Liquid Shortening (CANOLA OIL WITH TBHQ AND CITRIC ACID ADDED AS PRESERVATIVES AND DIMETHYLPOLYSILOXANE ADDED AS AN ANTI-FOAMING AGENT.), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA) Contains: Gluten, Wheat",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Bag",
+                            "is_default": true,
+                            "grams": 88.0,
+                            "calories": 350.0,
+                            "protein_g": 5.0,
+                            "carbs_g": 40.0,
+                            "fat_g": 20.0,
+                            "fiber_g": 5.0,
+                            "sugar_g": null,
+                            "sodium_mg": 290.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709989,
+                    "name": "Queso Dip",
+                    "allergens": [
+                        "milk"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Sauce Cheese Queso Chili Frozen Boil In (WATER, CHEDDAR CHEESE (PASTEURIZED MILK, CHEESE CULTURE, SALT, ENZYMES), CREAM, POBLANO PEPPERS, HATCH GREEN CHILES, CONTAINS LESS THAN 2% OF MODIFIED FOOD STARCH, JALAPENO PEPPERS (WITH SALT, ACETIC ACID, WATER, CALCIUM CHLORIDE), SODIUM PHOSPHATES, SALT, DEHYDRATED RED BELL PEPPERS, JALAPENO EXTRACTIVE) Contains: Milk",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Side Portion",
+                            "is_default": true,
+                            "grams": 113.0,
+                            "calories": 210.0,
+                            "protein_g": 9.0,
+                            "carbs_g": 8.0,
+                            "fat_g": 15.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 4.0,
+                            "sodium_mg": 980.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709990,
+                    "name": "Guacamole",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Avocado Fresh 24 Ct, Plum Tomatoes, Jumbo Red Onion, Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Herb Cilantro Fresh 4 oz, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA), Ground Cumin",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "6 oz Portion",
+                            "is_default": true,
+                            "grams": 175.0,
+                            "calories": 210.0,
+                            "protein_g": 3.0,
+                            "carbs_g": 15.0,
+                            "fat_g": 17.0,
+                            "fiber_g": 8.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 650.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709991,
+                    "name": "Pico de Gallo",
+                    "allergens": [],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Plum Tomatoes, Onion White Spring Flat Fresh 15-18 Bunc, Jalapeno Pepper, Juice Lime Reconstituted (LIME JUICE FROM CONCENTRATE WATER, CONCENTRATED LIME JUICE, AND LESS THAN 2 OF LIME OIL, SODIUM BENZOATE PRESERVATIVE, SODIUM METABISULFITE PRESERVATIVE.), Herb Cilantro Fresh 4 oz, Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA)",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Taco Portion",
+                            "is_default": true,
+                            "grams": 45.0,
+                            "calories": 10.0,
+                            "protein_g": 0.0,
+                            "carbs_g": 2.0,
+                            "fat_g": null,
+                            "fiber_g": null,
+                            "sugar_g": 1.0,
+                            "sodium_mg": 45.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709992,
+                    "name": "Chips and Salsa",
+                    "allergens": [
+                        "gluten",
+                        "wheat"
+                    ],
+                    "diets": [
+                        "vegan",
+                        "vegetarian"
+                    ],
+                    "ingredients": "Chips (Tortilla Chip Raw 4 Cut Yellow Corn 6\" (WHOLE GRAIN CORN, WATER, CONTAINS 2% OR LESS OF THE FOLLOWING: PRESERVATIVES (PROPIONIC ACID, SODIUM HYDROXIDE, BENZOIC ACID), LIME. MADE IN A FACILITY THAT ALSO PROCESSES WHEAT.), Canola Frying Liquid Shortening (CANOLA OIL WITH TBHQ AND CITRIC ACID ADDED AS PRESERVATIVES AND DIMETHYLPOLYSILOXANE ADDED AS AN ANTI-FOAMING AGENT.), Seasoning Salt Kosher (SALT, YELLOW PRUSSIATE OF SODA)), Roasted Salsa (Plum Tomatoes, Onion White Spring Flat Fresh 15-18 Bunc, Cnd Sliced Nacho Jalapeno Peppers (JALAPENO PEPPERS, WATER, VINEGAR, SALT, CALCIUM CHLORIDE AND GARLIC), Garlic White Whole Clove Peeled (GARLIC), Herb Cilantro Fresh 4 oz, Salt Kosher Ground Coarse Box (SALT, YELLOW PRUSSIATE OF SODA)) Contains: Gluten, Wheat",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Portion",
+                            "is_default": true,
+                            "grams": 152.0,
+                            "calories": 370.0,
+                            "protein_g": 6.0,
+                            "carbs_g": 45.0,
+                            "fat_g": 20.0,
+                            "fiber_g": 6.0,
+                            "sugar_g": 2.0,
+                            "sodium_mg": 460.0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Desserts",
+            "items": [
+                {
+                    "item_oid": 303709993,
+                    "name": "Brownie with Icing",
+                    "allergens": [
+                        "egg",
+                        "gluten",
+                        "milk",
+                        "soy",
+                        "wheat"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Brownie Choc Chip Iced 1/2 Sheet Cut 24 David's Cookie 96 oz (SUGAR, VEGETABLE OIL BLEND [SOYBEAN, PALM OLIVE OILS], WATER, SALT, MILK, MONO DIGLYCERIDES, SOY LECITHIN, SODIUM BENZOATE, NATURAL ARTIFICIAL FLAVORS, VITAMIN A PALMITATE, BETA CAROTENE FOR COLOR, PASTEURIZED WHOLE EGGS, WHEAT FLOUR BLEACHED, ENRICHED W/ NIACIN, REDUCED IRON, THIAMINE MONONITRATE, RIBOFLAVIN, FOLIC ACID, CHOCOLATE SUGAR, CHOCOLATE LIQUOR, COCOA BUTTER, MILK, SOY LECITHIN, ARTIFICIAL FLAVOR, CHOCOLATE CHIPS SUGAR, CHOCOLATE LIQUOR, COCOA BUTTER, SOY LECITHIN, VANILLA, SALT, MILK, COCOA POWDER, POTASSIUM SORBATE, ARTIFICIAL VANILLA FLAVOR, BAKING SODACONTAINS: EGGS, MILK, SOY, WHEAT), Buttercream Icing (10x Powdered Confectioner Sugar (SUGAR, CORN STARCH), Unsalted Solid Butter (PASTEURIZED CREAM (MILK), NATURAL FLAVORINGS.), Gallon Whole Milk Vit D (MILK, VITAMIN D3), Extract Vanilla Imitation (WATER, CARAMEL COLOR, ARTIFICIAL FLAVOR, CITRIC ACID, SODIUM BENZOATE (PRESERVATIVE).)) Contains: Egg, Gluten, Milk, Soy, Wheat",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Brownie",
+                            "is_default": true,
+                            "grams": 142.0,
+                            "calories": 570.0,
+                            "protein_g": 4.0,
+                            "carbs_g": 80.0,
+                            "fat_g": 28.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 56.0,
+                            "sodium_mg": 240.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709994,
+                    "name": "Churros",
+                    "allergens": [
+                        "egg",
+                        "gluten",
+                        "milk",
+                        "soy",
+                        "wheat"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Churros Plain Bulk Frz 10\" (WATER, WHEAT STARCH, SOYBEAN OIL,YELLOW CORN FLOUR, CONTAINS 2% OR LESS OF THEFOLLOWING: SODIUM CASEINATE (MILK), EGGS, ARTIFICIAL FLAVOR, CINNAMON, EGG WHITES, EGG YOLKS, GUAR GUM,LEAVENING (BAKING SODA, SODIUM ACID PYROPHOSPHATE), MONO- AND DIGLYCERIDES, PROPYLENE GLYCOL MONO- AND DIESTERS OF FATTY ACIDS, SALT, SOY LECITHIN, SUGAR.), Ground Cinnamon, White Granulated Cane Sugar (GRANULATED SUGAR) Contains: Egg, Gluten, Milk, Soy, Wheat",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "1 Churro",
+                            "is_default": true,
+                            "grams": 36.0,
+                            "calories": 130.0,
+                            "protein_g": 1.0,
+                            "carbs_g": 15.0,
+                            "fat_g": 7.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": null,
+                            "sodium_mg": 115.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709995,
+                    "name": "Triple Chocolate Cookie",
+                    "allergens": [
+                        "egg",
+                        "gluten",
+                        "milk",
+                        "soy",
+                        "wheat"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Dough Cookie Triple Chocolate 4.5 oz (CHOCOLATE CHOCOLATE LIQUOR, COCOA BUTTER, SOY LECITHIN, WHEAT FLOUR BLEACHED ENRICHED WITH NIACIN, IRON, THIAMIN MONONITRATE, RIBOFLAVIN, FOLIC ACID, SUGAR, BUTTER, VEGETABLE OIL BLEND [SOYBEAN, PALM, CANOLA OLIVE OILS], LACTIC ACID, VITAMIN E ACETATE, POTASSIUM SORBATE, CALCIUM DISODIUM EDTA PRESERVATIVE, NATURAL FLAVOR, PASTEURIZED WHOLE EGGS, INVERT SUGAR, MARGARINE PARTIALLY HYDROGENATED SOYBEAN OIL, WATER, SALT, MILK POWDER, SOY LECITHIN, MONO DIGLYCERIDES, SODIUM BENZOATE, BETA CAROTENE, ARTIFICIAL FLAVOR, VITAMIN A PALMITATE, BETA CAROTENE, HERSHEY'S CHOCOLATE KISSES MILK, CHOCOLATE, COCOA BUTTER, LACTOSE, MILK FAT, SOY LECITHIN, EMULSIFIERS AND ARTIFICIAL VANILLA FLAVOR, SOY FLOUR, SALT, BAKING SODA, NATURAL ARTIFICIAL VANILLA FLAVORS) Contains: Egg, Gluten, Milk, Soy, Wheat",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "Cookie",
+                            "is_default": true,
+                            "grams": 128.0,
+                            "calories": 470.0,
+                            "protein_g": 6.0,
+                            "carbs_g": 79.0,
+                            "fat_g": 16.0,
+                            "fiber_g": 2.0,
+                            "sugar_g": 27.0,
+                            "sodium_mg": 310.0
+                        }
+                    ]
+                },
+                {
+                    "item_oid": 303709996,
+                    "name": "Horchata",
+                    "allergens": [
+                        "milk"
+                    ],
+                    "diets": [
+                        "vegetarian"
+                    ],
+                    "ingredients": "Milk Sub Rice Carton Ref (FILTERED WATER, ORGANIC BROWN RICE (PARTIALLY MILLED), ORGANIC EXPELLER PRESSED SAFFLOWER AND/OR CANOLA OIL, TRICALCIUM PHOSPHATE, SEA SALT, VITAMIN A PALMITATE, VITAMIN D2, VITAMIN B12), Milk Condensed Sweetened (MILK, SUGAR.), Cinnamon Simple Syrup Saz\u00f3n (Sugar White Extra Fine Cane Monarch (SUGAR OR SUCROSE)), Extract Vanilla Imitation (WATER, CARAMEL COLOR, ARTIFICIAL FLAVOR, CITRIC ACID, SODIUM BENZOATE (PRESERVATIVE).) Contains: Milk",
+                    "meal": null,
+                    "known_price": null,
+                    "portions": [
+                        {
+                            "uofm_oid": 0,
+                            "name": "13 oz Portion",
+                            "is_default": true,
+                            "grams": 394.0,
+                            "calories": 450.0,
+                            "protein_g": 5.0,
+                            "carbs_g": 90.0,
+                            "fat_g": 7.0,
+                            "fiber_g": 0.0,
+                            "sugar_g": 73.0,
+                            "sodium_mg": 180.0
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

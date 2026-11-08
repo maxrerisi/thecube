@@ -28,3 +28,4 @@ DerivedData/
 # Local-only notes (deploy steps, secrets)
 docs/RUNBOOK.md
 ios/build/
+ios/build-device/

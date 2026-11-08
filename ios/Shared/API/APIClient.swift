@@ -31,7 +31,7 @@ final class APIClient: @unchecked Sendable {
         baseURL = (raw.isEmpty || raw.hasPrefix("$(")) ? nil : URL(string: raw)
         token = (bundle.object(forInfoDictionaryKey: "APP_TOKEN") as? String ?? "").trimmingCharacters(in: .whitespaces)
         let cfg = URLSessionConfiguration.default
-        cfg.timeoutIntervalForRequest = 20
+        cfg.timeoutIntervalForRequest = 8  // fail over to the bundled snapshot quickly
         session = URLSession(configuration: cfg)
     }
 
@@ -105,7 +105,19 @@ final class APIClient: @unchecked Sendable {
 
     private func get<T: Decodable>(_ path: String, _ query: [String: String] = [:], mock: String) async throws -> T {
         guard let u = url(path, query) else { return try loadMock(mock) }
-        return try await perform(request(u, method: "GET"))
+        do {
+            return try await perform(request(u, method: "GET"))
+        } catch {
+            // Server unreachable (no Wi-Fi, laptop asleep, tunnel down -> Cloudflare 530): show the
+            // bundled snapshot of the demo data instead of an error. Auth/4xx errors still surface.
+            let unreachable: Bool = switch error {
+            case is URLError: true
+            case let APIError.http(code, _): code >= 500
+            default: false
+            }
+            if unreachable, let m: T = try? loadMock(mock) { return m }
+            throw error
+        }
     }
 
     private func send<T: Decodable, B: Encodable>(_ method: String, _ path: String, _ query: [String: String] = [:],

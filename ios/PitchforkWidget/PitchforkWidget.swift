@@ -247,7 +247,8 @@ struct LargeView: View {
                 PixelDevil(mood: e.mood, size: 34, animated: false)
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Today").font(.title3.bold())
-                    Text(e.mood.line).font(.caption2).opacity(0.8).lineLimit(2)
+                    Text(e.mood.line).font(.caption2).opacity(0.8).lineLimit(2).minimumScaleFactor(0.85)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 Spacer(minLength: 0)
             }
@@ -290,9 +291,9 @@ struct LargeView: View {
                     Image(systemName: "star.fill").foregroundStyle(.orange)
                     VStack(alignment: .leading, spacing: 1) {
                         Text("Eat next").font(.caption2.weight(.heavy)).foregroundStyle(.orange)
-                        Text(pick.title).font(.subheadline.weight(.semibold)).lineLimit(1)
+                        Text(pick.title).font(.subheadline.weight(.semibold)).lineLimit(2).minimumScaleFactor(0.85)
                         Text("\(pick.vendor) · \(Int(pick.proteinG.rounded())) g · \(String(format: "%.2f", pick.pointsCost)) pts")
-                            .font(.caption2).opacity(0.8).lineLimit(1)
+                            .font(.caption2).opacity(0.8).lineLimit(1).minimumScaleFactor(0.8)
                     }
                     Spacer(minLength: 0)
                 }

@@ -242,6 +242,7 @@ struct HungryEntry: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityLabel("Feeling hungry? The devil cooks you a pick")
         .listRowBackground(
             LinearGradient(colors: [Color.orange.opacity(0.22), Color.red.opacity(0.14)], startPoint: .leading, endPoint: .trailing))
     }
@@ -265,6 +266,7 @@ struct WrappedEntry: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityLabel("Your Fall 2026 Wrapped")
         .listRowBackground(
             LinearGradient(colors: [Color.blue.opacity(0.18), Color.purple.opacity(0.14)], startPoint: .leading, endPoint: .trailing))
     }

@@ -12,6 +12,7 @@
 		C0BE00000000000000000003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0BE00000000000000000004 /* PitchforkWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PitchforkWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0BE00000000000000000005 /* WidgetInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WidgetInfo.plist; sourceTree = "<group>"; };
+		C0BE000000000000000000A1 /* thecubeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = thecubeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXBuildFile section */
@@ -25,6 +26,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C0BE00000000000000000080;
 			remoteInfo = PitchforkWidget;
+		};
+		C0BE000000000000000000A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0BE00000000000000000050 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0BE00000000000000000040;
+			remoteInfo = thecube;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -48,6 +56,11 @@
 			target = C0BE00000000000000000080 /* PitchforkWidget */;
 			targetProxy = C0BE00000000000000000046 /* PBXContainerItemProxy */;
 		};
+		C0BE000000000000000000A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0BE00000000000000000040 /* thecube */;
+			targetProxy = C0BE000000000000000000A2 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -64,6 +77,11 @@
 		C0BE00000000000000000012 /* PitchforkWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PitchforkWidget;
+			sourceTree = "<group>";
+		};
+		C0BE000000000000000000A4 /* thecubeUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = thecubeUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -83,6 +101,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0BE000000000000000000A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -92,6 +117,7 @@
 				C0BE00000000000000000010 /* thecube */,
 				C0BE00000000000000000011 /* Shared */,
 				C0BE00000000000000000012 /* PitchforkWidget */,
+				C0BE000000000000000000A4 /* thecubeUITests */,
 				C0BE00000000000000000031 /* Config */,
 				C0BE00000000000000000032 /* Products */,
 			);
@@ -112,6 +138,7 @@
 			children = (
 				C0BE00000000000000000001 /* thecube.app */,
 				C0BE00000000000000000004 /* PitchforkWidget.appex */,
+				C0BE000000000000000000A1 /* thecubeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +194,29 @@
 			productReference = C0BE00000000000000000004 /* PitchforkWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		C0BE000000000000000000A0 /* thecubeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0BE000000000000000000A8 /* Build configuration list for PBXNativeTarget "thecubeUITests" */;
+			buildPhases = (
+				C0BE000000000000000000A7 /* Sources */,
+				C0BE000000000000000000A5 /* Frameworks */,
+				C0BE000000000000000000A6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C0BE000000000000000000A3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C0BE000000000000000000A4 /* thecubeUITests */,
+			);
+			name = thecubeUITests;
+			packageProductDependencies = (
+			);
+			productName = thecubeUITests;
+			productReference = C0BE000000000000000000A1 /* thecubeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -182,6 +232,10 @@
 					};
 					C0BE00000000000000000080 = {
 						CreatedOnToolsVersion = 27.0;
+					};
+					C0BE000000000000000000A0 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = C0BE00000000000000000040;
 					};
 				};
 			};
@@ -201,6 +255,7 @@
 			targets = (
 				C0BE00000000000000000040 /* thecube */,
 				C0BE00000000000000000080 /* PitchforkWidget */,
+				C0BE000000000000000000A0 /* thecubeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -220,6 +275,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0BE000000000000000000A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -231,6 +293,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C0BE00000000000000000081 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0BE000000000000000000A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -392,6 +461,40 @@
 			};
 			name = Release;
 		};
+		C0BE000000000000000000A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0BE00000000000000000002 /* Config.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.duke.thecube.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = thecube;
+			};
+			name = Debug;
+		};
+		C0BE000000000000000000AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0BE00000000000000000002 /* Config.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.duke.thecube.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = thecube;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -418,6 +521,15 @@
 			buildConfigurations = (
 				C0BE00000000000000000091 /* Debug */,
 				C0BE00000000000000000092 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0BE000000000000000000A8 /* Build configuration list for PBXNativeTarget "thecubeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0BE000000000000000000A9 /* Debug */,
+				C0BE000000000000000000AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
