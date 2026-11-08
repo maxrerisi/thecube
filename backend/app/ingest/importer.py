@@ -41,7 +41,8 @@ def _import_one(conn, user_id: int, rec: ParsedReceipt, raw: bytes, result: dict
                 "INSERT INTO order_items (order_id, name, price, format) VALUES (%s, %s, %s, %s) RETURNING id",
                 (order["id"], it.name, it.price, fmt)).fetchone()["id"]
             # 5. components -> item_oid; an item with no components is its own single component
-            for raw_name in it.components or [it.name]:
+            listed = it.components or [it.name]
+            for raw_name in listed + matcher.implied_components(vendor, it.name, it.components):
                 oid = matcher.match_component(conn, vendor, raw_name, fmt)
                 uofm = matcher.pick_portion(conn, oid, fmt) if oid else None
                 conn.execute(

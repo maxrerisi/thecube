@@ -24,8 +24,10 @@ line can't be matched (e.g. McDonald's isn't on NetNutrition), the meal is marke
 rather than guessed.
 
 **How accurate is the matching?** All 31 real receipts parse. Lines are matched by aliases,
-then fuzzy name matching within that vendor. Known gap: burrito/quesadilla receipts don't list
-the tortilla, so those undercount by roughly 290 calories.
+then fuzzy name matching within that vendor. Some receipts leave out the main part because it's
+in the name ("Salmon Poke Bowl" lists only rice and sauces; burritos never list the tortilla). A
+short hand-checked list adds it (the salmon, the tortilla), so a poke bowl counts 24 g of protein,
+not 4.
 
 **Why not use Duke's dining API?** There isn't a public one. Balances and transactions live in
 Transact eAccounts behind NetID + MFA. We didn't scrape it (fragile, and not ours to scrape).
@@ -101,7 +103,7 @@ button that rerolls without opening the app.
 
 - One user, demo-grade auth (one shared token).
 - Balance is typed in, not read from DukeCard.
-- Burrito/quesadilla tortillas are missing from receipts.
+- New menu items whose main part is only in the name need one line added to that list.
 - Dated menus (It's Thyme, Tandoor, Trinity) change daily; we cache what we scraped.
 - Runs on a laptop with a tunnel for the demo, not hosted.
 

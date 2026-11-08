@@ -589,5 +589,30 @@
     "Trinity Cafe": "'Whole', 'Regular Espresso', 'Vanilla' are drink modifiers with no item; stay unmatched.",
     "It's Thyme": "Acai bar items (Traditional Acai, Honey Oat Granola, Seasonal Berries, ...) and Basil Roasted Potatoes, Sweet Potato Chips, Sunbutter, Chia Pudding are not on the Saturday menu; re-scrape on a weekday.",
     "Tandoor": "Tofu Korma and the Monday combo are not on Saturday's menu; menu rotates daily."
+  },
+  "includes": {
+    "_doc": "Receipt items whose main part is in the name, not in the listed components (\"Salmon Poke Bowl\" lists only rice and sauces). Each name here is added as a component and matched to NetNutrition like any other. Reviewed by hand against the NetNutrition course for that item.",
+    "Ginger + Soy": {
+      "salmon poke bowl": [
+        "Marinated Salmon"
+      ],
+      "tokyo (teriyaki chicken)": [
+        "Grilled Teriyaki Chicken"
+      ]
+    },
+    "Sazon": {
+      "quesadilla": [
+        "Flour Tortilla 12\""
+      ],
+      "burrito": [
+        "Flour Tortilla 12\""
+      ]
+    },
+    "The Skillet": {
+      "biscuit egg cheese with protein": [
+        "Cooked Eggs",
+        "Cheddar Cheese Slice"
+      ]
+    }
   }
 }

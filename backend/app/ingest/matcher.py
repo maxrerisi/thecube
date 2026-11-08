@@ -7,7 +7,10 @@ Tightened per E3 (docs/findings/matching.md), approved 2026-11-07:
   only then is the alias written. Word-subset ties ("Whole", "Chicken") and near misses
   ("Sweet Potato Chips" -> "Sweet Potato Fries", 83) stay NULL and are reported.
 """
+import functools
+import json
 import re
+from pathlib import Path
 
 from rapidfuzz import fuzz, process, utils
 
@@ -95,3 +98,17 @@ def pick_portion(conn, item_oid: int, fmt: str | None) -> int | None:
             return hit["uofm_oid"]
     default = next((r for r in rows if r["is_default"]), rows[0] if rows else None)
     return default["uofm_oid"] if default else None
+
+
+@functools.cache
+def _includes() -> dict:
+    data = json.loads((Path(__file__).resolve().parents[2] / "seed" / "aliases.json").read_text())
+    return {v: items for v, items in data.get("includes", {}).items() if not v.startswith("_")}
+
+
+def implied_components(vendor: dict | None, item_name: str, listed: list[str]) -> list[str]:
+    """Parts a receipt leaves out because they're in the item's name (seed/aliases.json "includes")."""
+    if not vendor or not listed:
+        return []
+    have = {key(c) for c in listed}
+    return [c for c in _includes().get(vendor["name"], {}).get(key(item_name), []) if key(c) not in have]

@@ -121,3 +121,21 @@ def test_tightened_fuzzy_rules(loaded):
         assert matcher.resolve_vendor(conn, "Devil's Krafthouse")["name"] == "The Devil's Krafthouse"
         assert matcher.resolve_vendor(conn, "Burger King") is None
         assert conn.execute("SELECT count(*) AS n FROM vendor_aliases").fetchone()["n"] == n
+
+
+def test_main_part_in_the_name_is_counted(loaded):
+    """'Salmon Poke Bowl' lists only rice and sauces; the salmon comes from aliases.json "includes"."""
+    with connect() as conn:
+        rows = conn.execute(
+            """SELECT oi.name AS item, c.raw_name, i.name AS nn_name FROM order_items oi
+               JOIN order_components c ON c.order_item_id = oi.id
+               LEFT JOIN nn_items i ON i.item_oid = c.item_oid
+               WHERE oi.name IN ('Salmon Poke Bowl', 'Tokyo (Teriyaki Chicken)', 'Quesadilla', 'Burrito',
+                                 'Biscuit Egg Cheese with Protein')""").fetchall()
+    got = {}
+    for r in rows:
+        got.setdefault(r["item"], set()).add(r["nn_name"])
+    assert "Marinated Salmon" in got["Salmon Poke Bowl"]
+    assert "Grilled Teriyaki Chicken" in got["Tokyo (Teriyaki Chicken)"]
+    assert 'Flour Tortilla 12"' in got["Quesadilla"] and 'Flour Tortilla 12"' in got["Burrito"]
+    assert {"Cooked Eggs", "Cheddar Cheese Slice"} <= got["Biscuit Egg Cheese with Protein"]

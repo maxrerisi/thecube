@@ -15,11 +15,11 @@ cards to A.
 | Time | Who | Screen | Say |
 | --- | --- | --- | --- |
 | 0:00–0:20 | A | Slide 1 (title) | "Hands up if you've run out of food points before finals, or come close." Pause. "Duke puts menus in one place and your balance in another. Nothing tells you if you'll make it." |
-| 0:20–0:50 | A | Slide 2 (how it works) | "Pitchfork: forward your Duke receipt email. We log the meal with Duke's own nutrition data, check your points against the Registrar calendar, and tell you what to eat next. No Duke login, nothing scraped from your account." |
-| 0:50–2:40 | B | Simulator | Live demo, 1:50, beats below. A says nothing. |
-| 2:40–3:15 | A | Slide 3 (trust + real) | "Every number is computed by code. The AI only writes the sentences, and any sentence with a number we didn't compute is thrown out. 527 real Duke menu items, 31 of 31 real receipts parse, the real Fall 2026 calendar, 62 tests." |
-| 3:15–3:50 | A | Slide 4 (impact) | "Running out of points means skipping meals during finals. Pitchfork tells you on November 7, while there's time to fix it, not on December 9. Next: auto-forward rules, push nudges, and any school on NetNutrition." |
-| 3:50–4:00 | A | Slide 4 | "We're Pitchfork. Questions?" |
+| 0:20–0:50 | A | Slide 2 (receipt → app) | "Pitchfork: forward your Duke receipt email. We log the meal with Duke's own nutrition data, check your points against the Registrar calendar, and tell you what to eat next. No Duke login, nothing scraped from your account." |
+| 0:50–2:40 | B | Slide 3 dark → simulator | Live demo, 1:50, beats below. A says nothing. |
+| 2:40–3:15 | A | Slide 4 (numbers) | "Every number is computed by code. The AI only writes the sentences, and any sentence with a number we didn't compute is thrown out. 527 real Duke menu items, 31 of 31 real receipts parse, the real Fall 2026 calendar, 62 tests." |
+| 3:15–3:50 | A | Slide 5 (Nov 7, not Dec 9) | "Running out of points means skipping meals during finals. Pitchfork tells you on November 7, while there's time to fix it, not on December 9. Next: auto-forward rules, push nudges, and any school on NetNutrition." |
+| 3:50–4:00 | A | Slide 5 | "We're Pitchfork. Questions?" |
 
 ### Demo beats (B, 1:50)
 
@@ -54,16 +54,18 @@ A takes "why / who / impact" questions; B takes "how does it work" questions. Li
 - **"How do you make money / scale?"** (A) Free for students; Duke Dining or student
   government could run it. Any school on NetNutrition works with a new calendar file.
 
-## Slides (4, mostly pictures)
+## Slides (5)
 
-1. **Title + hook.** `logo.png`, big `devil.png`, "Pitchfork: your Duke dining coach", team names.
-2. **How it works.** Left to right: receipt email screenshot (blur the address) → "Forward" →
-   our server (parse, match to NetNutrition) → `today.png`. One line under it: "No Duke
-   login. Tested with real Outlook forwards."
-3. **Trust + real.** Top: "Code does the math. AI writes the words, and gets checked." Below,
-   four big numbers: **527** menu items · **31/31** receipts · **104** dining days ·
-   **62** tests. Strip: `hungry.png`, `wrapped.png`, `widget_large.png`.
-4. **Impact.** "Find out on Nov 7, not Dec 9." What's next, 3 bullets. Big devil.
+Rule: the slides are pictures; the talking is ours. No subtitles, no bullets, no sentence that
+we're also saying out loud. If a slide needs a caption to make sense, the picture is wrong.
+
+1. **Pitchfork.** Logo, big devil, team names small at the bottom. Nothing else.
+2. **Receipt → app.** The receipt email screenshot (address blurred), an arrow, `today.png`.
+   The only word on it: "forward", on the arrow.
+3. *(Demo. Leave this slide black or just the devil, so the room looks at the phone.)*
+4. **The numbers.** Four big numbers, one or two small words under each: **527** menu items ·
+   **31/31** receipts · **104** dining days · **62** tests. No title.
+5. **Nov 7, not Dec 9.** That line, the devil. Done.
 
 Assets in `design/slides/`: `logo.png`, `devil.png` (transparent), `today.png`, `hungry.png`,
 `wrapped.png`, `widgets_home.png`, `widget_large.png`. **Still to make:** the receipt email
@@ -116,7 +118,7 @@ It takes about 4 minutes and doesn't log meals, so no reset is needed after it.
 | --- | --- | --- |
 | Calorie target hits 0 after a big day → sauces become the "best" pick | **Real and visible on stage** (a judge logs a meal) | Fixed: scoring uses at least a 20 g / 400 cal meal; the shown target stays true |
 | `demo_reset` fails on a brand-new database | Only matters on a fresh deploy; we demo on the existing local DB | Not touched |
-| Bowl entrée not counted when a receipt lists toppings | Duke receipts put the protein in the priced component, so demo meals are right; known gap is the tortilla (in QA "Limits") | Not touched |
+| Bowl entrée not counted when a receipt lists toppings | Real: a forwarded poke bowl counted 4 g protein | Fixed: hand-checked "includes" list in `seed/aliases.json` adds the salmon, teriyaki chicken, tortilla, egg + cheese |
 | Feeling hungry calls `/next-meal` 3× (3 coach calls) | Coach is cached per input; loads in about a second | Not touched |
 | Wrapped 500s for a user with orders but no items | Can't happen for Blue Devil | Not touched |
 | Widget has no App Group / mock data | Widgets read the server directly; they work (screenshots) | Not touched |
