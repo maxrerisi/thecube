@@ -17,6 +17,7 @@ Rules:
   semester's dining days (breaks skipped); behind_pace_by / ahead_of_pace_by state the gap.
 - Never name a dining location, food, or menu item that is not in the input. Refer to a
   meal option by its title (and vendor), never by its index number.
+- Every amount of dining points gets the word "points" after it ("4.56 points", never a bare 4.56).
 - Write plain words: never copy input key names (like protein_g) or say "restrictions of none".
 - Output JSON matching the schema, nothing else."""
 
@@ -56,6 +57,9 @@ PICK_SCHEMA = {
 WRAPPED_INSTRUCTIONS = """This is the student's semester recap story (like a year-in-review), one slide
 at a time. For EACH slide in the input, in the same order, write one short caption (at most 120
 characters) that is playful and warm, second person, and uses only that slide's own facts.
+Write it like a friend talking, in full natural sentences, never a list of stats.
+Style examples (N stands for the slide's own number): "You ate N meals at N different spots.
+You get around." / "You put away N eggs' worth of protein."
 Make the protein slide fun using eggs_equivalent. No emoji. captions must have exactly one entry per slide."""
 
 WRAPPED_SCHEMA = {

@@ -67,7 +67,7 @@ WEEKDAY_DINNER = ["quesadilla", "arepa", "poke", "sashimi", "burrito", "tandoor"
 WEEKEND_MEALS = [[(0, "pancakes"), (1, "burrito"), (3, "tokyo")],
                  [(0, "biscuit"), (1, "arepa"), (3, "sashimi")],
                  [(0, "biscuit"), (1, "quesadilla"), (2, "farmstead5"), (3, "tokyo")]]
-TODAY_MEALS = ["biscuit", "tokyo"]   # breakfast + lunch already logged today
+TODAY_MEALS = ["biscuit"]   # breakfast already logged today (the demo runs late morning, before lunch)
 SWIPE_MEALS = {"thyme"}              # It's Thyme lunches use a meal swipe, like William's
 TIMES = {0: (8, 30), 1: (12, 5), 2: (15, 30), 3: (18, 30)}  # base local time per slot (+-20..40 min)
 

@@ -157,7 +157,7 @@ struct PointsCard: View {
             }
             // The one fix: spend this much less a day and the points last to the end of term.
             if let budget = points.dailyBudget, points.runout != nil, points.trailingDaily > budget {
-                Label("Spend \(Fmt.pts(points.trailingDaily - budget)) less a day and your points last through \(Fmt.day(semesterEnd)).",
+                Label("Spend \(Fmt.pts(points.trailingDaily - budget)) points less a day and they last through \(Fmt.day(semesterEnd)).",
                       systemImage: "arrow.down.right.circle.fill")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(.orange)

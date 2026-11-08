@@ -24,7 +24,7 @@ def test_wrapped_story(menus):
     ids = [s["id"] for s in w["slides"]]
     assert ids == ["intro", "totals", "top_spot", "signature", "protein", "peak_hour", "personality", "share"]
     by = {s["id"]: s for s in w["slides"]}
-    assert by["totals"]["big"] == "87" and by["intro"]["big"] == "71"
+    assert by["totals"]["big"] == "86" and by["intro"]["big"] == "71"
     assert by["personality"]["big"] == "The Sprinter"  # 135 behind pace
     assert all(s["caption"] for s in w["slides"]) and "facts" not in by["intro"]
 

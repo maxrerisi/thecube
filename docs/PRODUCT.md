@@ -37,8 +37,7 @@ Top to bottom:
    open now (or opening within 2 hours).
 4. **Points.** Points left, swipes left, daily budget, spent today, 7-day average, run-out
    date, and **Plan pace**: where an even spend of your meal plan would leave you today. When
-   points would run out early, one orange line says the fix: "Spend 4.56 less a day and your
-   points last through Dec 14" (7-day average minus daily budget).
+   points would run out early, one orange line says the fix: "Spend 4.56 points less a day and they last through Dec 14" (7-day average minus daily budget).
 5. **Today's meals.** Each meal with vendor, items, protein, calories and points. Swipe to delete.
 
 Today refreshes every 5 seconds. A forwarded receipt is logged on the day it was bought (the
@@ -119,7 +118,7 @@ flowchart LR
 A made-up student so the demo has a story. Real menus and prices, invented history:
 - Plan A, 839.54 points left, **135 behind an even pace**. At their 30.80/day average, points
   **run out Dec 9, the first day of finals**.
-- Goal: build muscle, 150 g protein; 74 g so far today; hit protein 2 of the last 7 days.
+- Goal: build muscle, 150 g protein; breakfast (~28 g) logged today, so lunch is the next pick; picks skip places already eaten at today; hit protein 2 of the last 7 days.
 - Blue Devil is the app's only account; any receipt forwarded to the app lands in Blue Devil's
   log. The 31 real receipts are used only as a price list, so the meals cost what they really cost.
 

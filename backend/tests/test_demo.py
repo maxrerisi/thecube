@@ -39,7 +39,7 @@ def test_two_resets_identical_and_story(menus):
     t = menus.get("/today?user_id=2", headers=AUTH).json()
     assert t["user"]["name"] == "Blue Devil"
     assert t["targets"] == {"calories": 2800, "protein_g": 150}
-    assert len(t["meals"]) == 2 and 60 <= t["eaten"]["protein_g"] <= 80          # ~74 g so far today
+    assert len(t["meals"]) == 1 and 20 <= t["eaten"]["protein_g"] <= 40          # ~28 g so far today (breakfast)
     p = t["points"]
     assert p["meal_plan"] == "A" and p["pace_target"] == 974.54                    # even Plan A pace, Nov 7
     assert p["vs_pace"] == -135.0                                                  # 135 behind pace

@@ -175,6 +175,9 @@ def score(m: dict, p_t: float, c_t: float, headroom: float | None, history_share
     return s + 0.1 * history_share
 
 
+ATE_HERE_TODAY = 0.6  # variety: a place already eaten at today drops below the other good options
+
+
 def pick_top(cands: list[dict], n=3) -> list[dict]:
     """Top n by score, across at least 2 vendors when possible, one per template per vendor
     (so the picks differ by more than a sausage)."""
@@ -209,6 +212,9 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
     pts = budget.status(conn, user_id, s.semester_end, today, s.meal_plan)
     headroom = None if pts.daily_budget is None else pts.daily_budget - pts.spent_today
     ref_price = max((pts.daily_budget or 24.0) / 2, 8.0)  # a typical meal for this budget
+    today_vendors = {r["vendor_id"] for r in conn.execute(
+        "SELECT DISTINCT vendor_id FROM orders WHERE user_id = %s AND ts >= %s AND ts < %s",
+        (user_id, start, end)).fetchall()}
     hist = {r["vendor_id"]: r["n"] for r in conn.execute(
         "SELECT vendor_id, count(*) AS n FROM orders WHERE user_id = %s GROUP BY vendor_id", (user_id,)).fetchall()}
     n_orders = sum(hist.values()) or 1
@@ -231,7 +237,8 @@ def suggest(conn, user_id: int, bias: str | None = None) -> dict:
                 c.update(sum_macros(c["components"]))
                 c["points_cost"] = round(c["price"] * (1 + TAX), 2)
                 c.update(vendor_id=v["id"], vendor=v["name"], opens_at=opens.isoformat() if opens else None)
-                c["score"] = round(score(c, p_s, c_s, headroom, hist.get(v["id"], 0) / n_orders, bias, ref_price), 4)
+                s_ = score(c, p_s, c_s, headroom, hist.get(v["id"], 0) / n_orders, bias, ref_price)
+                c["score"] = round(s_ - (ATE_HERE_TODAY if v["id"] in today_vendors else 0.0), 4)
             vc = [c for c in vc if c["calories"] >= MIN_MEAL_SHARE * c_s]
             out += sorted(vc, key=lambda c: -c["score"])[:CAP_PER_VENDOR]
         return out

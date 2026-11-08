@@ -17,8 +17,8 @@ cards to A.
 | 0:00–0:20 | A | Slide 1 (title) | "Hands up if you've run out of food points before finals, or come close." Pause. "Duke puts menus in one place and your balance in another. Nothing tells you if you'll make it." |
 | 0:20–0:50 | A | Slide 2 (receipt → app) | "Pitchfork: forward your Duke receipt email. We log the meal with Duke's own nutrition data, check your points against the Registrar calendar, and tell you what to eat next. No Duke login, nothing scraped from your account." |
 | 0:50–2:40 | B | Slide 3 dark → simulator | Live demo, 1:50, beats below. A says nothing. |
-| 2:40–3:15 | A | Slide 4 (numbers) | "Every number is computed by code. The AI only writes the sentences, and any sentence with a number we didn't compute is thrown out. 527 real Duke menu items, 31 of 31 real receipts parse, the real Fall 2026 calendar, 63 tests." |
-| 3:15–3:50 | A | Slide 5 (Nov 7, not Dec 9) | "Running out of points means skipping meals during finals. Pitchfork tells you on November 7, while there's time to fix it, not on December 9. Next: auto-forward rules, push nudges, and any school on NetNutrition." |
+| 2:40–3:15 | A | Slide 4 (numbers) | "Every number is computed by code. The AI only writes the sentences, and any sentence with a number we didn't compute is thrown out. 527 real Duke dishes, 31 of 31 real receipts read right, zero Duke logins, and the real Fall 2026 calendar: 104 dining days, breaks skipped. 63 automated tests." |
+| 3:15–3:50 | A | Slide 5 (Know now, not Dec 9) | "Running out of points means skipping meals during finals. Pitchfork tells you now, with a month to fix it, not on December 9. Next: auto-forward rules, push nudges, and any school on NetNutrition." |
 | 3:50–4:00 | A | Slide 5 | "We're Pitchfork. Questions?" |
 
 ### Demo beats (B, 1:50)
@@ -28,7 +28,7 @@ real prices.
 
 1. **Today (0:30).** "This is Blue Devil." Read the coach card: *runs out December 9, before
    the semester ends.* Point at the protein ring. Scroll to Points: *135 behind*, then the
-   orange line: **"Spend 4.56 less a day and your points last through Dec 14."** "That one line
+   orange line: **"Spend N points less a day and they last through Dec 14."** (N changes daily; read what it shows) "That one line
    is the whole app: one number you can act on."
 2. **Eat next (0:30).** Scroll back up. Read the pick and its reason. Tap **More protein**:
    "it only suggests places open now, inside your points for today." (Before 11 AM it shows
@@ -59,13 +59,12 @@ A takes "why / who / impact" questions; B takes "how does it work" questions. Li
 Rule: the slides are pictures; the talking is ours. No subtitles, no bullets, no sentence that
 we're also saying out loud. If a slide needs a caption to make sense, the picture is wrong.
 
-1. **Pitchfork.** Logo, big devil, team names small at the bottom. Nothing else.
-2. **Receipt → app.** The receipt email screenshot (address blurred), an arrow, `today.png`.
-   The only word on it: "forward", on the arrow.
-3. *(Demo. Leave this slide black or just the devil, so the room looks at the phone.)*
+1. **Pitchfork.** The name, "Will your food points last?", the widget on a phone, team names small.
+2. **Receipt → app.** A real Sazon receipt, "forward" on an arrow, the Today screen.
+3. *(Demo.)* Feeling hungry and Wrapped on two phones: a backdrop, and the fallback if the demo dies.
 4. **The numbers.** Four big numbers, one or two small words under each: **527** menu items ·
-   **31/31** receipts · **104** dining days · **63** tests. No title.
-5. **Nov 7, not Dec 9.** That line, the devil. Done.
+   **31/31** receipts read right · **0** Duke logins · **104** days on the calendar. No title.
+5. **Know now, not Dec 9.** That line, the devil. Done.
 
 Assets in `design/slides/`: `logo.png`, `devil.png` (transparent), `today.png`, `hungry.png`,
 `wrapped.png`, `widgets_home.png`, `widget_large.png`. **Still to make:** the receipt email

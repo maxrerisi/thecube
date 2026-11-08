@@ -34,7 +34,7 @@
   },
   "coach": {
     "tone": "warning",
-    "message": "At your current pace, your dining points will run out on December 9 before the semester ends on December 14. Try to spend 4.56 less per day to make them last.",
+    "message": "At this pace, your points will run out on December 9, which is 5 days early. Try to spend 4.56 points less per day to last.",
     "headline": "Points pace update",
     "source": "cache"
   },
